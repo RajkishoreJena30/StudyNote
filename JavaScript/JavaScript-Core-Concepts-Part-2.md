@@ -239,6 +239,74 @@ console.log(url.replace('%20', '-'));   // https://hitesh.com/hitesh-choudhary
 console.log(url.includes('sundar'));    // false
 ```
 
+## Additional String Methods
+
+### Search & Check
+
+| Method | Technical Function | Example Output |
+|---|---|---|
+| `startsWith(str, pos?)` | Returns `true` if string begins with `str` | `"hello".startsWith("he")` → `true` |
+| `endsWith(str, len?)` | Returns `true` if string ends with `str` | `"hello".endsWith("lo")` → `true` |
+| `lastIndexOf(char)` | Index of the **last** occurrence of `char` | `"abcabc".lastIndexOf("a")` → `3` |
+| `search(regex)` | Index of first **regex** match; `-1` if none | `"foo123".search(/\d+/)` → `3` |
+| `match(regex)` | Returns array of matches (or `null`) | `"test".match(/e/)` → `["e"]` |
+
+```javascript
+const email = "user@example.com";
+console.log(email.startsWith("user"));  // true
+console.log(email.endsWith(".com"));    // true
+console.log(email.lastIndexOf("e"));    // 11
+
+const str = "Order #12345 shipped";
+console.log(str.search(/\d+/));         // 7
+console.log(str.match(/\d+/));          // ["12345"]
+console.log(str.match(/\d+/g));         // ["12345"] (global flag → all matches)
+```
+
+### Modify & Format
+
+| Method | Technical Function | Example Output |
+|---|---|---|
+| `replaceAll(a, b)` | Replaces **every** occurrence of `a` with `b` | `"a-b-a".replaceAll("a","x")` → `"x-b-x"` |
+| `repeat(n)` | Returns the string repeated `n` times | `"ha".repeat(3)` → `"hahaha"` |
+| `padStart(len, char)` | Pads the **start** until total length is `len` | `"5".padStart(3,"0")` → `"005"` |
+| `padEnd(len, char)` | Pads the **end** until total length is `len` | `"5".padEnd(3,"0")` → `"500"` |
+| `trimStart()` | Removes leading whitespace only | `" hi ".trimStart()` → `"hi "` |
+| `trimEnd()` | Removes trailing whitespace only | `" hi ".trimEnd()` → `" hi"` |
+
+```javascript
+const tag = "<div>hello</div>";
+console.log(tag.replaceAll("div", "p")); // "<p>hello</p>"
+
+console.log("ha".repeat(3));            // "hahaha"
+
+// padStart is commonly used to format numbers/IDs
+console.log("42".padStart(6, "0"));    // "000042"
+console.log("hi".padEnd(6, "."));      // "hi...."
+
+const padded = "   hello   ";
+console.log(padded.trimStart());        // "hello   "
+console.log(padded.trimEnd());          // "   hello"
+```
+
+### Index Access & Character Codes
+
+| Method | Technical Function | Example Output |
+|---|---|---|
+| `at(index)` | Character at index; **supports negative** | `"hello".at(-1)` → `"o"` |
+| `charCodeAt(index)` | UTF-16 code unit at position | `"A".charCodeAt(0)` → `65` |
+| `String.fromCharCode(n)` | **Static** — character from UTF-16 code | `String.fromCharCode(65)` → `"A"` |
+
+```javascript
+const word = "JavaScript";
+console.log(word.at(0));           // "J"
+console.log(word.at(-1));          // "t"  ← last char (no length math needed)
+
+console.log("A".charCodeAt(0));    // 65
+console.log("a".charCodeAt(0));    // 97
+console.log(String.fromCharCode(72, 105)); // "Hi"
+```
+
 ---
 
 # 4. Numbers and Math
@@ -459,6 +527,101 @@ flowchart LR
     style D fill:#FF9800,color:#fff
 ```
 
+## Search & Check Methods
+
+| Method | Technical Function | Mutates? |
+|---|---|---|
+| `includes(val, from?)` | Returns `true` if `val` exists in the array | ❌ No |
+| `indexOf(val, from?)` | First index of `val`; `-1` if not found | ❌ No |
+| `lastIndexOf(val, from?)` | Last index of `val`; `-1` if not found | ❌ No |
+| `every(fn)` | `true` if **all** elements pass the test | ❌ No |
+| `some(fn)` | `true` if **at least one** element passes | ❌ No |
+| `at(index)` | Element at index; supports **negative** | ❌ No |
+
+```javascript
+const scores = [10, 20, 30, 20, 40];
+
+console.log(scores.includes(20));        // true
+console.log(scores.indexOf(20));         // 1 (first match)
+console.log(scores.lastIndexOf(20));     // 3 (last match)
+
+console.log(scores.every(n => n > 5));   // true  — all > 5
+console.log(scores.every(n => n > 15));  // false — 10 fails
+console.log(scores.some(n => n > 35));   // true  — 40 qualifies
+
+console.log(scores.at(0));               // 10
+console.log(scores.at(-1));              // 40  ← last element
+```
+
+## Build & Combine Methods
+
+| Method | Technical Function | Mutates? |
+|---|---|---|
+| `concat(...arrs)` | Merges arrays into a new array | ❌ No |
+| `fill(val, start?, end?)` | Fills a range with a static value | ✅ Yes |
+| `flatMap(fn)` | `map()` then `flat(1)` in one pass | ❌ No |
+| `copyWithin(target, start?, end?)` | Copies a section to another position | ✅ Yes |
+
+```javascript
+const a = [1, 2];
+const b = [3, 4];
+console.log(a.concat(b, [5, 6]));  // [1, 2, 3, 4, 5, 6]
+
+const arr = [1, 2, 3, 4, 5];
+arr.fill(0, 2, 4);                  // fills indices 2 and 3 with 0
+console.log(arr);                   // [1, 2, 0, 0, 5]
+
+// flatMap — useful for "expand each item" patterns
+const words = ["hello world", "foo bar"];
+console.log(words.flatMap(w => w.split(" ")));
+// ["hello", "world", "foo", "bar"]
+```
+
+## Static Array Methods
+
+| Method | Technical Function |
+|---|---|
+| `Array.isArray(val)` | Returns `true` if `val` is an array |
+| `Array.from(iterable, mapFn?)` | Creates array from any iterable or array-like object |
+| `Array.of(...items)` | Creates array from the provided arguments |
+
+```javascript
+console.log(Array.isArray([1, 2, 3])); // true
+console.log(Array.isArray("hello"));   // false
+
+// Array.from — great for Sets, NodeLists, strings
+console.log(Array.from("hello"));             // ['h','e','l','l','o']
+console.log(Array.from({length: 3}, (_, i) => i + 1)); // [1, 2, 3]
+console.log(Array.from(new Set([1, 2, 2, 3]))); // [1, 2, 3]
+
+console.log(Array.of(7));    // [7]   (vs. new Array(7) which creates 7 empty slots)
+```
+
+## Iterators
+
+> These methods return **iterator objects** and are used with `for...of` loops to get structured access to indices and values.
+
+| Method | Yields |
+|---|---|
+| `entries()` | `[index, value]` pairs |
+| `keys()` | Indices only |
+| `values()` | Values only |
+
+```javascript
+const fruits = ["apple", "banana", "cherry"];
+
+for (const [i, fruit] of fruits.entries()) {
+    console.log(`${i}: ${fruit}`);
+}
+// 0: apple
+// 1: banana
+// 2: cherry
+
+for (const key of fruits.keys()) {
+    console.log(key); // 0, 1, 2
+}
+```
+
 ---
 
 # 7. Objects in JavaScript
@@ -533,6 +696,97 @@ console.log(jsUser?.address?.city); // undefined (no error)
 ```
 
 > 💡 **Objects → JSON**: In web development, JavaScript objects are serialized to **JSON** (JavaScript Object Notation) for API data exchange using `JSON.stringify(obj)` and parsed back with `JSON.parse(jsonString)`.
+
+## Additional Static Object Methods
+
+### Create & Inspect
+
+| Method | Technical Function |
+|---|---|
+| `Object.create(proto)` | Creates a new object with `proto` as its prototype |
+| `Object.fromEntries(entries)` | Inverse of `Object.entries()` — converts `[key, val]` pairs back into an object |
+| `Object.getOwnPropertyNames(obj)` | Array of **all** own property names, including non-enumerable ones |
+| `Object.getPrototypeOf(obj)` | Returns the prototype of `obj` |
+
+```javascript
+// Object.create — set up a prototype chain manually
+const animal = { breathes: true };
+const dog = Object.create(animal);
+dog.sound = "Woof";
+console.log(dog.breathes); // true  ← inherited from animal via prototype
+console.log(Object.getPrototypeOf(dog) === animal); // true
+
+// Object.fromEntries — reverse of Object.entries
+const entries = [["name", "Hitesh"], ["age", 30]];
+const obj = Object.fromEntries(entries);
+console.log(obj); // { name: 'Hitesh', age: 30 }
+
+// Powerful combo: transform object values
+const prices = { chai: 20, coffee: 60, water: 5 };
+const discounted = Object.fromEntries(
+    Object.entries(prices).map(([key, val]) => [key, val * 0.9])
+);
+console.log(discounted); // { chai: 18, coffee: 54, water: 4.5 }
+
+// Object.getOwnPropertyNames — includes hidden (non-enumerable) keys
+const secret = {};
+Object.defineProperty(secret, "_id", { value: 42, enumerable: false });
+console.log(Object.keys(secret));                   // []         ← hidden
+console.log(Object.getOwnPropertyNames(secret));    // ['_id']    ← visible
+```
+
+### Equality & Locking
+
+| Method | Technical Function |
+|---|---|
+| `Object.is(a, b)` | Strict equality that correctly handles `NaN` and `-0` |
+| `Object.seal(obj)` | Prevents adding/deleting properties but allows **modifying** existing values |
+| `Object.isFrozen(obj)` | Returns `true` if the object is fully immutable (`Object.freeze`) |
+| `Object.isSealed(obj)` | Returns `true` if the object is sealed |
+| `Object.hasOwn(obj, key)` | Modern, safe replacement for `hasOwnProperty` |
+
+```javascript
+// Object.is — handles edge cases that === misses
+console.log(NaN === NaN);           // false  ← === is wrong here
+console.log(Object.is(NaN, NaN));   // true   ← correct
+console.log(Object.is(+0, -0));     // false  ← distinguishes sign
+console.log(+0 === -0);             // true   ← === cannot tell
+
+// Object.seal — allow edits, block add/delete
+const config = { env: "prod", version: 2 };
+Object.seal(config);
+config.version = 3;       // ✅ allowed — modifying existing property
+config.newKey = "value";  // ❌ silently fails — new property blocked
+delete config.env;        // ❌ silently fails — delete blocked
+console.log(config);      // { env: 'prod', version: 3 }
+
+// Object.hasOwn — preferred over hasOwnProperty (works on null-prototype objects)
+const user = { name: "Hitesh" };
+console.log(Object.hasOwn(user, "name"));    // true
+console.log(Object.hasOwn(user, "age"));     // false
+```
+
+### Copying Objects (Shallow vs Deep)
+
+| Technique | Type | Notes |
+|---|---|---|
+| `{ ...obj }` | **Shallow** | Top-level copy; nested references are shared |
+| `Object.assign({}, obj)` | **Shallow** | Equivalent to spread for simple copies |
+| `structuredClone(obj)` | **Deep** | Recursively copies everything — no shared references |
+
+```javascript
+const original = { name: "Hitesh", address: { city: "Jaipur" } };
+
+// Shallow copy — nested object is still shared
+const shallow = { ...original };
+shallow.address.city = "Mumbai";
+console.log(original.address.city); // "Mumbai" ← original affected!
+
+// Deep clone — fully independent copy
+const deep = structuredClone(original);
+deep.address.city = "Delhi";
+console.log(original.address.city); // "Mumbai" ← original unchanged ✅
+```
 
 ---
 

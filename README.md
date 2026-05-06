@@ -1,2 +1,2 @@
-# StudyNode
+# StudyNote
 Keep Note

@@ -38,7 +38,7 @@ export const fetchAllPosts = createAsyncThunk<
     "posts/fetchAllPosts",
     async (_, thunkAPI) => {
         try {
-            const response = await fetch("https://dummyjson.com/posts");
+            const response = await fetch("https://dummyjson.com/posts?limit=5");
 
             if (!response.ok) {
                 return thunkAPI.rejectWithValue("Failed to fetch posts");

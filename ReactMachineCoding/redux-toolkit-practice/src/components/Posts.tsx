@@ -1,13 +1,17 @@
 
-import React from "react";
-import {useSelector} from  "react-redux";
-import type { RootState } from "../store/store";
+import React, { useEffect } from "react";
+import {useSelector, useDispatch} from  "react-redux";
+import type { RootState,AppDispatch} from "../store/store";
 import type { Post } from "../types/posts";
 import { fetchAllPosts } from "../store/postsThunks";
 
 const Posts = () => {
-    const posts = useSelector((state: RootState) => state.posts.posts);
+    const dispatch = useDispatch<AppDispatch>();
+    const {posts,error, loading} = useSelector((state: RootState) => state.posts);
 
+    useEffect(()=>{
+        dispatch(fetchAllPosts());
+    },[dispatch])
     return(
         <div className="post-list-container" >
             <h3>Posts</h3>
@@ -19,6 +23,8 @@ const Posts = () => {
                     </div>
                 )
             })}
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error}</p>}
         </div>
     )
 };

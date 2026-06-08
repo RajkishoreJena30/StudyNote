@@ -1,22 +1,22 @@
-import * as PrismaModule from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
+import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "./env";
 
-const PrismaClient = (PrismaModule as { PrismaClient?: new () => any }).PrismaClient;
+const connectionString = config.DATABASE_URL;
 
-if (!PrismaClient) {
-	throw new Error("PrismaClient is not available. Run 'npx prisma generate' after creating prisma/schema.prisma.");
+const globalForPrisma = globalThis as typeof globalThis & {
+	prisma?: PrismaClient;
+};
+
+if (!globalForPrisma.prisma) {
+	const adapter = new PrismaPg({ connectionString });
+
+	globalForPrisma.prisma = new PrismaClient({
+		adapter,
+		log: ["error", "warn"],
+	});
 }
 
-type PrismaClientInstance = InstanceType<typeof PrismaClient>;
-
-declare global {
-	var prisma: PrismaClientInstance | undefined;
-}
-
-const prisma = globalThis.prisma ?? new PrismaClient();
-
-if (config.NODE_ENV !== "production") {
-	globalThis.prisma = prisma;
-}
+const prisma = globalForPrisma.prisma!;
 
 export default prisma;

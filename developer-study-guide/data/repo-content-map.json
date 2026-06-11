@@ -1,0 +1,518 @@
+{
+  "workspaceRoot": "c:/Views/Other/StudyNote",
+  "manifestVersion": 1,
+  "generatedFor": "developer-study-guide",
+  "counts": {
+    "markdown": 36,
+    "code": 48,
+    "total": 84
+  },
+  "markdownFiles": [
+    {
+      "path": "CSS/CSS-Advanced-Guide.md",
+      "extension": ".md",
+      "group": "CSS",
+      "kind": "markdown"
+    },
+    {
+      "path": "CSS/CSS-Beginner-Guide.md",
+      "extension": ".md",
+      "group": "CSS",
+      "kind": "markdown"
+    },
+    {
+      "path": "HTML/HTML-Advanced-Guide.md",
+      "extension": ".md",
+      "group": "HTML",
+      "kind": "markdown"
+    },
+    {
+      "path": "HTML/HTML-Beginner-Guide.md",
+      "extension": ".md",
+      "group": "HTML",
+      "kind": "markdown"
+    },
+    {
+      "path": "JavaScript/JavaScript-Advanced-Concepts-Part-3.md",
+      "extension": ".md",
+      "group": "JavaScript",
+      "kind": "markdown"
+    },
+    {
+      "path": "JavaScript/JavaScript-Core-Concepts-Part-2.md",
+      "extension": ".md",
+      "group": "JavaScript",
+      "kind": "markdown"
+    },
+    {
+      "path": "JavaScript/JavaScript-ES6-Modern-Features.md",
+      "extension": ".md",
+      "group": "JavaScript",
+      "kind": "markdown"
+    },
+    {
+      "path": "JavaScript/JavaScript-Fundamentals-Part-1.md",
+      "extension": ".md",
+      "group": "JavaScript",
+      "kind": "markdown"
+    },
+    {
+      "path": "Next/NextJS-15-16-Latest-Features-Guide.md",
+      "extension": ".md",
+      "group": "Next",
+      "kind": "markdown"
+    },
+    {
+      "path": "Next/NextJS-Advanced-Guide.md",
+      "extension": ".md",
+      "group": "Next",
+      "kind": "markdown"
+    },
+    {
+      "path": "Next/NextJS-Authentication-Guide.md",
+      "extension": ".md",
+      "group": "Next",
+      "kind": "markdown"
+    },
+    {
+      "path": "Next/NextJS-Beginner-Guide.md",
+      "extension": ".md",
+      "group": "Next",
+      "kind": "markdown"
+    },
+    {
+      "path": "Next/ResumeForge-Frontend-Backlog.md",
+      "extension": ".md",
+      "group": "Next",
+      "kind": "markdown"
+    },
+    {
+      "path": "Node/NodeJS-Production-Backend-Guide.md",
+      "extension": ".md",
+      "group": "Node",
+      "kind": "markdown"
+    },
+    {
+      "path": "Node/NodeJS-TypeScript-Production-Backend.md",
+      "extension": ".md",
+      "group": "Node",
+      "kind": "markdown"
+    },
+    {
+      "path": "Node/ResumeForge-Backend-Backlog.md",
+      "extension": ".md",
+      "group": "Node",
+      "kind": "markdown"
+    },
+    {
+      "path": "Node/TaskFlow-Backend-Backlog.md",
+      "extension": ".md",
+      "group": "Node",
+      "kind": "markdown"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/Readme.md",
+      "extension": ".md",
+      "group": "Node",
+      "kind": "markdown"
+    },
+    {
+      "path": "Package/toast/README.md",
+      "extension": ".md",
+      "group": "Package",
+      "kind": "markdown"
+    },
+    {
+      "path": "README.md",
+      "extension": ".md",
+      "group": "root",
+      "kind": "markdown"
+    },
+    {
+      "path": "React/React-19-New-Features.md",
+      "extension": ".md",
+      "group": "React",
+      "kind": "markdown"
+    },
+    {
+      "path": "React/React-Advanced-Guide.md",
+      "extension": ".md",
+      "group": "React",
+      "kind": "markdown"
+    },
+    {
+      "path": "React/React-Authentication-Guide.md",
+      "extension": ".md",
+      "group": "React",
+      "kind": "markdown"
+    },
+    {
+      "path": "React/React-Beginner-Guide.md",
+      "extension": ".md",
+      "group": "React",
+      "kind": "markdown"
+    },
+    {
+      "path": "React/React-Production-PWA-Guide.md",
+      "extension": ".md",
+      "group": "React",
+      "kind": "markdown"
+    },
+    {
+      "path": "React/TaskFlow-Product-Backlog.md",
+      "extension": ".md",
+      "group": "React",
+      "kind": "markdown"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/README.md",
+      "extension": ".md",
+      "group": "ReactMachineCoding",
+      "kind": "markdown"
+    },
+    {
+      "path": "SystemDesign/Frontend-Security-System-Design.md",
+      "extension": ".md",
+      "group": "SystemDesign",
+      "kind": "markdown"
+    },
+    {
+      "path": "SystemDesign/Frontend-System-Design-Round.md",
+      "extension": ".md",
+      "group": "SystemDesign",
+      "kind": "markdown"
+    },
+    {
+      "path": "SystemDesign/System-Design-Advanced-Concepts.md",
+      "extension": ".md",
+      "group": "SystemDesign",
+      "kind": "markdown"
+    },
+    {
+      "path": "SystemDesign/System-Design-Products.md",
+      "extension": ".md",
+      "group": "SystemDesign",
+      "kind": "markdown"
+    },
+    {
+      "path": "TypeScript/TypeScript-Complete-Guide.md",
+      "extension": ".md",
+      "group": "TypeScript",
+      "kind": "markdown"
+    },
+    {
+      "path": "WebAppConcept/Zustand-vs-ReduxToolkit-NextJS.md",
+      "extension": ".md",
+      "group": "WebAppConcept",
+      "kind": "markdown"
+    },
+    {
+      "path": "developer-study-guide/AGENTS.md",
+      "extension": ".md",
+      "group": "developer-study-guide",
+      "kind": "markdown"
+    },
+    {
+      "path": "developer-study-guide/CLAUDE.md",
+      "extension": ".md",
+      "group": "developer-study-guide",
+      "kind": "markdown"
+    },
+    {
+      "path": "developer-study-guide/README.md",
+      "extension": ".md",
+      "group": "developer-study-guide",
+      "kind": "markdown"
+    }
+  ],
+  "codeFiles": [
+    {
+      "path": "Node/project/nama-yatra/user-services/src/app.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/config/env.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/config/logger.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/config/prisma.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/config/redis.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/middleware/corsHandler.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/middleware/errorHandler.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/middleware/requestHandler.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/server.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/utils/asyncHandler.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/utils/email.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Node/project/nama-yatra/user-services/src/utils/error.ts",
+      "extension": ".ts",
+      "group": "Node",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/.eslintrc.js",
+      "extension": ".js",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/components/ProgressBar.tsx",
+      "extension": ".tsx",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/components/ToastItem.tsx",
+      "extension": ".tsx",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/components/Toaster.tsx",
+      "extension": ".tsx",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/core/store.ts",
+      "extension": ".ts",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/core/types.ts",
+      "extension": ".ts",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/core/utils.ts",
+      "extension": ".ts",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/hooks/useTimer.ts",
+      "extension": ".ts",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/hooks/useToastStore.ts",
+      "extension": ".ts",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/index.ts",
+      "extension": ".ts",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Package/toast/src/toast.ts",
+      "extension": ".ts",
+      "group": "Package",
+      "kind": "code"
+    },
+    {
+      "path": "Programing/Currying.js",
+      "extension": ".js",
+      "group": "Programing",
+      "kind": "code"
+    },
+    {
+      "path": "Programing/Debounce.js",
+      "extension": ".js",
+      "group": "Programing",
+      "kind": "code"
+    },
+    {
+      "path": "Programing/Throttle.js",
+      "extension": ".js",
+      "group": "Programing",
+      "kind": "code"
+    },
+    {
+      "path": "Programing/oop.js",
+      "extension": ".js",
+      "group": "Programing",
+      "kind": "code"
+    },
+    {
+      "path": "Programing/prototype.js",
+      "extension": ".js",
+      "group": "Programing",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/eslint.config.js",
+      "extension": ".js",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/App.tsx",
+      "extension": ".tsx",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/components/AddNewPostContainer.tsx",
+      "extension": ".tsx",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/components/Posts.tsx",
+      "extension": ".tsx",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/main.tsx",
+      "extension": ".tsx",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/store/postsReducer.ts",
+      "extension": ".ts",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/store/postsThunks.ts",
+      "extension": ".ts",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/store/store.ts",
+      "extension": ".ts",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/src/types/posts.ts",
+      "extension": ".ts",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "ReactMachineCoding/redux-toolkit-practice/vite.config.ts",
+      "extension": ".ts",
+      "group": "ReactMachineCoding",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/app/guides/[slug]/page.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/app/guides/page.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/app/layout.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/app/page.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/components/guides/guide-detail-client.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/components/guides/markdown-article.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/components/home/guide-section-block.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/components/home/study-guide-card.tsx",
+      "extension": ".tsx",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/lib/study-guides.ts",
+      "extension": ".ts",
+      "group": "developer-study-guide",
+      "kind": "code"
+    },
+    {
+      "path": "developer-study-guide/next.config.ts",
+      "extension": ".ts",
+      "group": "developer-study-guide",
+      "kind": "code"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+// User service database (db-per-service: user_db)
+generator client {
+  provider = "prisma-client-js"
+  // Distinct output so each service's client doesn't overwrite the others.
+  output   = "../../../node_modules/@prisma-clients/user"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}

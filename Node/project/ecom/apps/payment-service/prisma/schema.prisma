@@ -1,0 +1,35 @@
+// Payment service database (db-per-service: payment_db)
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../node_modules/@prisma-clients/payment"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+model Payment {
+  id         String        @id @default(uuid())
+  bookingId  String
+  userId     String
+  amount     Float
+  currency   String        @default("USD")
+  provider   String // stripe | razorpay | paypal
+  providerRef String? // id returned by the gateway
+  status     PaymentStatus @default(PENDING)
+  // Idempotency at the data layer: one charge per key (DB-enforced).
+  idempotencyKey String    @unique
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([bookingId])
+  @@map("payments")
+}

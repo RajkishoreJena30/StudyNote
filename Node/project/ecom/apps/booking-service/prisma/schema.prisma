@@ -1,0 +1,72 @@
+// Booking service database (db-per-service: booking_db)
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../node_modules/@prisma-clients/booking"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SeatStatus {
+  AVAILABLE
+  HELD // temporarily reserved during a booking saga
+  BOOKED
+}
+
+enum BookingStatus {
+  PENDING
+  SEATS_RESERVED
+  CONFIRMED
+  CANCELLED
+  FAILED
+}
+
+// An inventory unit: a show / flight / event with a set of seats.
+model EventInventory {
+  id        String   @id @default(uuid())
+  name      String
+  startsAt  DateTime
+  seats     Seat[]
+  createdAt DateTime @default(now())
+
+  @@map("event_inventory")
+}
+
+model Seat {
+  id          String         @id @default(uuid())
+  label       String
+  status      SeatStatus     @default(AVAILABLE)
+  // OPTIMISTIC LOCKING: bumped on every state change; CAS updates use it.
+  version     Int            @default(0)
+  // Soft hold expiry so abandoned holds auto-release (anti-deadlock).
+  heldUntil   DateTime?
+  heldBy      String? // bookingId currently holding the seat
+  inventory   EventInventory @relation(fields: [inventoryId], references: [id])
+  inventoryId String
+
+  @@unique([inventoryId, label])
+  // Hot path index: find available seats for an inventory quickly.
+  @@index([inventoryId, status])
+  @@map("seats")
+}
+
+model Booking {
+  id          String        @id @default(uuid())
+  userId      String
+  inventoryId String
+  seatIds     String[]
+  amount      Float
+  currency    String        @default("USD")
+  provider    String        @default("stripe")
+  status      BookingStatus @default(PENDING)
+  paymentId   String?
+  failureReason String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("bookings")
+}

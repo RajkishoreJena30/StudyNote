@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import errorHandler from './middleware/errorHandler';
 import corsHandler from './middleware/corsHandler';
 import requestLoggerHandler from './middleware/requestHandler';
+import  authRoutes  from './routes/auth.routes';
 
 
 const app:Application = express();
@@ -15,6 +16,7 @@ app.use(corsHandler);
 app.use(requestLoggerHandler);
 app.use(express.json());
 app.use(cookieParser());
+app.use("/api/v1/auth", authRoutes);
     
 app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to User Services API");

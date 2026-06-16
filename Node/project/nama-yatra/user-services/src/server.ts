@@ -3,14 +3,15 @@ import app from './app';
 import { config } from './config/env';
 import logger from './config/logger';
 
-const startServer = async () => {
+const startServer = async (): Promise<void> => {
     try {
-        const server = app.listen(config.PORT, () => {
+        app.listen(config.PORT, () => {
             logger.info(`${config.SERVICE_NAME} is running on port http://localhost:${config.PORT}`);
-        })
+        });
     } catch (error) {
         logger.error(`Failed to start ${config.SERVICE_NAME}:`, error);
         process.exit(1);
     }
-}
+};
+
 startServer();

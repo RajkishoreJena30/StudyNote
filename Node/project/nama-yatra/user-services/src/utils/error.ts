@@ -38,11 +38,25 @@ class InternalServerError extends AppError {
     }
 }
 
+class ConflictError extends AppError {
+    constructor(message: string, code: string = "CONFLICT") {
+        super(message, 409, code);
+    }
+}
+
+class TooManyRequestError extends AppError {
+    constructor(message: string, code: string = "TOO_MANY_REQUESTS") {
+        super(message, 429, code);
+    }
+}
+
 export {
     AppError,
     BadRequestError,
     UnauthorizedError,
     ForbiddenError,
     NotFoundError,
-    InternalServerError
-}
+    InternalServerError,
+    ConflictError,
+    TooManyRequestError,
+};

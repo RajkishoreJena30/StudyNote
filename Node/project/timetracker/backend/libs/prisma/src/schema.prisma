@@ -1,0 +1,193 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------------------------------------------------------------
+// Auth & Users
+// ----------------------------------------------------------------------------
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(USER)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  refreshTokens RefreshToken[]
+  subscriptions Subscription[]
+  tasks         Task[]
+  timeEntries   TimeEntry[]
+  goals         Goal[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+// ----------------------------------------------------------------------------
+// Subscriptions & Billing
+// ----------------------------------------------------------------------------
+enum BillingInterval {
+  MONTH
+  YEAR
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  CANCELED
+  PAST_DUE
+}
+
+model Plan {
+  id          String          @id @default(uuid())
+  code        String          @unique
+  name        String
+  description String
+  priceCents  Int
+  interval    BillingInterval @default(MONTH)
+  features    String[]
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  subscriptions Subscription[]
+
+  @@map("plans")
+}
+
+model Subscription {
+  id                 String             @id @default(uuid())
+  userId             String
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planId             String
+  plan               Plan               @relation(fields: [planId], references: [id])
+  status             SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart DateTime           @default(now())
+  currentPeriodEnd   DateTime
+  cancelAtPeriodEnd  Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  @@index([userId])
+  @@index([planId])
+  @@map("subscriptions")
+}
+
+// ----------------------------------------------------------------------------
+// Productivity: Tasks, Time tracking, Goals
+// ----------------------------------------------------------------------------
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+  ARCHIVED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Task {
+  id               String     @id @default(uuid())
+  userId           String
+  user             User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title            String
+  description      String?
+  status           TaskStatus @default(TODO)
+  priority         Priority   @default(MEDIUM)
+  dueDate          DateTime?
+  estimatedMinutes Int?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  timeEntries TimeEntry[]
+
+  @@index([userId])
+  @@index([status])
+  @@map("tasks")
+}
+
+model TimeEntry {
+  id              String    @id @default(uuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskId          String?
+  task            Task?     @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  description     String?
+  startTime       DateTime  @default(now())
+  endTime         DateTime?
+  durationSeconds Int       @default(0)
+  isRunning       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([taskId])
+  @@map("time_entries")
+}
+
+enum GoalType {
+  DAILY
+  WEEKLY
+}
+
+model Goal {
+  id                String         @id @default(uuid())
+  userId            String
+  user              User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title             String
+  type              GoalType       @default(DAILY)
+  targetMinutes     Int
+  currentStreak     Int            @default(0)
+  longestStreak     Int            @default(0)
+  lastCompletedDate DateTime?
+  isActive          Boolean        @default(true)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  progress GoalProgress[]
+
+  @@index([userId])
+  @@map("goals")
+}
+
+model GoalProgress {
+  id              String   @id @default(uuid())
+  goalId          String
+  goal            Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  date            DateTime @db.Date
+  achievedMinutes Int      @default(0)
+  completed       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+
+  @@unique([goalId, date])
+  @@index([goalId])
+  @@map("goal_progress")
+}

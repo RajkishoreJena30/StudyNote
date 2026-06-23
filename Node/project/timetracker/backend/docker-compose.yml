@@ -1,0 +1,148 @@
+# TimeTracker — full backend stack: Postgres, Redis, 3 TCP microservices,
+# 2 API gateway replicas, and an Nginx load balancer in front of them.
+name: timetracker
+
+x-backend-env: &backend-env
+  NODE_ENV: production
+  DATABASE_URL: postgresql://timetracker:timetracker@postgres:5432/timetracker?schema=public
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  JWT_ACCESS_SECRET: super-secret-access-key-change-me
+  JWT_ACCESS_EXPIRES_IN: 15m
+  JWT_REFRESH_SECRET: super-secret-refresh-key-change-me
+  JWT_REFRESH_EXPIRES_IN: 7d
+  AUTH_SERVICE_HOST: auth-service
+  AUTH_SERVICE_PORT: 4001
+  SUBSCRIPTION_SERVICE_HOST: subscription-service
+  SUBSCRIPTION_SERVICE_PORT: 4002
+  PRODUCTIVITY_SERVICE_HOST: productivity-service
+  PRODUCTIVITY_SERVICE_PORT: 4003
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: timetracker
+      POSTGRES_PASSWORD: timetracker
+      POSTGRES_DB: timetracker
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U timetracker']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # One-shot: push the Prisma schema and seed plans, then exit.
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *backend-env
+    command: sh -c "npx prisma db push --schema=libs/prisma/src/schema.prisma --accept-data-loss && node dist/libs/prisma/seed.js"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *backend-env
+    command: node dist/apps/auth-service/apps/auth-service/src/main
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  subscription-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *backend-env
+    command: node dist/apps/subscription-service/apps/subscription-service/src/main
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  productivity-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *backend-env
+    command: node dist/apps/productivity-service/apps/productivity-service/src/main
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  api-gateway-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *backend-env
+      GATEWAY_PORT: 3000
+      ALLOWED_ORIGINS: http://localhost:3001,http://localhost:8080,http://localhost:3000
+    # Published directly so Swagger (/docs) and the API are reachable on :3000
+    # in addition to the Nginx load balancer on :8080.
+    ports:
+      - '3000:3000'
+    command: node dist/apps/api-gateway/apps/api-gateway/src/main
+    depends_on:
+      - auth-service
+      - subscription-service
+      - productivity-service
+
+  api-gateway-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *backend-env
+      GATEWAY_PORT: 3000
+      ALLOWED_ORIGINS: http://localhost:3001,http://localhost:8080
+    command: node dist/apps/api-gateway/apps/api-gateway/src/main
+    depends_on:
+      - auth-service
+      - subscription-service
+      - productivity-service
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - '8080:80'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-gateway-1
+      - api-gateway-2
+
+volumes:
+  pgdata:

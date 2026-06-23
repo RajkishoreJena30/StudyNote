@@ -1,0 +1,52 @@
+Backend (Docker, easiest):
+cd Node\project\timetracker\backend
+copy .env.example .env   # then set real secrets
+// docker compose build migrate  
+// docker compose up --build -d
+// docker compose ps
+// docker compose ps -a
+// docker compose logs migrate
+// docker compose up -d --build productivity-service 2>&1 | Select-Object -Last 15
+// docker compose ps productivity-service
+docker compose up --build
+
+
+Frontend:
+cd Node\project\timetracker\frontend
+copy .env.example .env.local
+npm run dev   # http://localhost:3001
+
+user :
+test@gmail.com
+test@1234
+
+
+# START — build + run all 9 containers (Postgres, Redis, migrate, 3 services, 2 gateways, Nginx)
+docker compose up --build -d
+
+# STOP — stop & remove containers (keeps the Postgres data volume)
+docker compose down
+
+# STOP + wipe the database volume too (fresh start next time)
+docker compose down -v
+
+# START infra — just the two datastores
+docker compose up -d postgres redis
+
+# STOP infra
+docker compose stop postgres redis        # pause (keeps data)
+# or: docker compose down                  # remove containers
+
+
+# 1. one-time: create local env + deps + Prisma client + DB schema/seed
+Copy-Item .env.example .env
+npm install
+npm run prisma:generate
+npm run prisma:deploy
+npm run prisma:seed
+
+# 2. start each service in its OWN terminal (each --watch)
+npm run start:auth
+npm run start:subscription
+npm run start:productivity
+npm run start:gateway

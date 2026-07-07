@@ -5,6 +5,7 @@ import {
   AUTH_SERVICE,
   PRODUCTIVITY_SERVICE,
   SUBSCRIPTION_SERVICE,
+  NOTIFICATION_SERVICE,
 } from '@app/common';
 
 @Global()
@@ -47,6 +48,18 @@ import {
           },
         }),
       },
+      {
+        name: NOTIFICATION_SERVICE,
+        imports: [ConfigModule],
+        inject: [ConfigService],
+        useFactory: (config: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: config.get<string>('NOTIFICATION_SERVICE_HOST', 'localhost'),
+            port: config.get<number>('NOTIFICATION_SERVICE_PORT', 4004),
+          },
+        }),
+      }
     ]),
   ],
   exports: [ClientsModule],

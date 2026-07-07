@@ -45,3 +45,8 @@ export const GOAL_PATTERNS = {
   LOG_PROGRESS: 'goal.log_progress',
   CONSISTENCY: 'goal.consistency',
 } as const;
+
+export const NOTIFICATION_PATTERNS = {
+  LIST: 'notification.list',
+  CREATE: 'notification.create',
+} as const;

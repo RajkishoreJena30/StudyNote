@@ -11,6 +11,7 @@ import { HealthModule } from './modules/health/health.module';
 import { SubscriptionModule } from './modules/subscription/subscription.module';
 import { TasksModule } from './modules/tasks/tasks.module';
 import { TimeTrackingModule } from './modules/time-tracking/time-tracking.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { TimeTrackingModule } from './modules/time-tracking/time-tracking.module
     TasksModule,
     TimeTrackingModule,
     GoalsModule,
+    NotificationModule
   ],
   providers: [
     JwtStrategy,

@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mock Interview Question Sets — Senior Frontend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0b;
+    --bg-elev: #131316;
+    --bg-elev-2: #1a1a1f;
+    --bg-code: #16161a;
+    --border: #26262c;
+    --border-soft: #1f1f24;
+    --text: #e6e6ea;
+    --text-dim: #a1a1aa;
+    --text-faint: #6b6b74;
+    --accent: #6ea8fe;
+    --accent-2: #8b7dff;
+    --accent-glow: rgba(110, 168, 254, 0.15);
+    --green: #4ade80;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --sidebar-w: 330px;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  #progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    z-index: 100;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  .layout { display: flex; min-height: 100vh; }
+
+  aside {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    position: sticky; top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--bg-elev);
+    border-right: 1px solid var(--border);
+    padding: 26px 16px 60px;
+  }
+
+  aside .brand {
+    font-weight: 800; font-size: 15px; letter-spacing: 0.2px; margin-bottom: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  aside .brand-sub { color: var(--text-faint); font-size: 12px; margin-bottom: 18px; }
+
+  .doc-switch { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .doc-btn {
+    display: flex; align-items: center; gap: 10px;
+    text-align: left;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 9px 11px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.3;
+    transition: all .14s;
+  }
+  .doc-btn:hover { border-color: var(--accent); color: var(--text); }
+  .doc-btn.active {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+    color: #fff;
+  }
+  .doc-btn .num {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 11px; font-weight: 700;
+    color: var(--accent);
+  }
+  .doc-btn.active .num { background: var(--accent); color: #0a0a0b; border-color: var(--accent); }
+  .doc-btn .meta { display: flex; flex-direction: column; min-width: 0; }
+  .doc-btn .meta .t { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .doc-btn .meta .band { font-size: 11px; color: var(--text-faint); }
+
+  .toc-search {
+    width: 100%;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .toc-search:focus { border-color: var(--accent); }
+  .toc-search::placeholder { color: var(--text-faint); }
+
+  .toc-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); margin: 4px 0 6px 8px; }
+
+  nav#toc { font-size: 13.5px; }
+  nav#toc a {
+    display: block; color: var(--text-dim); text-decoration: none;
+    padding: 5px 10px; border-radius: 6px;
+    border-left: 2px solid transparent; margin: 1px 0;
+    transition: background .12s, color .12s, border-color .12s;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  nav#toc a.lvl-3 { padding-left: 22px; font-size: 12.5px; color: var(--text-faint); }
+  nav#toc a:hover { background: var(--bg-elev-2); color: var(--text); }
+  nav#toc a.active {
+    color: var(--accent); background: var(--accent-glow);
+    border-left-color: var(--accent); font-weight: 600;
+  }
+
+  main { flex: 1; min-width: 0; display: flex; justify-content: center; padding: 56px 48px 120px; }
+  .content { width: 100%; max-width: 880px; }
+
+  .content h1 {
+    font-size: 32px; line-height: 1.25; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.5px;
+    background: linear-gradient(120deg, #fff 20%, var(--accent) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .content h2 {
+    font-size: 24px; font-weight: 700; margin: 50px 0 16px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border); letter-spacing: -0.3px; scroll-margin-top: 20px;
+  }
+  .content h3 { font-size: 18px; font-weight: 650; margin: 32px 0 12px; color: #f3f3f6; scroll-margin-top: 20px; }
+  .content h4 { font-size: 16px; font-weight: 650; margin: 24px 0 10px; color: var(--accent); }
+  .content p { margin: 12px 0; color: var(--text); }
+  .content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .12s; }
+  .content a:hover { border-bottom-color: var(--accent); }
+
+  .content ul, .content ol { margin: 12px 0; padding-left: 26px; }
+  .content li { margin: 6px 0; }
+  .content li::marker { color: var(--accent); }
+
+  .content strong { color: #fff; font-weight: 650; }
+  .content em { color: var(--text-dim); }
+
+  .content blockquote {
+    margin: 18px 0; padding: 12px 20px;
+    background: var(--bg-elev); border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; color: var(--text-dim);
+  }
+  .content blockquote p { margin: 6px 0; }
+
+  .content code {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13.5px; background: var(--bg-code); border: 1px solid var(--border-soft);
+    padding: 1.5px 6px; border-radius: 5px; color: #f0b3ff;
+  }
+  .content pre { background: var(--bg-code); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; margin: 16px 0; }
+  .content pre code { background: none; border: none; padding: 0; color: var(--text); }
+
+  .table-wrap { overflow-x: auto; margin: 20px 0; border: 1px solid var(--border); border-radius: var(--radius); }
+  .content table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  .content th, .content td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+  .content th { background: var(--bg-elev-2); color: #fff; font-weight: 600; white-space: nowrap; position: sticky; top: 0; }
+  .content tr:last-child td { border-bottom: none; }
+  .content tbody tr { transition: background .1s; }
+  .content tbody tr:hover { background: var(--bg-elev); }
+
+  .content hr { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
+
+  .content input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 17px; height: 17px; border: 1.5px solid var(--border); border-radius: 5px;
+    background: var(--bg-elev-2); margin-right: 9px; vertical-align: -3px; cursor: pointer;
+    position: relative; transition: all .15s; flex-shrink: 0;
+  }
+  .content input[type="checkbox"]:hover { border-color: var(--accent); }
+  .content input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+  .content input[type="checkbox"]:checked::after {
+    content: ""; position: absolute; left: 5px; top: 1.5px; width: 4px; height: 8px;
+    border: solid #0a0a0b; border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .content li.task-item { list-style: none; margin-left: -20px; display: flex; align-items: flex-start; }
+
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #2a2a31; border-radius: 6px; border: 3px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover { background: #3a3a42; }
+
+  #top-btn {
+    position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px;
+    background: var(--bg-elev-2); border: 1px solid var(--border); color: var(--text);
+    border-radius: 50%; cursor: pointer; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s, background .15s; z-index: 50;
+  }
+  #top-btn.show { opacity: 1; pointer-events: auto; }
+  #top-btn:hover { background: var(--accent); color: #0a0a0b; transform: translateY(-2px); }
+
+  .menu-toggle {
+    display: none; position: fixed; top: 14px; left: 14px; z-index: 90;
+    background: var(--bg-elev-2); border: 1px solid var(--border); color: var(--text);
+    width: 42px; height: 42px; border-radius: 10px; font-size: 20px; cursor: pointer;
+  }
+  .overlay { display: none; }
+
+  @media (max-width: 1000px) {
+    aside {
+      position: fixed; left: 0; top: 0; z-index: 95;
+      transform: translateX(-100%); transition: transform .25s ease;
+      box-shadow: 0 0 40px rgba(0,0,0,.6);
+    }
+    aside.open { transform: translateX(0); }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    main { padding: 68px 22px 100px; }
+    .content h1 { font-size: 26px; }
+    .overlay.show { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 92; }
+  }
+</style>
+</head>
+<body>
+  <div id="progress"></div>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <aside id="sidebar">
+      <div class="brand">Mock Interview Sets</div>
+      <div class="brand-sub">Senior Frontend · India · 5–6 YOE</div>
+
+      <div class="doc-switch" id="docSwitch"></div>
+
+      <input type="text" class="toc-search" id="tocSearch" placeholder="Filter sections…" />
+      <div class="toc-label">On this page</div>
+      <nav id="toc"></nav>
+    </aside>
+
+    <main>
+      <article class="content" id="content"></article>
+    </main>
+  </div>
+
+  <button id="top-btn" aria-label="Back to top">↑</button>
+
+  <!-- ============ EMBEDDED MARKDOWN DOCS ============ -->
+
+  <script id="md-readme" type="text/markdown">
+# Mock Interview Question Sets — Senior Frontend (India, 5–6 YOE)
+
+> Five tier-specific mock interview question sets, mapped to **§1.1 Company tiers** in the Senior Frontend Developer Market Prep Guide.
+> Each set covers the **full loop** — from the recruiter screen to the salary-negotiation round — so you can run realistic self-mocks.
+
+---
+
+## The 5 Sets
+
+| # | Tier | Weighs most | CTC band (Sr, 5–6y) |
+|---|------|-------------|---------------------|
+| 1 | **Product (FAANG-adjacent / unicorns)** | DSA + JS internals + Frontend System Design + React perf | ₹35–60+ LPA |
+| 2 | **Mid product / funded startups** | JS deep-dive + React/Next + machine coding + system design | ₹28–45 LPA |
+| 3 | **Service / consulting (premium)** | Practical coding + architecture + communication | ₹18–30 LPA |
+| 4 | **Service (volume)** | Fundamentals + project depth + framework basics | ₹12–22 LPA |
+| 5 | **GCC / captive centers** | DSA + system design + React internals | ₹30–50 LPA |
+
+> Use the tier buttons in the sidebar to switch between sets.
+
+---
+
+## How to Run a Self-Mock
+
+1. **Pick a tier** you're targeting this week.
+2. **Set a timer** for each round (times are listed in every set).
+3. **Answer out loud** as if an interviewer is present — record yourself if you can.
+4. **Self-grade** each round using the ⭐ signals at the end of each section.
+5. **Fill the Post-Mock Scorecard** at the bottom of each set.
+6. **Any round ≤ 3/5 → drill it** before your next mock.
+
+## Suggested Order (warm-up → dream)
+
+Aligns with §9 of the main guide — start easier tiers as live mocks, then escalate:
+
+1. **Tier 4 (Volume service)** — warm up, rebuild fundamentals + project story.
+2. **Tier 3 (Premium service)** — practice communication + clean-code pairing.
+3. **Tier 2 (Mid product)** — machine coding + React depth under pressure.
+4. **Tier 5 (GCC)** — DSA + system design at a product bar.
+5. **Tier 1 (Product/unicorn)** — your dream targets, once Phases 3–6 are solid.
+
+---
+
+## Round Coverage at a Glance
+
+| Round | T1 | T2 | T3 | T4 | T5 |
+|-------|----|----|----|----|----|
+| Recruiter / HR screen | ✅ | ✅ | ✅ | ✅ | ✅ |
+| DSA / coding | ✅✅ | ✅ | ✅ (pairing) | ✅ (basic) | ✅✅ |
+| JS internals deep-dive | ✅✅ | ✅ | ✅ | ✅ (basics) | ✅ |
+| Machine coding / live build | ✅ | ✅✅ | ✅ | — | ✅ |
+| Frontend system design | ✅✅ | ✅ | ✅ (architecture) | — | ✅✅ |
+| React / Next deep-dive | ✅ | ✅ | ✅ | ✅ (basics) | ✅ |
+| State management | (in RN) | ✅ | (in arch) | (in RN) | (in RN) |
+| Cross-cutting (test/perf/sec/a11y) | (in SD) | — | (in RN) | ✅ (web) | ✅ |
+| Behavioral / hiring manager | ✅ | ✅ | ✅✅ | ✅ | ✅ |
+| Salary negotiation | ✅ | ✅ (ESOP) | ✅ | ✅ (hike%) | ✅ (RSU) |
+
+`✅✅` = heavily weighted at this tier · `(in X)` = folded into another round
+
+---
+
+*Pair these mocks with the phase-by-phase revision plan in the main prep guide. Re-verify salary bands against live JDs before each application wave.*
+  </script>
+
+  <script id="md-tier1" type="text/markdown">
+# Tier 1 — Product (FAANG-adjacent / Unicorns) — Full Mock Interview Question Set
+
+> **Companies (type):** Google, Microsoft, Atlassian, Uber, Flipkart, Swiggy, Razorpay, Zeta, PhonePe
+> **What they weigh most:** DSA + JS internals + Frontend System Design + React performance
+> **CTC band (Sr, 5–6y):** ₹35–60+ LPA
+> **How to use:** Set a timer per round. Speak your answer out loud as if in a real interview, then self-grade using the ⭐ signals at the end of each round.
+
+---
+
+## Round 0 — Recruiter Screen (15–20 min)
+
+*Goal: confirm fit, notice period, comp expectations. Low technical, high signal on communication.*
+
+1. Walk me through your last 5–6 years in 3 minutes — focus on frontend ownership.
+2. What are you working on right now, and what's your exact role on the team?
+3. Why are you looking to switch? Why now?
+4. What's your current CTC (fixed + variable + ESOP) and your expectation?
+5. What's your notice period? Is it buyout-eligible / negotiable?
+6. Are you interviewing elsewhere / do you have offers in the pipeline?
+7. What team/domain interests you here and why?
+8. Are you comfortable with a DSA round and a system design round?
+
+**⭐ Self-grade:** Crisp 3-min pitch, clear comp band with fixed/variable split, honest notice framing, no rambling.
+
+---
+
+## Round 1 — DSA / Coding Screen (60 min, 1–2 mediums)
+
+*Enforced hard at this tier. Solve, state complexity, handle edge cases, talk while coding.*
+
+### Arrays &amp; Strings
+1. Two Sum / Two Sum II (sorted, two-pointer).
+2. Longest substring without repeating characters (sliding window).
+3. Group anagrams.
+4. Product of array except self.
+5. Merge intervals.
+6. Trapping rain water.
+
+### Hashmaps &amp; Frequency
+7. Top K frequent elements.
+8. Subarray sum equals K.
+9. First unique character in a string.
+
+### Two-pointer / Sliding window
+10. Minimum window substring.
+11. Container with most water.
+12. Longest repeating character replacement.
+
+### Recursion / Backtracking
+13. Generate all subsets / permutations.
+14. Combination sum.
+15. Word search on a grid.
+
+### Trees &amp; Graphs
+16. Level-order traversal (BFS).
+17. Lowest common ancestor.
+18. Number of islands.
+19. Validate a BST.
+20. Clone graph.
+
+### Stacks / Queues
+21. Valid parentheses.
+22. Min stack.
+23. Daily temperatures (monotonic stack).
+
+**⭐ Self-grade:** Stated approach before coding, correct Big-O time &amp; space, covered empty/duplicate/overflow edge cases, clean naming.
+
+---
+
+## Round 2 — JavaScript Internals Deep-Dive (45–60 min)
+
+*This tier probes fundamentals hard.*
+
+### Output prediction
+1. Predict the output — closures in a `for` loop with `var` vs `let`.
+2. Predict order — `console.log` + `setTimeout(0)` + `Promise.resolve().then` interleaved.
+3. What does `this` print in a regular function vs arrow function inside an object method?
+4. Hoisting: `var`, `let`, function declaration vs expression order.
+5. `[1,2,3].map(parseInt)` — explain the result.
+
+### Concepts
+6. Explain the event loop: call stack, microtask queue, macrotask queue.
+7. Difference between microtask and macrotask — give examples of each.
+8. Explain closures and one real-world use (memoization / private state).
+9. Prototypal inheritance vs classical inheritance.
+10. `call` vs `apply` vs `bind` — implement `bind`.
+11. Deep clone vs shallow clone — pitfalls with `JSON.parse(JSON.stringify())`.
+12. Explain `var` / `let` / `const`, TDZ, block scope.
+13. How does `async/await` map to promises under the hood?
+
+### Polyfills (implement live)
+14. `Array.prototype.map`.
+15. `debounce` (with leading/trailing option).
+16. `throttle`.
+17. `curry`.
+18. `Promise.all` and `Promise.allSettled`.
+19. `deepClone` (handle circular refs).
+20. A simple `EventEmitter` (on/off/emit).
+
+**⭐ Self-grade:** Correct output with reasoning (not memorized), polyfills handle edge cases, precise vocabulary (microtask, TDZ, referential equality).
+
+---
+
+## Round 3 — Machine Coding / Live UI Build (60–90 min)
+
+*Build a working, clean component. Focus on state modeling, edge cases, a11y.*
+
+Pick one and build end-to-end:
+1. **Typeahead / autocomplete** — debounced API calls, keyboard nav, cancel stale requests (AbortController), loading/empty/error states.
+2. **Infinite scroll feed** — IntersectionObserver, dedup, error retry.
+3. **Nested comments** — recursive component, collapse/expand, reply.
+4. **Star rating** — hover preview, keyboard accessible, half-stars.
+5. **Multi-select with chips** — add/remove, filter, keyboard support.
+6. **Kanban board** — drag &amp; drop columns/cards, state persistence.
+7. **Tabs + Accordion** — accessible (ARIA roles, focus management).
+
+**Follow-ups they'll ask:**
+- How do you cancel in-flight requests?
+- How would you make this accessible (keyboard + screen reader)?
+- How do you prevent unnecessary re-renders here?
+- How would you test this component?
+
+**⭐ Self-grade:** Working UI, clean state shape, handled loading/empty/error, no race conditions, basic a11y, readable code under time.
+
+---
+
+## Round 4 — Frontend System Design (60 min) ⭐⭐ biggest differentiator
+
+*Drive the conversation: requirements → architecture → data flow → trade-offs.*
+
+Prompts (pick 2–3 to drill):
+1. **Design a news feed (Twitter/Facebook)** — infinite scroll, real-time updates, optimistic likes.
+2. **Design a chat application** — websockets, message ordering, offline queue, read receipts.
+3. **Design an autocomplete at scale** — caching, debouncing, ranking, request cancellation.
+4. **Design an image gallery / Pinterest** — virtualization, lazy loading, responsive images.
+5. **Design a live dashboard** — polling vs websockets vs SSE, data freshness, error states.
+6. **Design a file uploader** — chunked upload, resume, progress, retries.
+
+**Framework to cover every time:**
+- Clarify requirements &amp; scope (functional + non-functional).
+- Component architecture &amp; folder structure.
+- Data flow &amp; state (local vs global vs server state).
+- API contract &amp; data fetching strategy (REST/GraphQL, pagination).
+- Rendering strategy (CSR/SSR/SSG/RSC) and why.
+- Performance: code splitting, virtualization, caching, prefetch.
+- Optimistic updates &amp; cache invalidation.
+- Accessibility, i18n, error/loading/empty states.
+- Observability: error tracking, RUM, logging.
+- Trade-offs &amp; alternatives (defend your choices).
+
+**⭐ Self-grade:** Led the discussion, quantified trade-offs, addressed scale (10k+ items → virtualization), covered failure/edge states, defended decisions.
+
+---
+
+## Round 5 — React / Next.js Deep-Dive (45–60 min)
+
+### React internals &amp; performance
+1. What triggers a re-render? How do you prevent unnecessary ones?
+2. `useMemo` vs `useCallback` — when does memoization *hurt*?
+3. `React.memo` and referential equality pitfalls.
+4. Why does `useEffect` run twice in StrictMode (dev)?
+5. Reconciliation and why keys must be stable &amp; unique.
+6. `useLayoutEffect` vs `useEffect`.
+7. Context re-render fan-out — how do you avoid it?
+8. Custom hook design — build a `useDebouncedValue` and a typed `useFetch`.
+9. Error boundaries — what they catch and what they don't.
+10. Concurrent features: `useTransition`, `useDeferredValue`, Suspense.
+11. React 19: `use`, actions, `useOptimistic`, `useActionState`.
+
+### Next.js
+12. SSR vs SSG vs ISR vs RSC — choose one per scenario and defend.
+13. What problem do React Server Components solve?
+14. App Router caching layers and `revalidate`.
+15. Server Actions — when and why.
+16. When would you *not* use SSR?
+
+**⭐ Self-grade:** Explained the "why" behind rendering choices, showed perf intuition, wrote a clean custom hook, precise on caching.
+
+---
+
+## Round 6 — Behavioral / Hiring Manager (45 min)
+
+*STAR format. Show ownership, trade-offs, mentoring, impact with metrics.*
+
+1. Tell me about a feature you owned end-to-end.
+2. Describe a hard technical trade-off you made and how you defended it.
+3. A time you improved performance — what metric, before/after numbers?
+4. A conflict with a teammate or PM — how did you resolve it?
+5. A production incident you handled — detection, fix, prevention.
+6. How do you mentor juniors / review PRs / set standards?
+7. A project that failed or slipped — what did you learn?
+8. How do you decide between shipping fast vs building it right?
+9. Why this company? What do you know about our product?
+10. Where do you see yourself in 2–3 years?
+
+**⭐ Self-grade:** 5 crisp STAR stories ready, quantified impact ("LCP 4.2s→1.8s, +12% conversion"), owned failures, senior signal (mentoring, standards).
+
+---
+
+## Round 7 — Salary Negotiation / HR Closing (30 min)
+
+1. What's your expected CTC? (Give a band, anchor high but reasonable.)
+2. Break down your current offer: fixed, variable, ESOP/RSU, joining bonus.
+3. Do you have competing offers? What are the numbers?
+4. What's your priority — fixed cash, equity, or growth?
+5. What level do you see yourself joining at (SDE-2 / Senior / SDE-3)?
+6. How soon can you join? (notice + buyout framing)
+
+**Your negotiation playbook:**
+- Anchor on **fixed comp**, not just CTC.
+- Ask for the **full breakdown** in writing before accepting.
+- Use competing offers as leverage — product cos. expect negotiation.
+- Ask about level, growth path, on-call, team seniority, stack modernity.
+- Never accept on the call — ask for time to review.
+- Confirm **join date + buyout** in writing.
+
+**⭐ Self-grade:** Anchored confidently, compared fixed not CTC, used leverage without bluffing, negotiated level + join date.
+
+---
+
+## Post-Mock Scorecard
+
+| Round | Time | Self-score (1–5) | Gaps to fix |
+|-------|------|------------------|-------------|
+| Recruiter screen | | | |
+| DSA | | | |
+| JS internals | | | |
+| Machine coding | | | |
+| System design | | | |
+| React/Next | | | |
+| Behavioral / HM | | | |
+| Salary negotiation | | | |
+
+> **Rule:** Any round ≤ 3 → drill it before the next mock. This tier rejects on DSA and system design most often.
+  </script>
+
+  <script id="md-tier2" type="text/markdown">
+# Tier 2 — Mid Product / Funded Startups — Full Mock Interview Question Set
+
+> **Companies (type):** Postman, Groww, CRED, Meesho, Zerodha, Freshworks
+> **What they weigh most:** JS deep-dive + React/Next + machine coding + system design
+> **CTC band (Sr, 5–6y):** ₹28–45 LPA
+> **How to use:** Timer per round, answer out loud, self-grade with the ⭐ signals. This tier leans **practical/product** — machine coding and React depth matter more than hard DSA.
+
+---
+
+## Round 0 — Recruiter / Founder-ish Screen (20 min)
+
+1. Give me your 3-minute story with emphasis on product impact you shipped.
+2. What features have you personally shipped that users touched?
+3. Why leave your current role? Why a startup?
+4. Are you comfortable with ambiguity and wearing multiple hats?
+5. Current CTC (fixed + variable + ESOP) and expectation?
+6. Notice period — negotiable / buyout?
+7. What's your experience with our product? Have you used it?
+
+**⭐ Self-grade:** Product-first framing, comfort with ambiguity, shows genuine interest in the product.
+
+---
+
+## Round 1 — Coding Screen (45–60 min, lighter DSA + practical)
+
+*Usually 1 medium + 1 practical/JS-flavored problem.*
+
+### Practical / JS-heavy
+1. Flatten a deeply nested array (and object).
+2. Implement `debounce` and `throttle` from scratch.
+3. Group an array of objects by a key.
+4. Implement a retry-with-backoff wrapper around a promise.
+5. Parse query string into an object and back.
+6. Implement `Promise.all` and a `promisePool` (concurrency limit).
+7. LRU cache.
+8. Deep equality check between two objects.
+
+### DSA (medium, not exotic)
+9. Two Sum / Longest substring without repeats.
+10. Merge intervals.
+11. Top K frequent elements.
+12. Valid parentheses / Min stack.
+13. Level-order traversal of a tree.
+
+**⭐ Self-grade:** Practical fluency (async, arrays, objects), stated complexity, clean readable JS.
+
+---
+
+## Round 2 — JavaScript Deep-Dive (45 min)
+
+1. Event loop — micro vs macro tasks, predict output of a mixed snippet.
+2. Closures — real use (private state, memoization, currying).
+3. `this` in regular vs arrow functions; `call`/`apply`/`bind`.
+4. Prototypal inheritance.
+5. `var`/`let`/`const`, hoisting, TDZ.
+6. Deep vs shallow copy, reference vs value.
+7. Debounce vs throttle — when to use which (real product examples).
+8. `Promise.all` vs `allSettled` vs `race` vs `any`.
+9. Polyfills: `map`, `reduce`, `bind`, `curry`, `deepClone`, `EventEmitter`.
+10. `localStorage` vs `sessionStorage` vs cookies — when each.
+
+**⭐ Self-grade:** Ties concepts to real product scenarios, polyfills correct, no hand-waving.
+
+---
+
+## Round 3 — Machine Coding / Live Build (60–90 min) ⭐ heavily weighted
+
+*This tier loves practical builds. Ship working UI with clean state.*
+
+Pick one:
+1. **Debounced search with API** — loading/empty/error, cancel stale calls.
+2. **Infinite scroll product list** — IntersectionObserver, skeleton loaders.
+3. **Cart / checkout mini-app** — add/remove, quantity, price totals, persistence.
+4. **Todo app with filters** — all/active/done, localStorage, edit inline.
+5. **Multi-step form / wizard** — validation, back/next, review step.
+6. **Data table** — sorting, filtering, pagination, column config.
+7. **Toast / notification system** — queue, auto-dismiss, variants.
+8. **Star rating + reviews widget**.
+
+**Follow-ups:**
+- How do you structure state for scale?
+- How do you handle API errors and retries?
+- How would you make it responsive and accessible?
+- How would you unit test this?
+
+**⭐ Self-grade:** Fully working, clean component split, handled edge/error states, responsive, some a11y, testable structure.
+
+---
+
+## Round 4 — React / Next.js Deep-Dive (45 min)
+
+### React
+1. What triggers re-renders; how to prevent unnecessary ones.
+2. `useMemo` vs `useCallback` vs `React.memo` — practical examples.
+3. `useEffect` deps, cleanup, and common bugs (stale closures, infinite loops).
+4. Custom hooks — build `useLocalStorage` and `useDebounce`.
+5. Controlled vs uncontrolled forms; form libraries (RHF) trade-offs.
+6. Context vs a state library — when to switch.
+7. Lists, keys, reconciliation.
+8. Error boundaries and Suspense for data.
+
+### Next.js
+9. App Router vs Pages Router.
+10. SSR vs SSG vs ISR — pick per scenario (product listing, blog, dashboard).
+11. Data fetching + caching in App Router; `revalidate`.
+12. API routes / route handlers, middleware.
+13. SEO, metadata, image optimization.
+
+**⭐ Self-grade:** Practical React intuition, correct rendering choices for product pages, clean hooks.
+
+---
+
+## Round 5 — State Management (30–40 min)
+
+1. Local vs global vs **server state** — the distinction.
+2. Redux Toolkit: slices, `createAsyncThunk`, RTK Query, normalization.
+3. Zustand: when you'd prefer it over Redux.
+4. TanStack Query / React Query: caching, invalidation, mutations, optimistic updates.
+5. Why prefer RTK Query / React Query over manual `useEffect` fetching?
+6. How would you cache and invalidate product/cart data?
+
+**⭐ Self-grade:** Clearly separates server vs client state, justifies tool choice for the product.
+
+---
+
+## Round 6 — Lightweight System Design (45 min)
+
+Prompts:
+1. **Design a product listing + filters page** (e-commerce) — pagination/infinite scroll, filter state in URL, caching.
+2. **Design a notifications system** (in-app).
+3. **Design a dashboard with live data** — polling vs websockets.
+4. **Design a cart + checkout flow** — optimistic updates, error recovery.
+
+Cover: requirements → components → state (server vs client) → data fetching/caching → rendering strategy → performance → error/loading states → trade-offs.
+
+**⭐ Self-grade:** Product-pragmatic design, URL-driven filter state, right caching, handled failures.
+
+---
+
+## Round 7 — Behavioral / Hiring Manager (45 min)
+
+1. A feature you owned end-to-end and its impact (metrics).
+2. Working in a fast-moving, ambiguous startup environment.
+3. A time you shipped fast and paid down tech debt later.
+4. Disagreement with a PM/designer — resolution.
+5. How you improved performance / DX for the team.
+6. Mentoring juniors / raising code quality.
+7. Why this startup specifically?
+8. How do you prioritize when everything is "urgent"?
+
+**⭐ Self-grade:** Ownership + speed + pragmatism stories, metrics, genuine product interest.
+
+---
+
+## Round 8 — Salary Negotiation / HR Closing (30 min)
+
+1. Expected CTC? (band, anchor high-reasonable)
+2. Current breakdown: fixed + variable + **ESOP** (startups push equity).
+3. How do you value equity vs cash?
+4. Competing offers?
+5. Notice / join date?
+
+**Playbook:**
+- Startups lean on **ESOP** — understand strike price, vesting, dilution, last valuation.
+- Compare **fixed cash** first; treat equity as upside.
+- Negotiate fixed + a meaningful ESOP grant + join date.
+- Ask about runway, funding stage, growth path.
+- Get everything in writing.
+
+**⭐ Self-grade:** Understood equity mechanics, anchored on fixed, evaluated startup risk, negotiated confidently.
+
+---
+
+## Post-Mock Scorecard
+
+| Round | Time | Self-score (1–5) | Gaps to fix |
+|-------|------|------------------|-------------|
+| Recruiter screen | | | |
+| Coding screen | | | |
+| JS deep-dive | | | |
+| Machine coding | | | |
+| React/Next | | | |
+| State management | | | |
+| System design | | | |
+| Behavioral / HM | | | |
+| Salary negotiation | | | |
+
+> **Rule:** This tier rejects most on **machine coding** and **React depth**. Drill any round ≤ 3.
+  </script>
+
+  <script id="md-tier3" type="text/markdown">
+# Tier 3 — Service / Consulting (Premium) — Full Mock Interview Question Set
+
+> **Companies (type):** ThoughtWorks, Nagarro, GlobalLogic, Publicis Sapient
+> **What they weigh most:** Practical coding + architecture + **communication**
+> **CTC band (Sr, 5–6y):** ₹18–30 LPA
+> **How to use:** Timer per round, answer out loud. This tier weighs **clean code, pairing, and articulation** heavily — think out loud, explain trade-offs, be a great communicator.
+
+---
+
+## Round 0 — Recruiter / Staffing Screen (20 min)
+
+1. 3-minute career story — emphasize breadth across projects and clients.
+2. What domains/industries have you worked in?
+3. Are you comfortable with client-facing work and travel/onsite if needed?
+4. How do you handle changing requirements from clients?
+5. Current CTC + expectation; notice period.
+6. Comfortable pairing and TDD?
+
+**⭐ Self-grade:** Clear communication, client-readiness, adaptability, breadth of experience.
+
+---
+
+## Round 1 — Practical Coding / Pairing (60–90 min) ⭐ core at this tier
+
+*Often a pairing session. They watch HOW you code and communicate, not just the result. TDD is common (esp. ThoughtWorks).*
+
+### Problem styles
+1. **Refactor legacy code** — improve readability, extract functions, remove duplication; explain each step.
+2. **TDD kata** — build a feature test-first (e.g., string calculator, bowling scorer, FizzBuzz with rules, shopping cart pricing).
+3. **Build a small feature** — parse &amp; transform data, then render.
+4. **Debug a broken function** — find and fix, explain root cause.
+5. **Implement `debounce` / `throttle` / `groupBy`** while narrating.
+6. **Design clean functions** — pure functions, single responsibility.
+
+### What they evaluate
+- Do you write tests first / alongside?
+- Do you name things well and keep functions small?
+- Do you talk through your reasoning and ask clarifying questions?
+- Do you handle edge cases and refactor after green?
+
+**⭐ Self-grade:** Test-first mindset, clean incremental commits, strong narration, asked clarifying questions, refactored.
+
+---
+
+## Round 2 — JavaScript / TypeScript Fundamentals (45 min)
+
+1. Closures, scope, hoisting — with a practical example.
+2. `this`, `call`/`apply`/`bind`.
+3. Event loop basics — micro vs macro.
+4. Promises, async/await, error handling patterns.
+5. Array methods: `map`/`filter`/`reduce` — refactor a loop into these.
+6. Immutability — why and how (spread, structuredClone).
+7. TypeScript: `type` vs `interface`, generics, utility types (`Pick`, `Omit`, `Partial`).
+8. Discriminated unions for API state (loading/success/error).
+9. `unknown` vs `any` vs `never`.
+
+**⭐ Self-grade:** Clean idiomatic JS/TS, immutability awareness, explains clearly with examples.
+
+---
+
+## Round 3 — Machine Coding / Component Build (60 min)
+
+Pick one; emphasis on **clean architecture** and **testability**:
+1. **Todo app with filters** — but structured with clear separation (UI / state / services).
+2. **Autocomplete** — debounced, testable service layer.
+3. **Form with validation** — controlled inputs, reusable validation.
+4. **Data table** — sorting/filtering, extracted logic.
+5. **Weather / user card fetcher** — API layer + presentational component + loading/error.
+
+**Follow-ups:**
+- How would you unit test the logic vs the UI?
+- How would you structure this for a team of 5?
+- Where's the seam for mocking the API?
+
+**⭐ Self-grade:** Layered architecture, testable seams, presentational vs container split, clean naming.
+
+---
+
+## Round 4 — Architecture &amp; Design (45–60 min)
+
+*Architecture and communication over raw scale.*
+
+1. How do you structure a large frontend codebase (folders, modules, boundaries)?
+2. Component design: presentational vs container, composition over inheritance.
+3. Design a reusable **design system / component library** — API design, theming, docs.
+4. How do you handle cross-cutting concerns (auth, logging, error handling)?
+5. SSR vs CSR vs SSG — when for a client project.
+6. How do you approach a migration (jQuery/AngularJS → React) for a client?
+7. Managing shared state across a large app.
+8. How do you ensure code quality across a distributed team (lint, review, CI, standards)?
+
+**⭐ Self-grade:** Clear architectural reasoning, reusability, team-scale thinking, migration strategy.
+
+---
+
+## Round 5 — React / Next.js (40 min)
+
+1. Hooks: `useState`, `useEffect` (deps/cleanup), `useMemo`, `useCallback`, `useRef`.
+2. Custom hooks for reuse across a codebase.
+3. Controlled vs uncontrolled forms.
+4. Preventing unnecessary re-renders.
+5. Error boundaries &amp; Suspense.
+6. Next.js rendering strategies for client projects (SEO sites → SSG/SSR).
+7. Testing React with Jest + RTL — what to test, query priorities, mocking.
+
+**⭐ Self-grade:** Reuse-focused hooks, testing fluency, pragmatic rendering choices.
+
+---
+
+## Round 6 — Behavioral / Communication (45–60 min) ⭐ heavily weighted
+
+*This tier promotes on communication and client handling.*
+
+1. Tell me about working with a difficult client / changing requirements.
+2. A time you disagreed with a client's technical decision — how did you handle it?
+3. How do you explain a technical concept to a non-technical stakeholder?
+4. A time you mentored or onboarded someone.
+5. Handling a project under tight deadline with scope creep.
+6. A production issue on a client project — how you communicated it.
+7. How do you give and receive code review feedback?
+8. Why consulting? Why this firm?
+9. Describe pairing/mobbing experience.
+
+**⭐ Self-grade:** Excellent communication, stakeholder empathy, conflict handling, mentoring, articulate trade-offs.
+
+---
+
+## Round 7 — Salary Negotiation / HR Closing (30 min)
+
+1. Expected CTC? (band)
+2. Current fixed + variable breakdown.
+3. Are you open to a specific band/level based on the client project?
+4. Notice period / join date.
+5. Onsite/relocation flexibility?
+
+**Playbook:**
+- Premium service bands (₹18–30 LPA) are tighter than product — anchor realistically but firmly.
+- Negotiate **fixed**, level, and role (senior/lead/architect track).
+- Ask about **project quality, tech stack modernity, growth to architect/lead**.
+- Clarify bench policy, client allocation, travel/onsite expectations.
+- Get band + level in writing.
+
+**⭐ Self-grade:** Realistic anchoring, negotiated level + role track, asked about project quality and growth.
+
+---
+
+## Post-Mock Scorecard
+
+| Round | Time | Self-score (1–5) | Gaps to fix |
+|-------|------|------------------|-------------|
+| Recruiter screen | | | |
+| Practical coding / pairing | | | |
+| JS / TS fundamentals | | | |
+| Machine coding | | | |
+| Architecture &amp; design | | | |
+| React / Next | | | |
+| Behavioral / communication | | | |
+| Salary negotiation | | | |
+
+> **Rule:** This tier rejects most on **communication** and **clean-code/pairing**. Practice narrating while you code, and drill any round ≤ 3.
+  </script>
+
+  <script id="md-tier4" type="text/markdown">
+# Tier 4 — Service (Volume) — Full Mock Interview Question Set
+
+> **Companies (type):** TCS, Infosys, Wipro, Cognizant, Accenture
+> **What they weigh most:** Fundamentals + project depth + framework basics
+> **CTC band (Sr, 5–6y):** ₹12–22 LPA
+> **How to use:** Timer per round, answer out loud. This tier weighs **breadth of fundamentals, project explanation, and framework basics**. Depth of trivia matters; polish your project story.
+
+---
+
+## Round 0 — HR / Screening Call (15–20 min)
+
+1. Brief introduction and total years of experience.
+2. Current CTC, expected CTC, notice period.
+3. Which technologies are you strongest in?
+4. Are you open to the client location / onsite / rotational shifts?
+5. Reason for change.
+6. Highest qualification &amp; certifications.
+
+**⭐ Self-grade:** Clear, polite, straightforward answers; correct comp + notice details.
+
+---
+
+## Round 1 — Technical Screen: Fundamentals (45–60 min)
+
+### HTML
+1. Semantic HTML elements and why they matter.
+2. `block` vs `inline` vs `inline-block`.
+3. Difference between `id` and `class`.
+4. Forms, input types, validation attributes.
+5. What are data attributes?
+6. Meta tags &amp; basic SEO.
+
+### CSS
+7. Box model.
+8. `position`: static/relative/absolute/fixed/sticky.
+9. Flexbox vs Grid — when to use each.
+10. Specificity — how it's calculated.
+11. Ways to center a div.
+12. `rem` vs `em` vs `px` vs `%` vs `vh/vw`.
+13. Pseudo-classes vs pseudo-elements.
+14. Media queries / responsive design.
+
+### JavaScript
+15. `var` vs `let` vs `const`.
+16. `==` vs `===`.
+17. Closures (with example).
+18. Hoisting.
+19. `this` keyword.
+20. Arrow vs regular functions.
+21. `map` vs `forEach` vs `filter` vs `reduce`.
+22. Promises vs callbacks vs async/await.
+23. `null` vs `undefined`.
+24. Event bubbling &amp; delegation.
+25. Shallow vs deep copy.
+
+**⭐ Self-grade:** Broad, accurate fundamentals; concise definitions with a quick example each.
+
+---
+
+## Round 2 — React / Framework Basics (45 min)
+
+1. What is the Virtual DOM?
+2. Class vs functional components.
+3. `useState`, `useEffect` — basic usage and dependency array.
+4. Props vs state.
+5. Lifting state up.
+6. Controlled vs uncontrolled components.
+7. What are keys in lists and why needed?
+8. `useRef`, `useMemo`, `useCallback` — basic purpose.
+9. Context API — what and when.
+10. React Router basics — routes, params, navigation.
+11. How do you call an API in React? (`useEffect` + fetch/axios).
+12. Redux basics — store, actions, reducers, dispatch (or Redux Toolkit).
+13. Component lifecycle (mount/update/unmount).
+14. Handling forms and events.
+
+**⭐ Self-grade:** Solid framework basics, correct hook usage, can explain data flow clearly.
+
+### Optional — Light Hands-On (10–20 min)
+
+*Not a full machine-coding round at this tier, but a short live task may be folded in here. Practice these so you're not caught off guard.*
+
+1. Build a **controlled search input** that filters a static list as you type.
+2. **Fetch and render a list** from an API with loading and error states (`useEffect` + fetch/axios).
+3. Build a **counter or mini todo** — add, toggle/complete, delete.
+4. **Fix a broken snippet** — e.g., a `useEffect` infinite loop (missing/incorrect dependency array) or a stale-state bug.
+
+**⭐ Self-grade:** Working component under time, correct hook usage (deps + cleanup), handled loading/error, readable code while narrating.
+
+---
+
+## Round 3 — Coding / DSA (Basic to Medium) (45 min)
+
+1. Reverse a string / check palindrome.
+2. FizzBuzz.
+3. Find largest/second largest in an array.
+4. Remove duplicates from an array.
+5. Count character/word frequency in a string.
+6. Fibonacci (iterative + recursive).
+7. Check for anagram.
+8. Sort an array (and know built-in sort behavior).
+9. Find missing number in 1..n.
+10. Simple object/array manipulation (group, flatten).
+11. Two Sum.
+12. Basic recursion (factorial, sum of digits).
+
+**⭐ Self-grade:** Correct working solutions, can explain logic, aware of basic complexity.
+
+---
+
+## Round 4 — Project Deep-Dive (45–60 min) ⭐ heavily weighted
+
+*This tier interrogates your project story in depth. Prepare it thoroughly.*
+
+1. Explain your current/last project — architecture, your role, tech stack.
+2. What was the most challenging feature you built? How?
+3. How is state managed in your project?
+4. How do you handle API integration and errors?
+5. How did your team handle version control / branching / releases?
+6. How did you test your code?
+7. What was your team size and your responsibilities?
+8. A bug you fixed that was hard to trace.
+9. How did you handle performance issues?
+10. Agile/Scrum process on your project — your involvement.
+
+**⭐ Self-grade:** Confident end-to-end project narrative, clear personal contribution, honest technical depth.
+
+---
+
+## Round 5 — Web &amp; General Concepts (30 min)
+
+1. HTTP methods &amp; status codes.
+2. REST API principles.
+3. What is CORS?
+4. Cookies vs localStorage vs sessionStorage.
+5. Authentication basics — JWT, sessions.
+6. Git basics — merge vs rebase, resolving conflicts.
+7. What happens when you type a URL and hit enter?
+8. Synchronous vs asynchronous.
+9. Basic security — XSS, CSRF (awareness level).
+
+**⭐ Self-grade:** Broad awareness across web fundamentals; correct definitions.
+
+---
+
+## Round 6 — Managerial / Behavioral (30–45 min)
+
+1. Walk me through your career and growth.
+2. How do you handle tight deadlines?
+3. A conflict in your team and how you resolved it.
+4. How do you handle feedback?
+5. Have you mentored juniors?
+6. Why do you want to leave your current company?
+7. Why our company?
+8. Are you comfortable with the client's shift timings / location?
+9. Where do you see yourself in 3–5 years?
+
+**⭐ Self-grade:** Professional, stable, team-oriented answers; clear motivation.
+
+---
+
+## Round 7 — HR / Salary Negotiation (20–30 min)
+
+1. Current CTC breakdown (fixed + variable).
+2. Expected CTC.
+3. Notice period &amp; buyout options.
+4. Any competing offers?
+5. Flexibility on location / shift / onsite.
+
+**Playbook:**
+- Volume-service bands (₹12–22 LPA) are structured — negotiate on **hike % over current** (aim 30–50%+ with a switch).
+- Have a competing offer if possible — biggest lever here.
+- Clarify designation/band mapping, appraisal cycle, variable payout history.
+- Get the offer + join date in writing; confirm buyout policy.
+
+**⭐ Self-grade:** Negotiated a strong hike %, used competing offer, clarified band + variable.
+
+---
+
+## Post-Mock Scorecard
+
+| Round | Time | Self-score (1–5) | Gaps to fix |
+|-------|------|------------------|-------------|
+| HR screen | | | |
+| Fundamentals | | | |
+| React / framework basics | | | |
+| Coding / DSA | | | |
+| Project deep-dive | | | |
+| Web &amp; general concepts | | | |
+| Managerial / behavioral | | | |
+| Salary negotiation | | | |
+
+> **Rule:** This tier rejects most on **weak fundamentals** or a **shaky project story**. Polish breadth + your project narrative. Drill any round ≤ 3.
+  </script>
+
+  <script id="md-tier5" type="text/markdown">
+# Tier 5 — GCC / Captive Centers — Full Mock Interview Question Set
+
+> **Companies (type):** Walmart Global Tech, Target, Wells Fargo, Mastercard
+> **What they weigh most:** DSA + system design + React internals
+> **CTC band (Sr, 5–6y):** ₹30–50 LPA
+> **How to use:** Timer per round, answer out loud, self-grade with ⭐ signals. GCCs run a **product-grade loop** with strong DSA + system design + deep React, plus emphasis on **quality, testing, and ownership**.
+
+---
+
+## Round 0 — Recruiter Screen (20 min)
+
+1. 3-minute career summary — focus on scale, quality, and ownership.
+2. Team/domain you're interested in (payments, retail, banking, etc.).
+3. Reason for switch; interest in a global captive setup.
+4. Current CTC (fixed + variable + RSU) and expectation.
+5. Notice period — negotiable / buyout.
+6. Comfortable with DSA + system design rounds?
+
+**⭐ Self-grade:** Clear pitch, scale/quality framing, correct comp + notice details.
+
+---
+
+## Round 1 — DSA / Coding (60 min, 1–2 mediums) ⭐ enforced
+
+*GCCs run near-product DSA bars. State approach, complexity, edge cases.*
+
+### Arrays &amp; Strings
+1. Two Sum / Two Sum II.
+2. Longest substring without repeating characters.
+3. Maximum subarray (Kadane's).
+4. Product of array except self.
+5. Merge intervals / insert interval.
+
+### Hashmaps
+6. Top K frequent elements.
+7. Subarray sum equals K.
+8. Group anagrams.
+
+### Sliding window / Two-pointer
+9. Minimum window substring.
+10. Longest repeating character replacement.
+
+### Trees &amp; Graphs
+11. Binary tree level-order / zigzag traversal.
+12. Lowest common ancestor.
+13. Number of islands / flood fill.
+14. Course schedule (topological sort).
+15. Validate BST.
+
+### Stack / Queue / Heap
+16. Valid parentheses / Min stack.
+17. Kth largest element (heap).
+18. Merge k sorted lists.
+
+### Recursion / DP (basic)
+19. Climbing stairs / coin change.
+20. Subsets / permutations.
+
+**⭐ Self-grade:** Optimal approach stated first, correct Big-O, edge cases, clean code.
+
+---
+
+## Round 2 — JavaScript + React Internals (45–60 min) ⭐
+
+### JavaScript
+1. Event loop — micro vs macro, predict mixed output.
+2. Closures, `this`, `call`/`apply`/`bind`.
+3. Prototypal inheritance.
+4. Promises — `all`/`race`/`allSettled`/`any`.
+5. Polyfills: `debounce`, `throttle`, `bind`, `Promise.all`, `deepClone`.
+6. Deep vs shallow copy; immutability.
+
+### React internals
+7. What triggers a re-render; prevent unnecessary ones.
+8. `useMemo` vs `useCallback` vs `React.memo`; referential equality.
+9. Reconciliation, keys, virtual DOM.
+10. `useEffect` deps/cleanup; why double-invoke in StrictMode.
+11. Custom hooks — build `useFetch` (typed) and `useDebounce`.
+12. Context re-render fan-out and mitigation.
+13. Error boundaries; Suspense.
+14. Concurrent: `useTransition`, `useDeferredValue`.
+
+**⭐ Self-grade:** Deep, precise React internals; polyfills correct; strong perf intuition.
+
+---
+
+## Round 3 — System Design (60 min) ⭐⭐ heavily weighted
+
+Prompts (drill 2–3):
+1. **Design a retail product listing + search** (Walmart/Target style) — filters, pagination/infinite scroll, caching, faceted search, URL state.
+2. **Design a payments/transaction dashboard** (banking) — security, data freshness, error handling, auditability.
+3. **Design a notifications system**.
+4. **Design an order-tracking UI** with live updates (polling vs websockets vs SSE).
+5. **Design a large data table / grid** — virtualization for 10k+ rows, sorting/filtering server-side.
+
+**Framework each time:**
+- Functional + non-functional requirements (incl. security &amp; compliance for banking/retail).
+- Component architecture &amp; module boundaries.
+- State: local vs global vs server state.
+- API contract, pagination, caching, invalidation.
+- Rendering strategy (CSR/SSR/SSG/RSC) with reasoning.
+- Performance: virtualization, code splitting, prefetch, image strategy.
+- Accessibility (WCAG — big at global cos.), i18n, error/loading/empty states.
+- Observability: error tracking, RUM, logging, feature flags.
+- Security: XSS/CSRF, auth token handling, CSP.
+- Trade-offs &amp; alternatives.
+
+**⭐ Self-grade:** Led discussion, addressed scale + security + a11y + observability, quantified trade-offs.
+
+---
+
+## Round 4 — Machine Coding / Live Build (60–90 min)
+
+Pick one:
+1. **Searchable, paginated data table** — sorting, filtering, server-side pagination.
+2. **Autocomplete with request cancellation** (AbortController), keyboard nav.
+3. **Infinite scroll feed** — IntersectionObserver, error retry.
+4. **Multi-step transaction/checkout form** — validation, review, submit.
+5. **Dashboard widget grid** — configurable, loading/error states.
+
+**Follow-ups:** cancel stale requests, accessibility, prevent re-renders, unit test strategy.
+
+**⭐ Self-grade:** Working, clean state, handled edge/error/empty, a11y, testable.
+
+---
+
+## Round 5 — Cross-Cutting: Testing, Performance, Security, A11y (45 min)
+
+### Testing
+1. Jest + RTL — query priorities, `user-event`, mocking APIs.
+2. What to test (behavior not implementation); coverage philosophy.
+3. Integration vs unit vs e2e (Cypress/Playwright).
+
+### Performance
+4. Core Web Vitals (LCP, INP, CLS) — how to fix each.
+5. Bundle analysis, code splitting, tree shaking, lazy loading.
+6. Virtualization for large lists.
+
+### Security (OWASP-aware — critical for banking/retail)
+7. XSS types &amp; sanitization; `dangerouslySetInnerHTML`.
+8. CSRF, CORS, CSP headers.
+9. Auth token storage (cookie vs localStorage), JWT, refresh flow.
+
+### Accessibility
+10. Semantic HTML, ARIA roles, keyboard nav, focus management, WCAG.
+
+**⭐ Self-grade:** Concrete fixes and practices, security-aware, testing discipline, a11y fluency.
+
+---
+
+## Round 6 — Behavioral / Hiring Manager (45 min)
+
+*GCCs weigh ownership, quality culture, cross-timezone collaboration.*
+
+1. A feature you owned end-to-end and its impact (metrics).
+2. A hard technical trade-off and how you defended it.
+3. A production incident — detection, mitigation, prevention.
+4. Working with global/distributed teams across timezones.
+5. How you enforce quality: testing, CI, reviews, standards.
+6. Mentoring and raising the team's bar.
+7. A conflict and its resolution.
+8. Why this GCC / this domain (retail/banking/payments)?
+9. How you handle compliance/security requirements.
+
+**⭐ Self-grade:** 5 STAR stories with metrics, quality + ownership signal, cross-timezone maturity.
+
+---
+
+## Round 7 — Salary Negotiation / HR Closing (30 min)
+
+1. Expected CTC? (band, anchor high-reasonable)
+2. Current breakdown: fixed + variable + **RSU** (GCCs grant real RSUs).
+3. Competing offers?
+4. Level mapping (SDE-2 / Senior / SDE-3)?
+5. Notice / join date + buyout?
+
+**Playbook:**
+- GCCs pay well (₹30–50 LPA) with **RSUs of the global parent** — understand vesting (usually 4y), refreshers, and current stock price.
+- Compare **fixed + RSU value**; negotiate both fixed and grant.
+- Level mapping drives comp — push for the right level using system-design signal.
+- Ask about growth, global mobility, on-call, stack modernity.
+- Confirm level, comp breakdown, and join date in writing.
+
+**⭐ Self-grade:** Understood RSU mechanics, negotiated fixed + grant + level, used leverage well.
+
+---
+
+## Post-Mock Scorecard
+
+| Round | Time | Self-score (1–5) | Gaps to fix |
+|-------|------|------------------|-------------|
+| Recruiter screen | | | |
+| DSA | | | |
+| JS + React internals | | | |
+| System design | | | |
+| Machine coding | | | |
+| Testing / perf / security / a11y | | | |
+| Behavioral / HM | | | |
+| Salary negotiation | | | |
+
+> **Rule:** GCCs reject most on **DSA** and **system design**, and probe **quality/testing/security** hard. Drill any round ≤ 3.
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    (function () {
+      var DOCS = [
+        { id: "md-readme", num: "★", title: "Overview", band: "Start here" },
+        { id: "md-tier1", num: "1", title: "Product (FAANG / Unicorns)", band: "₹35–60+ LPA" },
+        { id: "md-tier2", num: "2", title: "Mid Product / Startups", band: "₹28–45 LPA" },
+        { id: "md-tier3", num: "3", title: "Premium Service / Consulting", band: "₹18–30 LPA" },
+        { id: "md-tier4", num: "4", title: "Volume Service", band: "₹12–22 LPA" },
+        { id: "md-tier5", num: "5", title: "GCC / Captive Centers", band: "₹30–50 LPA" }
+      ];
+
+      var contentEl = document.getElementById("content");
+      var tocEl = document.getElementById("toc");
+      var switchEl = document.getElementById("docSwitch");
+      var headings = [];
+      var observer = null;
+
+      // Build the tier switcher buttons
+      DOCS.forEach(function (doc, i) {
+        var btn = document.createElement("button");
+        btn.className = "doc-btn" + (i === 0 ? " active" : "");
+        btn.dataset.id = doc.id;
+        btn.innerHTML =
+          '<span class="num">' + doc.num + '</span>' +
+          '<span class="meta"><span class="t">' + doc.title + '</span>' +
+          '<span class="band">' + doc.band + '</span></span>';
+        btn.addEventListener("click", function () {
+          selectDoc(doc.id);
+          if (window.innerWidth <= 1000) closeSidebar();
+        });
+        switchEl.appendChild(btn);
+      });
+
+      function slugify(text) {
+        return text.toLowerCase().trim()
+          .replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
+      }
+
+      function renderMarkdown(raw) {
+        if (window.marked) {
+          marked.setOptions({ gfm: true, breaks: false, headerIds: true });
+          contentEl.innerHTML = marked.parse(raw);
+        } else {
+          contentEl.innerHTML = "<pre style='white-space:pre-wrap'>" +
+            raw.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</pre>";
+        }
+      }
+
+      function selectDoc(id) {
+        var raw = document.getElementById(id).textContent;
+        renderMarkdown(raw);
+
+        // active button state
+        Array.prototype.forEach.call(switchEl.children, function (b) {
+          b.classList.toggle("active", b.dataset.id === id);
+        });
+
+        postProcess();
+        window.scrollTo({ top: 0 });
+        document.getElementById("tocSearch").value = "";
+      }
+
+      function postProcess() {
+        // wrap tables
+        contentEl.querySelectorAll("table").forEach(function (t) {
+          if (t.parentElement.classList.contains("table-wrap")) return;
+          var wrap = document.createElement("div");
+          wrap.className = "table-wrap";
+          t.parentNode.insertBefore(wrap, t);
+          wrap.appendChild(t);
+        });
+        // task checkboxes
+        contentEl.querySelectorAll("li").forEach(function (li) {
+          var cb = li.querySelector('input[type="checkbox"]');
+          if (cb) { li.classList.add("task-item"); cb.disabled = false; }
+        });
+        buildToc();
+        setupScrollSpy();
+      }
+
+      function buildToc() {
+        tocEl.innerHTML = "";
+        headings = [];
+        var used = {};
+        contentEl.querySelectorAll("h2, h3").forEach(function (h) {
+          var id = h.id || slugify(h.textContent);
+          if (used[id]) { id = id + "-" + (++used[id]); } else { used[id] = 1; }
+          h.id = id;
+          var a = document.createElement("a");
+          a.href = "#" + id;
+          a.textContent = h.textContent;
+          a.className = h.tagName === "H3" ? "lvl-3" : "lvl-2";
+          a.dataset.target = id;
+          tocEl.appendChild(a);
+          headings.push(h);
+          a.addEventListener("click", function () {
+            if (window.innerWidth <= 1000) closeSidebar();
+          });
+        });
+      }
+
+      function setupScrollSpy() {
+        if (observer) observer.disconnect();
+        var links = Array.prototype.slice.call(tocEl.querySelectorAll("a"));
+        var map = {};
+        links.forEach(function (l) { map[l.dataset.target] = l; });
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              links.forEach(function (l) { l.classList.remove("active"); });
+              var link = map[e.target.id];
+              if (link) { link.classList.add("active"); link.scrollIntoView({ block: "nearest" }); }
+            }
+          });
+        }, { rootMargin: "0px 0px -75% 0px", threshold: 0 });
+        headings.forEach(function (h) { observer.observe(h); });
+      }
+
+      // Progress bar + back to top
+      var progress = document.getElementById("progress");
+      var topBtn = document.getElementById("top-btn");
+      window.addEventListener("scroll", function () {
+        var st = document.documentElement.scrollTop || document.body.scrollTop;
+        var sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        progress.style.width = (sh > 0 ? (st / sh) * 100 : 0) + "%";
+        topBtn.classList.toggle("show", st > 400);
+      });
+      topBtn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+      // TOC filter
+      document.getElementById("tocSearch").addEventListener("input", function (e) {
+        var q = e.target.value.toLowerCase();
+        tocEl.querySelectorAll("a").forEach(function (a) {
+          a.style.display = a.textContent.toLowerCase().indexOf(q) !== -1 ? "" : "none";
+        });
+      });
+
+      // Mobile sidebar
+      var sidebar = document.getElementById("sidebar");
+      var overlay = document.getElementById("overlay");
+      function closeSidebar() { sidebar.classList.remove("open"); overlay.classList.remove("show"); }
+      document.getElementById("menuToggle").addEventListener("click", function () {
+        sidebar.classList.toggle("open"); overlay.classList.toggle("show");
+      });
+      overlay.addEventListener("click", closeSidebar);
+
+      // initial
+      selectDoc("md-readme");
+    })();
+  </script>
+</body>
+</html>

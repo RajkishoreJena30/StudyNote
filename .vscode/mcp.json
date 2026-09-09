@@ -1,0 +1,9 @@
+{
+	"servers": {
+		"medical-equipment-advisor": {
+			"type": "http",
+			"url": "http://localhost:3003/mcp"
+		}
+	},
+	"inputs": []
+}

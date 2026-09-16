@@ -1,0 +1,66 @@
+Frontend Architecture Pattern :
+
+static Page
+MVC
+Single page
+Backend for frontend
+Modular monoliths
+Micro frontend
+
+
+Frontend System Design  for Senior Developer
+
+Micro-frontends & Microservices: Scaling development teams by splitting monoliths into independent vertical slices 
+API Gateways: Managing security, caching, and rate limiting in a centralized way 
+Backend for Frontends (BFF): Creating specialized backends for different clients to improve performance and developer efficiency 
+Load Balancing: Distributing traffic across multiple server instances 
+Container Systems: Standardizing deployments using Docker and orchestration tools like Kubernetes (
+Content Delivery Networks (CDN): Optimizing global asset delivery to reduce latency
+Design Systems: Ensuring visual consistency and efficiency through design tokens and reusable components 
+Design-to-Code & MCP: Using Model Context Protocol servers to integrate design tools with coding agents (
+Monorepos: Standardizing code style and dependencies across large projects 
+MCP UI: Building hybrid applications that combine LLM-powered chat with traditional UI components 
+Core Web Vitals & Performance: Understanding LCP, INP, and CLS metrics and the critical rendering path 
+Code Splitting & Lazy Loading: Improving performance by delivering only necessary JavaScript
+Rendering Strategies: Comparing CSR, Static Site Generation, and Server-Side Rendering (SSR) Data Fetching: Real-time communication techniques including polling, websockets, and Server-Sent Events 
+
+
+15 Frontend Concepts Every Senior Dev has Mastered:
+Critical Rendering Path
+
+Bundle Splitting
+
+Server Side Rendering
+
+Core Web Vitals
+
+Critical CSS
+
+HTTP Caching
+
+Essential State Model
+
+Content Negotiation
+
+Lazy Loading
+
+TT Reducer Pattern
+
+Partial Pre-rendering
+
+Rehydration
+
+Sever Side Components
+
+Windowing
+
+Microfrontends
+
+
+In the AI Era: 3 Frontend Skills:
+Frontend System Design
+Code Quality
+State and Data
+Design to Code
+Web Performance & Automated Testing
+Accessibility

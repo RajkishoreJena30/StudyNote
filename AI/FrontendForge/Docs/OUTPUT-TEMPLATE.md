@@ -50,7 +50,7 @@
 | `01-Project-Research.md` | candidate table, concept-coverage matrix, scope tiers |
 | `02-Tech-Stack.md` | toolchain table + package.json preview + architecture options |
 | `03-Architecture.md` | context + module + sequence diagrams + folder tree |
-| `04-Product-Spec.md` | roles, feature list, page inventory, sitemap + ≥3 flows |
+| `04-Product-Spec.md` | **Part A PO brief** (vision, OKRs, personas, MoSCoW, roadmap, risks, pricing, glossary) + **Part B** roles, feature list, page inventory, sitemap + ≥3 flows |
 | `05-UIUX-Design.md` | color/type/spacing tables + CSS token block + a11y checklist |
 | `06-Delivery-Plan.md` | sprints, Epic→Feature→Story→Task (≤5h), 1 worked LLD, Gantt |
 | `07-Security-Auth.md` | auth model, ≥1 sequence diagram, OWASP table, CSP |

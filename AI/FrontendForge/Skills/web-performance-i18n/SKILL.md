@@ -1,6 +1,6 @@
 ---
 name: web-performance-i18n
-description: 'Knowledge pack for Core Web Vitals performance budgets (LCP/INP/CLS), code splitting, image/font strategy, measurement, plus internationalization (i18next/FormatJS, ICU, locale routing, RTL, Intl formatting). Use when planning performance or multi-language support.'
+description: 'Knowledge pack for Core Web Vitals budgets (LCP/INP/CLS), critical rendering path, critical CSS, code splitting, HTTP caching, content negotiation, hydration/rehydration, windowing/virtualization, image/font strategy, measurement, plus internationalization (i18next/FormatJS, ICU, locale routing, RTL, Intl). Use when planning performance or multi-language support.'
 ---
 
 # Skill: Web Performance & i18n
@@ -31,6 +31,28 @@ description: 'Knowledge pack for Core Web Vitals performance budgets (LCP/INP/CL
 ## Measurement
 - `web-vitals` lib → RUM (Sentry / analytics).
 - Lighthouse CI in the pipeline; `size-limit` for bundle gate.
+
+## Critical Rendering Path
+HTML→DOM, CSS→CSSOM, JS exec, Render Tree, Layout, Paint, Composite. Blocking any step delays first paint: inline critical CSS, defer non-critical JS, skeleton/stream the rest.
+
+## Critical CSS
+Inline above-the-fold CSS in `<head>`; lazy-load the rest (`critters`/`beasties`). One of the biggest LCP levers.
+
+## HTTP caching & delivery
+- Immutable hashed assets: `Cache-Control: public, max-age=31536000, immutable`.
+- HTML + **remote manifest**: `no-cache` (revalidate) so new remote versions are picked up.
+- Revalidation: `ETag` / `If-None-Match` → 304; `stale-while-revalidate` for cacheable JSON.
+- **MFE:** cache each remote's chunks hard, but keep the manifest the shell reads revalidated.
+
+## Content negotiation
+Server varies on `Accept` (AVIF→WebP→JPEG), `Accept-Encoding` (br/gzip), `Accept-Language`, `Sec-CH-*` client hints — powers image format, compression, and i18n without client code. Add `Vary` accordingly.
+
+## Rendering & hydration (this stack = CSR)
+- **Rehydration** (attaching listeners to server HTML) only matters if you add SSR. CSR SPA remotes skip it — cost shifts to bundle parse/exec, so keep bundles small and code-split.
+- **RSC / SSR / PPR** are framework-specific; out of scope for CSR MFE. Adopt only for a dedicated SEO surface.
+
+## Windowing (virtualization)
+Render only visible rows and recycle DOM nodes. **TanStack Virtual** for large inbox/report tables (100k rows at 60fps) — directly protects INP.
 
 ## i18n patterns
 - **Library:** i18next (React/Vue) or FormatJS/react-intl; Angular i18n for Angular.

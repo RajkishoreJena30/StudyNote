@@ -54,5 +54,11 @@ Emit copy-pasteable CSS custom properties:
 - [ ] `prefers-reduced-motion` and `prefers-contrast` honored.
 - [ ] Target sizes ≥ 24px (2.2 requirement).
 
+## Design-to-Code & MCP
+- **Token pipeline:** Figma variables → design tokens (Style Dictionary) → CSS vars / Tailwind theme in `packages/tokens`.
+- **MCP servers:** Figma Dev Mode MCP + Storybook MCP let coding agents read frames, tokens, and component APIs to draft components.
+- **Feedback loop:** Figma → MCP → agent → PR → visual regression (Chromatic/Playwright) → human review.
+- **Tools:** v0 / Builder.io Visual Copilot for first-draft components; always refactor into design-system primitives — never ship raw generated markup.
+
 ## Deliverable must include
 IA/sitemap diagram, color + type + spacing tables, full token block, component list with states.

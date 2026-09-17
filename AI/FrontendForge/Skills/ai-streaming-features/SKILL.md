@@ -52,6 +52,13 @@ while (true) {
 - Map tool calls → whitelisted UI components (charts, tables, forms).
 - Stream server components / progressive rendering where the stack supports it.
 
+## MCP UI (hybrid LLM + component UIs)
+Chat and the component UI are **peers**: the model can read/mutate UI state through an MCP-defined, **typed** tool surface, and the UI sends structured context back.
+- **Deterministic tool schema** (Zod / JSON Schema) — the model never hallucinates props.
+- **Whitelist** model-invokable components; validate args before render.
+- **Reversibility:** every model action is undoable and audit-logged.
+- **In this stack:** the copilot lives in `mfe-inbox`; `tool_call` events arrive on the SSE stream and map to whitelisted React components.
+
 ## Guardrails (production)
 - Rate limit per user/IP; token/cost budget.
 - PII redaction on input and output.

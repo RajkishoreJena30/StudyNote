@@ -2,7 +2,39 @@
 
 > Features, pages, roles, user flows, and requirements for **NexusDesk**. Terminology here is the source of truth for all later deliverables.
 
+## 0. Project overview — what is NexusDesk?
+
+**In one sentence:** NexusDesk is an **AI-native, multi-tenant customer-support & operations platform** — a help desk where support agents answer customer conversations with an AI copilot that **streams** draft replies and summaries in real time.
+
+**Who it's for:** support teams from a 3-person startup to a 500-seat BPO (beachhead: 25–150-agent SaaS support teams).
+
+**What a user actually does (end-to-end):**
+1. An **agent** logs in (OIDC + PKCE) and lands in the **Inbox**.
+2. They pick a customer **conversation** from a virtualized list (filters live in the URL).
+3. They open the thread and click **“Suggest reply”** — the **AI copilot streams a draft token-by-token** (over SSE) into the composer; they can stop, edit, or accept it.
+4. They send the reply — it applies **optimistically** and broadcasts to teammates over WebSocket (presence/typing).
+5. A **supervisor** watches live **Analytics** (SLA, CSAT, volume) and gets alerted *before* an SLA breaches.
+6. Customers self-serve through a multi-language **Knowledge Base**; **admins/owners** manage users, roles, feature flags, and billing.
+
+**How it's built (in brief):** a **micro-frontend** app — a `shell` host composes four independently deployable remotes (`inbox`, `analytics`, `knowledge`, `admin`) via **Rspack Module Federation**; a **BFF** shapes data and owns auth; the AI copilot streams over **SSE**. Full technical detail is in [03-Architecture.md](03-Architecture.md).
+
+```mermaid
+flowchart LR
+    Agent["Agent"] --> Shell["shell (host)"]
+    Shell --> Inbox["inbox: convos + AI copilot"]
+    Shell --> Analytics["analytics: live SLA/CSAT"]
+    Shell --> Knowledge["knowledge: KB"]
+    Shell --> Admin["admin: users/roles/billing"]
+    Inbox -->|SSE stream| BFF["BFF"] --> LLM["LLM gateway"]
+    Inbox -->|WebSocket| RT["presence/messages"]
+    BFF --> Core["core services + DB"]
+```
+
+> **Why this project?** It naturally exercises every senior concept — auth/RBAC, real-time + AI streaming, virtualization, forms, uploads, dashboards, i18n, and independently deployable micro-frontends. See [01-Project-Research.md](01-Project-Research.md).
+
 ## Table of Contents
+- [0. Project overview — what is NexusDesk?](#0-project-overview--what-is-nexusdesk)
+
 **Part A — Product Owner Brief**
 - [A. Vision & mission](#a-vision--mission)
 - [B. Problem statement](#b-problem-statement)

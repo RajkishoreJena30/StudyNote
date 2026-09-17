@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NexusDesk - Login</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/tokens.css" />
+</head>
+<body class="min-h-screen">
+<main class="min-h-screen grid place-items-center p-6" style="background: radial-gradient(1200px 500px at 50% -10%, var(--color-primary-50), transparent), var(--color-bg);">
+  <a href="index.html" class="absolute top-4 left-6 text-sm" style="color:var(--color-muted)">&larr; Screens index</a>
+  <button class="btn btn-secondary absolute top-4 right-6" data-action="toggle-theme">Toggle theme</button>
+
+  <section class="card w-full max-w-md p-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-9 h-9 rounded-lg" style="background:var(--color-primary-500)"></div>
+      <div class="font-semibold text-lg">NexusDesk</div>
+    </div>
+    <h1 class="text-2xl font-semibold mb-1">Welcome back</h1>
+    <p class="text-sm mb-6" style="color:var(--color-muted)">The AI-native help desk that answers with your team, not for them.</p>
+
+    <button class="btn btn-primary w-full justify-center mb-3">
+      <span>&#128274;</span> Continue with SSO
+    </button>
+    <button class="btn btn-secondary w-full justify-center">Continue with email</button>
+
+    <div class="my-6 flex items-center gap-3" style="color:var(--color-muted)">
+      <div class="flex-1 h-px" style="background:var(--color-border)"></div>
+      <span class="text-xs">OR</span>
+      <div class="flex-1 h-px" style="background:var(--color-border)"></div>
+    </div>
+
+    <label class="text-xs font-medium">Work email</label>
+    <input class="input mt-1" type="email" placeholder="you@company.com" />
+    <label class="text-xs font-medium mt-3 block">Password</label>
+    <input class="input mt-1" type="password" placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022" />
+
+    <div class="flex items-center justify-between mt-3 text-xs" style="color:var(--color-muted)">
+      <label class="flex items-center gap-2"><input type="checkbox" /> Remember me</label>
+      <a href="#" class="hover:underline">Forgot password?</a>
+    </div>
+
+    <button class="btn btn-primary w-full justify-center mt-5">Sign in</button>
+    <p class="text-xs text-center mt-5" style="color:var(--color-muted)">By continuing you agree to the Terms and Privacy Policy.</p>
+  </section>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>

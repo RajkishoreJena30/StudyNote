@@ -1,0 +1,63 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NexusDesk - UI/UX Reference</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/tokens.css" />
+</head>
+<body class="min-h-screen">
+<div class="max-w-5xl mx-auto p-8">
+  <header class="flex items-center justify-between mb-10">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg" style="background:var(--color-primary-500)"></div>
+      <div>
+        <div class="text-xl font-semibold">NexusDesk</div>
+        <div class="text-sm" style="color:var(--color-muted)">UI/UX Reference - static prototype</div>
+      </div>
+    </div>
+    <button class="btn btn-secondary" data-action="toggle-theme">Toggle theme</button>
+  </header>
+
+  <p class="text-base mb-8" style="color:var(--color-muted)">
+    Static HTML + Tailwind (CDN) + design tokens. Use as a visual/interaction reference for the real React + TypeScript + Module Federation implementation. Tokens live in <code class="font-mono text-xs px-2 py-1 rounded" style="background:var(--color-surface)">assets/tokens.css</code>.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <a href="login.html" class="card p-5 hover:-translate-y-0.5 transition">
+      <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--color-muted)">Screen 01</div>
+      <div class="text-lg font-semibold">Login (OIDC + PKCE)</div>
+      <div class="text-sm mt-1" style="color:var(--color-muted)">SSO entry, redirect state.</div>
+    </a>
+    <a href="inbox.html" class="card p-5 hover:-translate-y-0.5 transition">
+      <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--color-muted)">Screen 02 - Hero</div>
+      <div class="text-lg font-semibold">Inbox + AI Copilot (SSE streaming)</div>
+      <div class="text-sm mt-1" style="color:var(--color-muted)">Three-pane workspace with streaming demo.</div>
+    </a>
+    <a href="analytics.html" class="card p-5 hover:-translate-y-0.5 transition">
+      <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--color-muted)">Screen 03</div>
+      <div class="text-lg font-semibold">Analytics dashboard</div>
+      <div class="text-sm mt-1" style="color:var(--color-muted)">KPIs, charts, agent-performance table.</div>
+    </a>
+    <a href="knowledge.html" class="card p-5 hover:-translate-y-0.5 transition">
+      <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--color-muted)">Screen 04</div>
+      <div class="text-lg font-semibold">Knowledge base</div>
+      <div class="text-sm mt-1" style="color:var(--color-muted)">Browse + article editor (multi-locale).</div>
+    </a>
+    <a href="admin.html" class="card p-5 hover:-translate-y-0.5 transition md:col-span-2">
+      <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--color-muted)">Screen 05</div>
+      <div class="text-lg font-semibold">Admin - users, roles, plans</div>
+      <div class="text-sm mt-1" style="color:var(--color-muted)">RBAC table, invite drawer, plan cards.</div>
+    </a>
+  </div>
+
+  <footer class="mt-10 text-xs" style="color:var(--color-muted)">
+    Reference only. Open any page and press <kbd class="px-1.5 py-0.5 rounded font-mono" style="background:var(--color-surface);border:1px solid var(--color-border)">Cmd/Ctrl + K</kbd> for the command palette.
+  </footer>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

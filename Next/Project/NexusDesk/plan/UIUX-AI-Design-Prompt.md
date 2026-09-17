@@ -1,0 +1,73 @@
+﻿# NexusDesk — Single Mega-Prompt for a UI/UX Design AI
+
+> Paste the block below into a design-generation AI (Google Stitch, v0, Uizard, Figma AI, Lovable, etc.) to generate the **entire multi-screen NexusDesk app in one shot**. It encodes the product, layout, design tokens, every screen, states, accessibility, and RTL from the NexusDesk plan.
+
+---
+
+## How to use
+- Paste the whole prompt as a single message.
+- If the tool has a separate "style/theme" field, put the **Design tokens** section there and keep the rest in the main prompt.
+- Ask for **dark theme by default**, then request a light-theme variant.
+- If output is capped, generate in this order: Shell + Login -> Inbox/Copilot -> Analytics -> Knowledge -> Admin.
+
+---
+
+## Mega-prompt (copy everything inside the block)
+
+```
+You are a senior product designer. Design a COMPLETE, COHESIVE, high-fidelity multi-screen web app called "NexusDesk" as a single connected prototype with shared navigation and one consistent design system. Desktop-first (1440px), fully responsive down to mobile. Default the preview to DARK theme, and also provide a LIGHT theme.
+
+PRODUCT
+NexusDesk is an AI-native, multi-tenant customer-support & operations platform (a help desk). Support agents answer customer conversations with an AI copilot that STREAMS draft replies and summaries in real time. Users: Agent (primary), Supervisor, Admin, Owner. Tone: calm, focused, trustworthy, professional operations tool — generous whitespace, dense-but-legible data tables, no playful gimmicks.
+
+GLOBAL SHELL (persistent across all app screens)
+- Left: slim collapsible nav rail with icon+label items: Inbox, Analytics, Knowledge, Admin. Active item uses the indigo accent.
+- Top bar: tenant switcher (left), global command/search in the center, and on the right a locale switcher (EN/ES/AR), a light/dark toggle, notifications, and a profile menu.
+- Right: a contextual panel that shows the AI Copilot or a record's details, collapsible.
+- Content area between nav and context panel renders the active screen.
+
+DESIGN TOKENS (use exactly)
+- Primary/accent indigo: #4f46e5 light, #6366f1 dark. Primary-hover #4338ca.
+- Light theme: bg #ffffff, surface #f8fafc, text #0f172a, muted #64748b, border #e2e8f0.
+- Dark theme: bg #0b1020, surface #141a2e, text #e2e8f0, muted #94a3b8, border #263149.
+- Semantic: success #16a34a, warning #d97706, error #dc2626, info #0284c7.
+- Fonts: Inter (UI), JetBrains Mono (IDs/code). Type scale rem: 0.75 / 0.875 / 1 / 1.125 / 1.25 / 1.5 / 1.875 / 2.25. Headings line-height 1.2, body 1.5. Weights 400/500/600/700.
+- Spacing on a 4px grid: 4/8/12/16/24/32/48/64. Radius 8px (inputs/cards), 16px (modals). Shadows: sm 0 1px 2px rgba(0,0,0,.06), md 0 4px 12px rgba(0,0,0,.10).
+- Motion: 150-250ms ease; streaming text shows a blinking caret; loading uses skeletons.
+
+SHARED COMPONENT LIBRARY (define once, reuse everywhere)
+Buttons (primary/secondary/ghost/destructive), IconButton, Input, Textarea, Select, Checkbox/Radio/Switch, Field (label+input+helper+error), Badge/StatusPill, Avatar (with presence dot), Tabs, Table (sortable, virtualized), Card, Modal, Slide-over Drawer, Toast, Tooltip, Command Palette, Skeleton. Every interactive component must show: default, hover, focus-visible (visible ring), active, disabled, loading.
+
+SCREENS TO GENERATE (all connected via the shell + nav)
+1) Login: centered auth card on a subtly branded background; NexusDesk logo, tagline "The AI-native help desk that answers with your team, not for them", primary "Continue with SSO" (OIDC) button, secondary email option, and a redirect/loading state.
+2) Inbox (hero): three panes. Left = virtualized conversation list with filter chips (status open/pending/closed, assignee, priority); each row has avatar, customer name, subject snippet, status badge, SLA countdown pill, relative time. Center = conversation thread with alternating customer/agent bubbles; AI-authored messages visually distinct (indigo tint + "AI" tag); below is a reply composer with a formatting toolbar and primary Send. Right = AI Copilot panel with a "Suggest reply" button; show the STREAMING state (draft filling token-by-token with a blinking caret, a "Stop" button), plus "Summarize thread" and a sentiment tag. Include presence dots and a typing indicator.
+3) Analytics: supervisor dashboard. Top KPI tiles (Open, Closed today, CSAT, SLA compliance) each with sparkline + up/down delta. Below: area chart (conversation volume over time) and bar chart (median response time), plus a sortable virtualized agent-performance table. Show an SLA breach-risk alert banner when a queue is over 80% of its SLA window.
+4) Knowledge - Browse: searchable article list with a category sidebar, article cards, and a locale badge (EN/ES/AR).
+5) Knowledge - Editor: rich-text editor with formatting toolbar, media/image upload dropzone, a right sidebar to manage locale variants (add EN/ES/AR), and Preview + Publish actions with a publish validation/error state. Include an RTL preview for Arabic.
+6) Admin - Users & Roles: data table (avatar, name, email, role, status, last active) with search, role filter, pagination, row actions (edit role, deactivate), and a slide-over to invite/edit a user with RBAC roles Agent/Supervisor/Admin/Owner.
+7) Admin - Settings & Feature Flags: a settings form with toggles for plan-tier features.
+8) Admin - Billing: plan cards for Starter / Growth / Scale tiers with current-plan highlight.
+9) Command Palette overlay: keyboard-driven quick actions and navigation (Cmd/Ctrl+K).
+
+STATES (show for every data screen)
+Loading (skeleton), Empty (friendly illustration + primary action), Error (message + Retry), and Populated. The AI copilot additionally shows idle / streaming / cancelled / failed.
+
+ACCESSIBILITY & INTERNATIONALIZATION
+WCAG 2.2 AA: visible focus rings, text contrast >= 4.5:1 (UI >= 3:1), full keyboard operability, focus trap in modals/command palette, target size >= 24px, never rely on color alone (pair with icon/text), live region announcing streaming AI status. Support RTL layouts (mirror the whole UI for Arabic). Respect reduced-motion.
+
+DELIVERABLE
+One cohesive, production-quality design system + all nine screens sharing the same shell, tokens, and components, with realistic sample content (customer names, message snippets, metrics). Provide dark (default) and light themes. Make the screens feel like one connected product, not isolated mockups.
+```
+
+---
+
+## Optional follow-up prompts (after the first generation)
+- "Now export the design tokens as CSS custom properties and a Tailwind theme."
+- "Generate the light-theme variant of every screen."
+- "Show the Inbox screen at mobile width (375px) with the copilot as a bottom sheet."
+- "Produce the empty and error states for Analytics and Knowledge."
+
+## To View
+cd Next/Project/NexusDesk/UIUX
+python -m http.server 5173
+# open http://localhost:5173/

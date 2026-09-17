@@ -1,0 +1,139 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NexusDesk - Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/tokens.css" />
+</head>
+<body class="h-screen overflow-hidden">
+<div class="h-screen grid" style="grid-template-columns: 240px 1fr; grid-template-rows: 56px 1fr;">
+<header class="col-span-2 flex items-center gap-4 px-4 border-b" style="background:var(--color-elev); border-color:var(--color-border);">
+  <a href="index.html" class="flex items-center gap-2"><div class="w-7 h-7 rounded-md" style="background:var(--color-primary-500)"></div><span class="font-semibold">NexusDesk</span></a>
+  <button class="btn btn-secondary" style="height:32px; padding:4px 10px; font-size:12px;">Acme Corp &#9662;</button>
+  <div class="flex-1"></div>
+  <button class="btn btn-ghost" data-action="toggle-theme" style="height:32px; padding:4px 10px;">Theme</button>
+</header>
+<aside class="border-r p-3 flex flex-col gap-1" style="background:var(--color-elev); border-color:var(--color-border);">
+  <a class="nav-item" href="inbox.html"><span>&#128231;</span> Inbox</a>
+  <a class="nav-item" href="analytics.html"><span>&#128200;</span> Analytics</a>
+  <a class="nav-item" href="knowledge.html"><span>&#128218;</span> Knowledge</a>
+  <a class="nav-item active" href="admin.html"><span>&#9881;</span> Admin</a>
+</aside>
+
+<main class="overflow-y-auto p-6">
+  <div class="flex items-center gap-4 mb-6">
+    <h1 class="text-xl font-semibold">Admin</h1>
+    <nav class="flex gap-1 text-sm">
+      <button class="btn btn-secondary" style="height:32px; padding:4px 12px;">Users &amp; roles</button>
+      <button class="btn btn-ghost" style="height:32px; padding:4px 12px;">Settings &amp; flags</button>
+      <button class="btn btn-ghost" style="height:32px; padding:4px 12px;">Billing</button>
+    </nav>
+    <button class="btn btn-primary ml-auto" data-action="open-drawer" data-target="invite-drawer">+ Invite user</button>
+  </div>
+
+  <!-- Users table -->
+  <div class="card overflow-hidden mb-8">
+    <div class="p-4 border-b flex items-center gap-2" style="border-color:var(--color-border);">
+      <input class="input" style="max-width:280px" placeholder="Search users..." />
+      <select class="select" style="width:auto"><option>All roles</option><option>Agent</option><option>Supervisor</option><option>Admin</option><option>Owner</option></select>
+      <span class="ml-auto text-xs" style="color:var(--color-muted)">124 users</span>
+    </div>
+    <table class="tbl">
+      <thead><tr><th></th><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Last active</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="w-7 h-7 rounded-full grid place-items-center text-xs font-semibold" style="background:#f97316;color:#fff;">AK</div></td>
+          <td>Aisha Kaur</td><td>aisha@acme.com</td>
+          <td><span class="badge badge-primary">Agent</span></td>
+          <td><span class="badge badge-success">Active</span></td>
+          <td>2m ago</td>
+          <td class="text-right"><button class="btn btn-ghost" style="height:28px;padding:2px 8px;">Edit</button></td>
+        </tr>
+        <tr>
+          <td><div class="w-7 h-7 rounded-full grid place-items-center text-xs font-semibold" style="background:#0ea5e9;color:#fff;">DR</div></td>
+          <td>Diego Ramirez</td><td>diego@acme.com</td>
+          <td><span class="badge">Supervisor</span></td>
+          <td><span class="badge badge-success">Active</span></td>
+          <td>18m ago</td>
+          <td class="text-right"><button class="btn btn-ghost" style="height:28px;padding:2px 8px;">Edit</button></td>
+        </tr>
+        <tr>
+          <td><div class="w-7 h-7 rounded-full grid place-items-center text-xs font-semibold" style="background:#a855f7;color:#fff;">PS</div></td>
+          <td>Priya Shah</td><td>priya@acme.com</td>
+          <td><span class="badge">Admin</span></td>
+          <td><span class="badge">Idle</span></td>
+          <td>2h ago</td>
+          <td class="text-right"><button class="btn btn-ghost" style="height:28px;padding:2px 8px;">Edit</button></td>
+        </tr>
+        <tr>
+          <td><div class="w-7 h-7 rounded-full grid place-items-center text-xs font-semibold" style="background:#22c55e;color:#fff;">SO</div></td>
+          <td>Samir Odeh</td><td>samir@acme.com</td>
+          <td><span class="badge badge-warning">Owner</span></td>
+          <td><span class="badge badge-success">Active</span></td>
+          <td>9m ago</td>
+          <td class="text-right"><button class="btn btn-ghost" style="height:28px;padding:2px 8px;">Edit</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="p-3 flex items-center justify-between text-xs" style="color:var(--color-muted); border-top:1px solid var(--color-border);">
+      <span>Showing 1 - 4 of 124</span>
+      <div class="flex gap-1"><button class="btn btn-secondary" style="height:28px;padding:2px 10px;">Prev</button><button class="btn btn-secondary" style="height:28px;padding:2px 10px;">Next</button></div>
+    </div>
+  </div>
+
+  <!-- Feature flags -->
+  <div class="card p-4 mb-8">
+    <div class="font-semibold text-sm mb-3">Feature flags</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+      <label class="flex items-center gap-3"><input type="checkbox" checked /> AI copilot streaming</label>
+      <label class="flex items-center gap-3"><input type="checkbox" checked /> Generative UI cards</label>
+      <label class="flex items-center gap-3"><input type="checkbox" /> Offline draft (beta)</label>
+      <label class="flex items-center gap-3"><input type="checkbox" checked /> Multi-locale KB</label>
+    </div>
+  </div>
+
+  <!-- Plans -->
+  <h2 class="text-lg font-semibold mb-3">Plan &amp; billing</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card p-5">
+      <div class="text-sm font-semibold">Starter</div>
+      <div class="text-2xl font-semibold mt-2">$0</div>
+      <ul class="mt-4 text-sm space-y-1" style="color:var(--color-muted)"><li>Up to 5 seats</li><li>Inbox + copilot</li><li>1 locale</li></ul>
+      <button class="btn btn-secondary w-full justify-center mt-5">Downgrade</button>
+    </div>
+    <div class="card p-5" style="border-color: var(--color-primary-500); box-shadow: var(--shadow-md);">
+      <div class="flex items-center gap-2"><div class="text-sm font-semibold">Growth</div><span class="badge badge-primary">Current</span></div>
+      <div class="text-2xl font-semibold mt-2">$49<span class="text-sm font-normal" style="color:var(--color-muted)">/seat/mo</span></div>
+      <ul class="mt-4 text-sm space-y-1" style="color:var(--color-muted)"><li>Up to 50 seats</li><li>+ Analytics + KB</li><li>2 locales &middot; 8h SLA</li></ul>
+      <button class="btn btn-primary w-full justify-center mt-5" disabled>Current plan</button>
+    </div>
+    <div class="card p-5">
+      <div class="text-sm font-semibold">Scale</div>
+      <div class="text-2xl font-semibold mt-2">$99<span class="text-sm font-normal" style="color:var(--color-muted)">/seat/mo</span></div>
+      <ul class="mt-4 text-sm space-y-1" style="color:var(--color-muted)"><li>50+ seats</li><li>+ Admin, flags, export, SSO</li><li>3+ locales incl. RTL &middot; 1h SLA</li></ul>
+      <button class="btn btn-primary w-full justify-center mt-5">Upgrade</button>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- Invite drawer -->
+<div id="invite-drawer" data-drawer class="hidden fixed inset-0" style="z-index: var(--z-modal);">
+  <div class="absolute inset-0" style="background: rgba(0,0,0,.5);" data-action="close-drawer"></div>
+  <aside class="absolute top-0 right-0 h-full w-full max-w-md p-6 overflow-y-auto" style="background: var(--color-elev); border-left:1px solid var(--color-border);">
+    <div class="flex items-center justify-between mb-4"><h3 class="font-semibold text-lg">Invite user</h3><button class="btn btn-ghost" data-action="close-drawer">Close</button></div>
+    <label class="text-xs font-medium">Full name</label><input class="input mt-1 mb-3" placeholder="e.g. Aisha Kaur" />
+    <label class="text-xs font-medium">Email</label><input class="input mt-1 mb-3" placeholder="you@company.com" />
+    <label class="text-xs font-medium">Role</label>
+    <select class="select mt-1 mb-3"><option>Agent</option><option>Supervisor</option><option>Admin</option><option>Owner</option></select>
+    <label class="text-xs font-medium">Team</label>
+    <select class="select mt-1 mb-6"><option>Support</option><option>Billing</option><option>Sales</option></select>
+    <div class="flex gap-2 justify-end"><button class="btn btn-secondary" data-action="close-drawer">Cancel</button><button class="btn btn-primary">Send invite</button></div>
+  </aside>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

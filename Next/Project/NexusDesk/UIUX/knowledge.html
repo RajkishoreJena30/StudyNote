@@ -1,0 +1,113 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NexusDesk - Knowledge</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/tokens.css" />
+</head>
+<body class="h-screen overflow-hidden">
+<div class="h-screen grid" style="grid-template-columns: 240px 1fr; grid-template-rows: 56px 1fr;">
+<header class="col-span-2 flex items-center gap-4 px-4 border-b" style="background:var(--color-elev); border-color:var(--color-border);">
+  <a href="index.html" class="flex items-center gap-2"><div class="w-7 h-7 rounded-md" style="background:var(--color-primary-500)"></div><span class="font-semibold">NexusDesk</span></a>
+  <button class="btn btn-secondary" style="height:32px; padding:4px 10px; font-size:12px;">Acme Corp &#9662;</button>
+  <button class="flex-1 max-w-xl flex items-center gap-2 px-3 py-1.5 rounded-md text-sm" style="background:var(--color-surface); color:var(--color-muted); border:1px solid var(--color-border);" data-action="open-palette"><span>&#128269;</span> Search or run a command <kbd class="ml-auto font-mono text-xs px-1.5 py-0.5 rounded" style="background:var(--color-elev); border:1px solid var(--color-border);">Ctrl K</kbd></button>
+  <button class="btn btn-ghost" data-action="toggle-theme" style="height:32px; padding:4px 10px;">Theme</button>
+</header>
+<aside class="border-r p-3 flex flex-col gap-1" style="background:var(--color-elev); border-color:var(--color-border);">
+  <a class="nav-item" href="inbox.html"><span>&#128231;</span> Inbox</a>
+  <a class="nav-item" href="analytics.html"><span>&#128200;</span> Analytics</a>
+  <a class="nav-item active" href="knowledge.html"><span>&#128218;</span> Knowledge</a>
+  <a class="nav-item" href="admin.html"><span>&#9881;</span> Admin</a>
+</aside>
+
+<main class="grid overflow-hidden" style="grid-template-columns: 220px 1fr 340px;">
+  <!-- Categories -->
+  <section class="border-r p-3 overflow-y-auto" style="border-color:var(--color-border);">
+    <input class="input mb-3" placeholder="Search articles..." />
+    <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--color-muted)">Categories</div>
+    <ul class="space-y-1 text-sm">
+      <li class="nav-item active">Getting started (12)</li>
+      <li class="nav-item">Orders &amp; shipping (34)</li>
+      <li class="nav-item">Refunds (18)</li>
+      <li class="nav-item">Account &amp; SSO (9)</li>
+      <li class="nav-item">Billing (7)</li>
+    </ul>
+  </section>
+
+  <!-- Editor -->
+  <section class="overflow-y-auto p-6">
+    <div class="flex items-center gap-2 mb-4">
+      <input class="input" style="max-width:420px; font-weight:600;" value="Tracking a DHL shipment" />
+      <span class="badge badge-success">Published</span>
+      <span class="badge">v3 &middot; last edited 2h ago</span>
+      <div class="ml-auto flex gap-2">
+        <button class="btn btn-secondary">Preview</button>
+        <button class="btn btn-primary">Publish</button>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 mb-2 text-xs" style="color:var(--color-muted)">
+      <button class="btn btn-ghost" style="height:28px; padding:2px 8px;">H1</button>
+      <button class="btn btn-ghost" style="height:28px; padding:2px 8px;">H2</button>
+      <button class="btn btn-ghost" style="height:28px; padding:2px 8px;">B</button>
+      <button class="btn btn-ghost" style="height:28px; padding:2px 8px;">I</button>
+      <button class="btn btn-ghost" style="height:28px; padding:2px 8px;">List</button>
+      <button class="btn btn-ghost" style="height:28px; padding:2px 8px;">Link</button>
+      <button class="btn btn-ghost" style="height:28px; padding:2px 8px;">Image</button>
+    </div>
+    <div contenteditable="true" class="card p-4 min-h-[280px] leading-relaxed text-sm">
+      <h2 class="text-lg font-semibold mb-2">Tracking a DHL shipment</h2>
+      <p>When we ship an order via DHL you will receive a tracking number in your confirmation email. To track your package:</p>
+      <ol class="list-decimal pl-6 mt-2 space-y-1"><li>Open the shipping confirmation email.</li><li>Click the tracking link (or copy the number).</li><li>Visit the DHL portal and paste the number.</li></ol>
+      <p class="mt-3">Tracking typically updates within 24 hours of shipment.</p>
+    </div>
+
+    <div class="mt-4 card p-4 border-dashed" style="border-style: dashed;">
+      <div class="text-sm font-medium mb-1">Drop images here or click to upload</div>
+      <div class="text-xs" style="color:var(--color-muted)">PNG/JPG/WebP up to 5 MB - converted server-side to AVIF.</div>
+    </div>
+  </section>
+
+  <!-- Locale variants -->
+  <aside class="border-l p-4 overflow-y-auto space-y-4" style="border-color:var(--color-border); background: var(--color-elev);">
+    <div>
+      <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--color-muted)">Locales</div>
+      <ul class="space-y-2 text-sm">
+        <li class="flex items-center gap-2"><span class="badge badge-primary">EN</span> Tracking a DHL shipment <span class="ml-auto text-xs" style="color:var(--color-success)">Ready</span></li>
+        <li class="flex items-center gap-2"><span class="badge">ES</span> Rastrear un envio DHL <span class="ml-auto text-xs" style="color:var(--color-warning)">Draft</span></li>
+        <li class="flex items-center gap-2" dir="rtl"><span class="badge">AR</span> &#1578;&#1578;&#1576;&#1593; &#1588;&#1581;&#1606;&#1577; DHL <span class="ml-auto text-xs" style="color:var(--color-muted)">Missing</span></li>
+      </ul>
+      <button class="btn btn-secondary mt-3 w-full justify-center">Add locale</button>
+    </div>
+
+    <div class="card p-3">
+      <div class="text-xs mb-2" style="color:var(--color-muted)">RTL preview (AR)</div>
+      <div dir="rtl" lang="ar" class="text-sm border rounded p-3" style="border-color:var(--color-border);">
+        <div class="font-semibold mb-1">&#1578;&#1578;&#1576;&#1593; &#1588;&#1581;&#1606;&#1577; DHL</div>
+        <p>&#1593;&#1606;&#1583;&#1605;&#1575; &#1606;&#1588;&#1581;&#1606; &#1591;&#1604;&#1576;&#1603; &#1593;&#1576;&#1585; DHL &#1587;&#1578;&#1587;&#1578;&#1604;&#1605; &#1585;&#1602;&#1605; &#1578;&#1578;&#1576;&#1593; &#1601;&#1610; &#1575;&#1604;&#1576;&#1585;&#1610;&#1583; &#1575;&#1604;&#1573;&#1604;&#1603;&#1578;&#1585;&#1608;&#1606;&#1610;.</p>
+      </div>
+    </div>
+
+    <div class="card p-3">
+      <div class="text-xs mb-1" style="color:var(--color-muted)">Validation</div>
+      <ul class="text-xs space-y-1">
+        <li>&#10003; H1 present</li>
+        <li>&#10003; Alt text on images</li>
+        <li>&#9888; ES translation has 1 missing key</li>
+      </ul>
+    </div>
+  </aside>
+</main>
+</div>
+
+<div id="cmdk" class="hidden fixed inset-0 grid place-items-start pt-24" style="background: rgba(0,0,0,.5); z-index: var(--z-modal);" data-action="close-palette">
+  <div class="card w-full max-w-xl mx-auto p-0 overflow-hidden" onclick="event.stopPropagation()">
+    <input class="input" style="border:none; border-radius:0; height:52px;" placeholder="Type a command or search..." />
+    <ul class="text-sm"><li class="px-4 py-2" style="border-top:1px solid var(--color-border);">New article</li><li class="px-4 py-2" style="border-top:1px solid var(--color-border);">Toggle theme</li></ul>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

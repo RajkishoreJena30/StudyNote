@@ -52,19 +52,29 @@ AI/FrontendForge/
 
 ## 🚀 How to Activate (30-second version)
 
-1. Open the orchestrator: [Agents/00-orchestrator.agent.md](Agents/00-orchestrator.agent.md).
-2. In chat, run the init command with your stack:
+1. In chat, run the init command with your stack (the `/forge-*` commands are wired into `.github/prompts/`):
 
    ```
    /forge-init React + TypeScript + Micro-Frontend
    ```
 
-3. The orchestrator asks you **2 questions only**:
+   …or pick the **FrontendForge** agent from the agent picker (wired into `.github/agents/`).
+2. The orchestrator asks you **2 questions only**:
    - Which **architecture** do you want? (it proposes options)
    - Which **frameworks/tools should it NOT use**?
-4. It then runs the full pipeline (research → tech → architecture → spec → UI/UX → sprints → security → testing → performance → i18n → standards → starter → AI features) and writes all Markdown deliverables.
+3. It then runs the full pipeline (research → tech → architecture → spec → UI/UX → sprints → security → testing → performance → i18n → standards → starter → AI features) and writes all Markdown deliverables.
 
 Full details: [Docs/ACTIVATION-GUIDE.md](Docs/ACTIVATION-GUIDE.md).
+
+### Discovery layer (`.github/`) vs canonical package (`AI/FrontendForge/`)
+
+| Location | Contains | Role |
+|----------|----------|------|
+| `.github/prompts/forge-*.prompt.md` | 11 thin pointer prompts | Make `/forge-*` slash commands discoverable |
+| `.github/agents/frontendforge.agent.md` | 1 orchestrator pointer | Makes the agent selectable in the picker |
+| `AI/FrontendForge/**` | agents, skills, rules, hooks, scripts, docs | **Canonical source — edit here** |
+
+The `.github/` files only *point at* this package, so there is no meaningful drift: change behavior by editing `AI/FrontendForge/`. `Rules/` stays **opt-in** (not copied into `.github/instructions/`) so it never auto-applies to unrelated files in this workspace.
 
 ---
 

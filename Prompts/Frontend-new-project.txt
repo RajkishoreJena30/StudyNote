@@ -1,0 +1,20 @@
+Cretae requred AI Agents, Skils, Comments,Rules,hooks,scrips,docs, inside AI folder with new Separate Folder to Active below things , user only can provide tech stack or major framework (Like React, Next, View, Angular,etc), you can ask Architecture user want what framework do not use, after that you can provide remaing.  
+Consider I am a senior fronted developer of 6+ years of exprience, I want build web application using given info of Tech stack or framework Example: React + typescript + Microfontend Arctitecture.
+Suggest me the what lattest Frameworks should we use to develop as per the Industry Standard.
+I want build Full production Grade Application, where I want cover all basic to all advance concept in depath for web application.
+1. Do a deep research find good project for Me In which I will cover basic to advane concept as per the production grade standard.
+2.Finalise the All framework and required package.
+3.Finalise the Archtecture, with Diagram if required.
+4.Give Project Details description with feature , pages, requirements.Workflow, With diagram if requred.
+5. UI/UX Design - Information Color , font, all other things
+6.Break down to Sprint Level- Epic, Feature, sotory, task. use the bast approch. Details Description Of a Story, Feature, LLD break down. And Break task that way I will work daily 5 hours. 
+7.Cover the Security and Auth
+8.Test case Coverage more then 90% Unit Test , E2E Test
+9.Core Web Vital, Load fater as per Industry Standard.
+10. Multi Language Support.
+11. Follow the Industry Coding Standard.
+12.GIve me the Steps to create Working stater Template for this Project in a md file.
+13. I want all the information in md file, less information in the chart console,  create required md files.
+14.Plan properly and acive this.
+15. do not use Example: next js for now.
+16. Also I want in my Project AI-feature implement like strim events.

@@ -1,0 +1,143 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ResumeForge — UI/UX Reference</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/tokens.css" />
+</head>
+<body>
+  <header class="rf-header">
+    <span class="rf-brand">ResumeForge</span>
+    <nav class="rf-nav">
+      <button class="rf-btn" data-theme-toggle aria-label="Toggle theme">◐ Theme</button>
+      <a class="rf-btn rf-btn--primary" href="login.html">Log in</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="rf-card rf-hero">
+      <div>
+        <p class="rf-badge rf-badge--ai">AI-powered · React + TypeScript + Module Federation</p>
+        <h1 class="display rf-mt">Chat your resume past the ATS.</h1>
+        <p class="rf-muted">ResumeForge streams AI suggestions straight into a live, Overleaf-style resume editor — accept a suggestion, watch your ATS score climb, export a pixel-perfect PDF.</p>
+        <div class="rf-row rf-mt">
+          <a class="rf-btn rf-btn--primary" href="login.html">Log in to get started →</a>
+          <a class="rf-btn" href="#about-heading">See how it works</a>
+        </div>
+        <p class="rf-muted rf-mt" style="margin-top:var(--rf-space-3)">Tip: press <kbd>Ctrl/Cmd + K</kbd> for the command palette.</p>
+
+        <div class="rf-hero-stats rf-mt">
+          <div class="rf-hero-stat"><strong>+15 pts</strong><span>avg. ATS score lift / session</span></div>
+          <div class="rf-hero-stat"><strong>45%</strong><span>AI suggestions accepted</span></div>
+          <div class="rf-hero-stat"><strong>&lt; 10 min</strong><span>time to first export</span></div>
+        </div>
+      </div>
+
+      <div class="rf-pane rf-hero-visual" data-streaming-demo>
+        <div class="rf-row" style="justify-content:space-between">
+          <span class="rf-badge rf-badge--ai">Assistant</span>
+          <div class="rf-gauge" style="--v:82; width:56px; height:56px" aria-label="ATS score 82">
+            <span style="width:42px; height:42px; font-size:.85rem">82</span>
+          </div>
+        </div>
+        <p class="rf-muted" style="margin-top:var(--rf-space-3)">Improving your summary…</p>
+        <div class="rf-card" style="background:var(--rf-surface); margin-top:var(--rf-space-3)">
+          <div aria-live="polite" data-stream-out
+               data-script="Senior Frontend Engineer with 6+ years architecting Module Federation micro-frontends in React and TypeScript, shipping AI-streamed resume tooling that lifts ATS scores by 15+ points."></div>
+        </div>
+        <div class="rf-row rf-mt">
+          <button class="rf-btn rf-btn--primary" data-stream-start>Improve with AI</button>
+          <button class="rf-btn rf-btn--danger" data-stream-stop hidden>Stop</button>
+          <button class="rf-btn" data-stream-accept hidden>Accept</button>
+        </div>
+        <p class="rf-badge rf-badge--ok rf-mt" data-stream-note hidden></p>
+      </div>
+    </section>
+
+    <section class="rf-mt" aria-labelledby="about-heading">
+      <h2 id="about-heading">About ResumeForge</h2>
+      <p class="rf-muted">We're a small team of engineers and career coaches who got tired of watching great candidates get filtered out by keyword-matching software before a human ever saw their resume.</p>
+
+      <div class="rf-grid cols-3 rf-mt">
+        <div class="rf-card">
+          <h3>What we do</h3>
+          <p class="rf-muted">We build an AI, ATS-aware resume &amp; cover-letter studio: a conversational assistant that rewrites, scores, and tailors your resume to a specific job description in real time.</p>
+        </div>
+        <div class="rf-card">
+          <h3>How we help</h3>
+          <p class="rf-muted">Paste a job description and our AI streams keyword-matched suggestions you can accept with one click, while a live ATS score shows exactly how much each change improves your odds.</p>
+        </div>
+        <div class="rf-card">
+          <h3>Why it matters</h3>
+          <p class="rf-muted">Over 75% of resumes never reach a human recruiter. ResumeForge closes that gap — so your experience gets read by a person, not filtered by a machine.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="rf-muted rf-mt">Static UI/UX reference prototype — framework-free HTML + Tailwind (CDN) + shared tokens/JS. Maps to <code>plan/05-UIUX-Design.md</code>. See <code>README.md</code> for how to run and a full screen list.</p>
+  </main>
+
+  <footer class="rf-footer">
+    <div class="rf-footer-inner">
+      <div class="rf-footer-grid">
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="login.html">AI Resume Editor</a></li>
+            <li><a href="login.html">Templates</a></li>
+            <li><a href="login.html">ATS Analysis</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about-heading">About us</a></li>
+            <li><a href="account.html">Pricing</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Resume examples</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Help center</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="rf-footer-bottom">
+        <span class="rf-muted">© 2026 ResumeForge. All rights reserved.</span>
+        <span class="rf-row">
+          <a href="#" aria-label="ResumeForge on X">X</a>
+          <a href="#" aria-label="ResumeForge on LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="ResumeForge on GitHub">GitHub</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="rf-cmdk-backdrop" id="rf-cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="rf-cmdk">
+      <input type="text" placeholder="Type a command… (Esc to close)" aria-label="Command" />
+      <ul>
+        <li>Log in</li>
+        <li>Learn about ResumeForge</li>
+      </ul>
+    </div>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+

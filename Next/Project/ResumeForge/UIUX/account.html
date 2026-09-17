@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ResumeForge — Account</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/tokens.css" />
+</head>
+<body>
+  <header class="rf-header">
+    <a class="rf-brand" href="index.html">ResumeForge</a>
+    <nav class="rf-nav">
+      <a class="rf-btn" href="dashboard.html">Dashboard</a>
+      <button class="rf-btn" data-rtl-toggle>RTL preview</button>
+      <button class="rf-btn" data-theme-toggle>◐ Theme</button>
+    </nav>
+  </header>
+  <main>
+    <h1>Account &amp; billing</h1>
+
+    <h2 class="rf-mt">Plan</h2>
+    <div class="rf-grid cols-3">
+      <div class="rf-card"><h3>Free</h3><p class="rf-muted">1 resume · 3 templates · 10 AI/day · PDF</p><button class="rf-btn" disabled>Current</button></div>
+      <div class="rf-card" style="border-color:var(--rf-accent)"><h3>Pro <span class="rf-badge rf-badge--pro">Popular</span></h3><p class="rf-muted">Unlimited · all AI · all exports · tailor-to-JD</p><button class="rf-btn rf-btn--primary">Upgrade</button></div>
+      <div class="rf-card"><h3>Teams</h3><p class="rf-muted">Pro + sharing · seats · brand templates</p><button class="rf-btn">Contact sales</button></div>
+    </div>
+
+    <h2 class="rf-mt">Preferences</h2>
+    <div class="rf-card">
+      <div class="rf-field">
+        <label for="locale">Language</label>
+        <select id="locale" class="rf-input"><option>English</option><option>Español</option><option>Français</option><option>Deutsch</option><option>العربية (RTL)</option></select>
+      </div>
+      <p class="rf-muted">Toggle “RTL preview” in the header to see the Arabic layout (logical properties).</p>
+    </div>
+
+    <h2 class="rf-mt">Usage</h2>
+    <table class="rf-table">
+      <thead><tr><th>Metric</th><th>This month</th></tr></thead>
+      <tbody>
+        <tr><td>AI actions</td><td>124</td></tr>
+        <tr><td>Exports</td><td>18 PDF · 4 PNG</td></tr>
+        <tr><td>Avg ATS lift / session</td><td>+15 pts</td></tr>
+      </tbody>
+    </table>
+  </main>
+  <div class="rf-cmdk-backdrop" id="rf-cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="rf-cmdk"><input type="text" placeholder="Type a command… (Esc to close)" aria-label="Command" /><ul><li>Upgrade to Pro</li><li>Change language</li></ul></div>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+

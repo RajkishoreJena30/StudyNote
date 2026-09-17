@@ -1,0 +1,53 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ResumeForge — Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/tokens.css" />
+</head>
+<body>
+  <header class="rf-header">
+    <a class="rf-brand" href="index.html">ResumeForge</a>
+    <nav class="rf-nav">
+      <a class="rf-btn" href="templates.html">Templates</a>
+      <a class="rf-btn" href="account.html">Account</a>
+      <button class="rf-btn" data-theme-toggle>◐ Theme</button>
+    </nav>
+  </header>
+  <main>
+    <div class="rf-row" style="justify-content:space-between">
+      <h1>Your resumes</h1>
+      <a class="rf-btn rf-btn--primary" href="templates.html">+ New resume</a>
+    </div>
+
+    <section class="rf-card rf-mt" style="border-style:dashed; text-align:center">
+      <h3>Import an existing resume</h3>
+      <p class="rf-muted">Drop a PDF or DOCX — parsed client-side (pdfjs / mammoth) into an editable document.</p>
+      <button class="rf-btn">Choose file…</button>
+    </section>
+
+    <div class="rf-grid cols-2 rf-mt">
+      <a class="rf-card" href="editor.html">
+        <div class="rf-row" style="justify-content:space-between"><h3>Frontend Engineer</h3><span class="rf-badge rf-badge--ok">ATS 82</span></div>
+        <p class="rf-muted">Edited 2h ago · Template: Modern</p>
+      </a>
+      <a class="rf-card" href="editor.html">
+        <div class="rf-row" style="justify-content:space-between"><h3>Product Manager</h3><span class="rf-badge">ATS 61</span></div>
+        <p class="rf-muted">Edited yesterday · Template: Classic</p>
+      </a>
+      <div class="rf-card" aria-hidden="true">
+        <div class="rf-skeleton" style="width:60%"></div>
+        <div class="rf-skeleton rf-mt" style="width:40%"></div>
+      </div>
+    </div>
+  </main>
+  <div class="rf-cmdk-backdrop" id="rf-cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="rf-cmdk"><input type="text" placeholder="Type a command… (Esc to close)" aria-label="Command" /><ul><li>New resume</li><li>Import resume</li><li>Open Frontend Engineer</li></ul></div>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+

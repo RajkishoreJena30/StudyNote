@@ -49,6 +49,7 @@ These specialist `.agent.md` files are **personas the model adopts**, not a runt
 | 3 | `03-architecture-designer` | `03-Architecture.md` |
 | 4 | `04-product-planner` | `04-Product-Spec.md` |
 | 5 | `05-uiux-designer` | `05-UIUX-Design.md` |
+| 5b | `05b-uiux-static-reference` | `<Project>/UIUX/` (static HTML/Tailwind/CSS/JS reference site) |
 | 6 | `06-agile-sprint-planner` | `06-Delivery-Plan.md` |
 | 7 | `07-security-auth-architect` | `07-Security-Auth.md` |
 | 8 | `08-testing-strategist` | `08-Testing-Strategy.md` |

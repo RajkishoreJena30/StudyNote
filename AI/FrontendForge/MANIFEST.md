@@ -14,6 +14,7 @@
 | `03-architecture-designer.agent.md` | System/module/data-flow diagrams. | frontend-architecture | `03-Architecture.md` |
 | `04-product-planner.agent.md` | **PO + Product Planner.** PO brief (vision, OKRs, personas, MoSCoW, roadmap, pricing, glossary) + features, pages, flows, requirements. | product-management, ui-ux-design-system | `04-Product-Spec.md` |
 | `05-uiux-designer.agent.md` | IA, color, typography, spacing, tokens, components. | ui-ux-design-system | `05-UIUX-Design.md` |
+| `05b-uiux-static-reference.agent.md` | Auto-generates a static HTML/Tailwind reference site (`<Project>/UIUX/`) from the tokens + screens. | static-ui-reference | `<Project>/UIUX/` folder |
 | `06-agile-sprint-planner.agent.md` | Epic→Feature→Story→Task, LLD, 5 hrs/day cadence. | agile-breakdown | `06-Delivery-Plan.md` |
 | `07-security-auth-architect.agent.md` | AuthN/AuthZ, OWASP, session/token strategy. | security-auth | `07-Security-Auth.md` |
 | `08-testing-strategist.agent.md` | Unit + integration + E2E, 90%+ coverage plan. | testing-strategy | `08-Testing-Strategy.md` |
@@ -29,6 +30,7 @@
 | `frontend-architecture/SKILL.md` | Full pattern ladder (Static Page, MVC, SPA, BFF, Modular Monolith, MFE), rendering strategies, platform context (API Gateway, Load Balancing, Docker/K8s, CDN, Monorepo), cross-MFE concerns, state topology. |
 | `product-management/SKILL.md` | PO brief: vision, problem, market, OKRs/KPIs, personas (JTBD), business rules, MoSCoW, roadmap, risks, pricing, glossary. |
 | `ui-ux-design-system/SKILL.md` | Design tokens, color systems, type scales, spacing, accessibility, component taxonomy, **Design-to-Code & MCP**. |
+| `static-ui-reference/SKILL.md` | Framework-free static reference site (plain HTML + Tailwind CDN + shared CSS tokens + shared JS). |
 | `agile-breakdown/SKILL.md` | Epic/Feature/Story/Task decomposition, estimation, INVEST, 5-hr/day slicing. |
 | `security-auth/SKILL.md` | OWASP Top 10 (frontend), auth flows (OIDC/OAuth2/JWT/session), token storage, CSP. |
 | `testing-strategy/SKILL.md` | Test pyramid, coverage strategy, unit/integration/E2E tooling, mocking, CI gates. |
@@ -47,6 +49,7 @@
 | `/forge-architecture` | Phase 3 only — architecture + diagrams. |
 | `/forge-product` | Phase 4 only — product spec. |
 | `/forge-uiux` | Phase 5 only — UI/UX. |
+| `/forge-uiux-static` | Phase 5b only — generate the `<Project>/UIUX/` static reference site. |
 | `/forge-sprints` | Phase 6 only — sprint breakdown. |
 | `/forge-security` | Phase 7 only — security & auth. |
 | `/forge-testing` | Phase 8 only — testing strategy. |

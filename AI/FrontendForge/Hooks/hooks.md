@@ -31,6 +31,11 @@
 - **Pass when:** structure valid, non-empty, no excluded framework mentioned.
 - **On fail:** re-run the phase with the specific gap noted.
 
+### `post-phase/validate-uiux-static` (Phase 5b only)
+- **Trigger:** after Phase 5b writes the `<Project>/UIUX/` folder.
+- **Action:** confirm `index.html`, `assets/tokens.css`, `assets/app.js`, `README.md`, and ≥4 screen pages exist; every screen page references the shared tokens + JS; the hero screen contains a streaming caret and a Stop control.
+- **Pass when:** all files present and non-empty and the streaming demo elements are present.
+
 ---
 
 ## Post-run

@@ -18,6 +18,7 @@ For any tech stack you give it, FrontendForge generates a full documentation set
 | 3 | Architecture + diagrams | `03-Architecture.md` |
 | 4 | Project description, features, pages, workflow, diagrams | `04-Product-Spec.md` |
 | 5 | UI/UX — information architecture, color, typography, tokens | `05-UIUX-Design.md` |
+| 5b | **Static UI/UX reference site** (browsable HTML/Tailwind/CSS/JS prototype) | `<Project>/UIUX/` folder |
 | 6 | Sprint breakdown — Epic → Feature → Story → Task (5 hrs/day) | `06-Delivery-Plan.md` |
 | 7 | Security & Auth | `07-Security-Auth.md` |
 | 8 | Testing strategy (90%+ unit + E2E) | `08-Testing-Strategy.md` |

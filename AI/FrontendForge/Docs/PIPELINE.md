@@ -1,6 +1,6 @@
 # FrontendForge — Pipeline
 
-> The 10-phase pipeline: inputs, the agent + skill used, the deliverable produced, and the gate that must pass before moving on.
+> The 11-phase pipeline: inputs, the agent + skill used, the deliverable produced, and the gate that must pass before moving on.
 
 ---
 
@@ -12,8 +12,9 @@
 | 1 | Research | `02-project-researcher` | frontend-architecture | intake | `01-Project-Research.md` | concept matrix covers basic→advanced |
 | 2 | Tech stack | `01-techstack-architect` | frontend-architecture | 1 | `02-Tech-Stack.md` | no excluded/unnamed framework |
 | 3 | Architecture | `03-architecture-designer` | frontend-architecture | 1,2 | `03-Architecture.md` | ≥3 diagrams + folder tree |
-| 4 | Product | `04-product-planner` | ui-ux-design-system | 1,3 | `04-Product-Spec.md` | sitemap + ≥3 flows |
+| 4 | Product | `04-product-planner` | product-management, ui-ux-design-system | 1,3 | `04-Product-Spec.md` | PO brief + sitemap + ≥3 flows |
 | 5 | UI/UX | `05-uiux-designer` | ui-ux-design-system | 4 | `05-UIUX-Design.md` | token block + a11y checklist |
+| 5b | UI/UX static reference | `05b-uiux-static-reference` | static-ui-reference | 4,5,13 (opt) | `<Project>/UIUX/` folder (index + screens + tokens.css + app.js + README) | ≥4 screen pages + tokens.css + app.js |
 | 6 | Sprints | `06-agile-sprint-planner` | agile-breakdown | 3,4,5 | `06-Delivery-Plan.md` | tasks ≤ 5h + worked LLD |
 | 7 | Security | `07-security-auth-architect` | security-auth | 3,4 | `07-Security-Auth.md` | auth diagram + CSP |
 | 8 | Testing | `08-testing-strategist` | testing-strategy | 4,6 | `08-Testing-Strategy.md` | ≥90% threshold config |
@@ -31,7 +32,9 @@ flowchart TD
     P2 --> P3[3 Architecture]
     P3 --> P4[4 Product]
     P4 --> P5[5 UI/UX]
-    P5 --> P6[6 Sprints]
+    P5 --> P5b[5b UI/UX static reference]
+    P5b --> P6[6 Sprints]
+    P5 --> P6
     P3 --> P7[7 Security]
     P4 --> P7
     P4 --> P8[8 Testing]
@@ -61,6 +64,7 @@ After Phase 10: `post-run/consistency-check` → `post-run/validate-plan`.
 | 3. Architecture + diagram | Phase 3 |
 | 4. Project details + workflow | Phase 4 |
 | 5. UI/UX (color, font…) | Phase 5 |
+| 5b. Browsable static UI/UX reference (visual prototype) | Phase 5b |
 | 6. Sprint breakdown (5h/day) | Phase 6 |
 | 7. Security + auth | Phase 7 |
 | 8. 90%+ unit + E2E | Phase 8 |

@@ -65,8 +65,32 @@ foreach ($check in $topicChecks) {
 
 if ($missing.Count -eq 0 -and $empty.Count -eq 0) {
     Write-Host "All deliverables present and non-empty." -ForegroundColor Green
-    exit 0
+    $exitCode = 0
 }
 else {
-    exit 1
+    $exitCode = 1
 }
+
+# --- Phase 5b: UIUX static reference site ---
+$uiuxDir = Join-Path (Split-Path $PlanDir -Parent) 'UIUX'
+if (Test-Path $uiuxDir) {
+    $requiredUiUx = @('index.html', 'README.md', 'assets/tokens.css', 'assets/app.js')
+    $uiuxMissing = @()
+    foreach ($rel in $requiredUiUx) {
+        $p = Join-Path $uiuxDir $rel
+        if (-not (Test-Path $p) -or (Get-Item $p).Length -lt 100) { $uiuxMissing += $rel }
+    }
+    $screenCount = (Get-ChildItem -Path $uiuxDir -Filter '*.html' -File | Where-Object { $_.Name -ne 'index.html' }).Count
+    $uiuxOk = ($uiuxMissing.Count -eq 0 -and $screenCount -ge 4)
+    $status = if ($uiuxOk) { 'OK ' } else { 'GAP' }
+    Write-Host ("[{0}] UIUX static reference (screens found: {1})" -f $status, $screenCount)
+    if ($uiuxMissing.Count) { Write-Warning ("UIUX missing/empty: " + ($uiuxMissing -join ', ')) }
+    if ($screenCount -lt 4) { Write-Warning "UIUX has fewer than 4 screen pages (need index + >=4 screens)." }
+    if (-not $uiuxOk) { $exitCode = 1 }
+}
+else {
+    Write-Host "[GAP] UIUX static reference (folder missing at $uiuxDir)"
+    $exitCode = 1
+}
+
+exit $exitCode

@@ -1,0 +1,83 @@
+import React, { Suspense } from 'react';
+import type { ReactNode } from 'react';
+import { createBrowserRouter, RouterProvider, Link, Outlet } from 'react-router';
+import { Button } from '@resumeforge/ui';
+
+const EditorApp = React.lazy(() => import('editor/EditorApp'));
+
+function Layout() {
+  return (
+    <div>
+      <header className="rf-header">
+        <strong>ResumeForge</strong>
+        <nav className="rf-nav">
+          <Link to="/">Home</Link>
+          <Link to="/editor/demo">Editor</Link>
+        </nav>
+      </header>
+      <main style={{ padding: 24 }}>
+        <Outlet />
+      </main>
+    </div>
+  );
+}
+
+function Home() {
+  return (
+    <div>
+      <h1>Welcome to ResumeForge</h1>
+      <p>Open the Editor to load the federated remote running on port 3001.</p>
+      <Button onClick={() => alert('Shared @resumeforge/ui Button works!')}>
+        Try the shared Button
+      </Button>
+    </div>
+  );
+}
+
+function RemoteFallback() {
+  return <p>Loading editor remote…</p>;
+}
+
+interface BoundaryProps {
+  children: ReactNode;
+}
+interface BoundaryState {
+  hasError: boolean;
+}
+
+class RemoteErrorBoundary extends React.Component<BoundaryProps, BoundaryState> {
+  state: BoundaryState = { hasError: false };
+  static getDerivedStateFromError(): BoundaryState {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return <p>Could not load the editor remote. Make sure it is running on http://localhost:3001.</p>;
+    }
+    return this.props.children;
+  }
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Home /> },
+      {
+        path: 'editor/:id',
+        element: (
+          <RemoteErrorBoundary>
+            <Suspense fallback={<RemoteFallback />}>
+              <EditorApp />
+            </Suspense>
+          </RemoteErrorBoundary>
+        ),
+      },
+    ],
+  },
+]);
+
+export function App() {
+  return <RouterProvider router={router} />;
+}

@@ -15,7 +15,7 @@
 | 4 | Product | `04-product-planner` | product-management, ui-ux-design-system | 1,3 | `04-Product-Spec.md` | PO brief + sitemap + ≥3 flows |
 | 5 | UI/UX | `05-uiux-designer` | ui-ux-design-system | 4 | `05-UIUX-Design.md` | token block + a11y checklist |
 | 5b | UI/UX static reference | `05b-uiux-static-reference` | static-ui-reference | 4,5,13 (opt) | `<Project>/UIUX/` folder (index + screens + tokens.css + app.js + README) | ≥4 screen pages + tokens.css + app.js |
-| 6 | Sprints | `06-agile-sprint-planner` | agile-breakdown | 3,4,5 | `06-Delivery-Plan.md` | tasks ≤ 5h + worked LLD |
+| 6 | Sprints | `06-agile-sprint-planner` | agile-breakdown | 3,4,5 | `06-Delivery-Plan.md` | every sprint fully carded (story+task, not one example) + tasks ≤ 5h + 1 LLD/epic + backlog export table |
 | 7 | Security | `07-security-auth-architect` | security-auth | 3,4 | `07-Security-Auth.md` | auth diagram + CSP |
 | 8 | Testing | `08-testing-strategist` | testing-strategy | 4,6 | `08-Testing-Strategy.md` | ≥90% threshold config |
 | 9 | Perf + i18n | `09-performance-i18n-engineer` | web-performance-i18n | 3,5 | `09-Performance.md`, `10-Internationalization.md` | CWV budget + locale plan |

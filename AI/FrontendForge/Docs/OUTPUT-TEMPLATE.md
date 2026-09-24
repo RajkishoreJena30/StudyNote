@@ -53,7 +53,7 @@
 | `04-Product-Spec.md` | **Part A PO brief** (vision, OKRs, personas, MoSCoW, roadmap, risks, pricing, glossary) + **Part B** roles, feature list, page inventory, sitemap + ≥3 flows |
 | `05-UIUX-Design.md` | color/type/spacing tables + CSS token block + a11y checklist |
 | `<Project>/UIUX/` (Phase 5b) | static reference site — `index.html`, ≥4 screen pages, `assets/tokens.css`, `assets/app.js`, `README.md`; hero has a streaming caret + Stop |
-| `06-Delivery-Plan.md` | sprints, Epic→Feature→Story→Task (≤5h), 1 worked LLD, Gantt |
+| `06-Delivery-Plan.md` | ID scheme (Jira/TFS mapping) + Gantt + **every sprint fully carded** (goal, capacity, every story with AC/points/depends-on/task table ≤5h) + 1 LLD per epic + DoR/DoD + flat backlog export table with totals |
 | `07-Security-Auth.md` | auth model, ≥1 sequence diagram, OWASP table, CSP |
 | `08-Testing-Strategy.md` | pyramid, coverage config (≥90%), 3 example tests |
 | `09-Performance.md` | CWV targets, budget table, levers, CRP diagram, CI gate |

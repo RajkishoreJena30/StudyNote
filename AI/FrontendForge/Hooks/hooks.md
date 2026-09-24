@@ -42,7 +42,7 @@
 
 ### `post-run/consistency-check`
 - **Trigger:** after Phase 10.
-- **Action:** cross-check stack/terminology consistency across all files; confirm coverage ≥ 90% target, CWV budget, i18n, security diagram, AI streaming diagram, tasks ≤ 5h.
+- **Action:** cross-check stack/terminology consistency across all files; confirm coverage ≥ 90% target, CWV budget, i18n, security diagram, AI streaming diagram, tasks ≤ 5h; confirm `06-Delivery-Plan.md` cards **every** sprint (not just one worked example) and ends with a flat backlog export table.
 - **Pass when:** all completeness gates in `Rules/output-structure.instructions.md` are true.
 
 ### `post-run/validate-plan`

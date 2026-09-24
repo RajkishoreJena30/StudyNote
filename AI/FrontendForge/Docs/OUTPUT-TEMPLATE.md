@@ -59,7 +59,7 @@
 | `09-Performance.md` | CWV targets, budget table, levers, CRP diagram, CI gate |
 | `10-Internationalization.md` | library setup, ICU, locale routing, RTL, Intl, diagram |
 | `11-Coding-Standards.md` | TS/lint/naming/commit conventions, PR checklist |
-| `12-Starter-Template.md` | numbered, copy-pasteable commands to a working app |
+| `12-Starter-Template.md` | a single cross-platform Node.js scaffold script (see `Skills/starter-template-scaffolding/SKILL.md`) covering scaffold→deps→config→structure→tests→CI→verify, actually run end-to-end (install/build/test/typecheck/lint green) before the doc is finalized |
 | `13-AI-Features.md` | SSE contract, client streaming code, guardrails, sequence diagram |
 | `00-INDEX.md` | links to all 13 + coverage summary + how to proceed |
 

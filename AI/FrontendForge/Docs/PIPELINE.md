@@ -19,7 +19,7 @@
 | 7 | Security | `07-security-auth-architect` | security-auth | 3,4 | `07-Security-Auth.md` | auth diagram + CSP |
 | 8 | Testing | `08-testing-strategist` | testing-strategy | 4,6 | `08-Testing-Strategy.md` | ≥90% threshold config |
 | 9 | Perf + i18n | `09-performance-i18n-engineer` | web-performance-i18n | 3,5 | `09-Performance.md`, `10-Internationalization.md` | CWV budget + locale plan |
-| 10 | Starter + AI | `10-starter-template-generator` | ai-streaming-features | all | `11-Coding-Standards.md`, `12-Starter-Template.md`, `13-AI-Features.md` | working steps + SSE diagram |
+| 10 | Starter + AI | `10-starter-template-generator` | ai-streaming-features, starter-template-scaffolding | all | `11-Coding-Standards.md`, `12-Starter-Template.md`, `13-AI-Features.md` | scaffold script actually run (install/build/test/typecheck/lint green) + working steps + SSE diagram |
 
 ---
 

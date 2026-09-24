@@ -1,0 +1,89 @@
+/* ResumeForge Delivery Plan Tracker — layout on top of ../../../UIUX/assets/tokens.css */
+
+body { min-height: 100vh; }
+.rf-app-header {
+  position: sticky; top: 0; z-index: var(--rf-z-drawer);
+  background: color-mix(in srgb, var(--rf-surface) 92%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--rf-border);
+  padding: var(--rf-space-4);
+}
+.rf-app-header-row { display: flex; align-items: center; gap: var(--rf-space-4); flex-wrap: wrap; max-width: 84rem; margin: 0 auto; }
+.rf-app-title { font-family: var(--rf-font-serif); font-size: 1.35rem; font-weight: 600; }
+.rf-app-actions { margin-inline-start: auto; display: flex; gap: var(--rf-space-2); }
+
+/* overall progress */
+.rf-progress-summary { display: flex; gap: var(--rf-space-6); flex-wrap: wrap; margin-top: var(--rf-space-3); max-width: 84rem; margin-inline: auto; }
+.rf-stat { min-width: 140px; }
+.rf-stat strong { display: block; font-family: var(--rf-font-serif); font-size: 1.3rem; color: var(--rf-accent); }
+.rf-stat span { font-size: .78rem; color: var(--rf-text-muted); }
+
+.rf-progressbar { height: 8px; border-radius: var(--rf-radius-full); background: var(--rf-surface-2); overflow: hidden; }
+.rf-progressbar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--rf-accent-600), var(--rf-accent-400)); transition: width var(--rf-dur-base) var(--rf-ease); }
+
+.rf-container { max-width: 84rem; margin: 0 auto; padding: var(--rf-space-6) var(--rf-space-4) var(--rf-space-16); }
+
+/* tabs */
+.rf-tabs { display: flex; gap: var(--rf-space-2); flex-wrap: wrap; border-bottom: 1px solid var(--rf-border); margin-bottom: var(--rf-space-6); padding-bottom: var(--rf-space-2); }
+.rf-tab {
+  padding: var(--rf-space-2) var(--rf-space-4); border-radius: var(--rf-radius-full); border: 1px solid transparent;
+  background: transparent; color: var(--rf-text-muted); font: inherit; font-weight: 600; cursor: pointer;
+}
+.rf-tab:hover { background: var(--rf-surface-2); color: var(--rf-text); }
+.rf-tab[aria-selected="true"] { background: var(--rf-accent-600); color: #fff; }
+.rf-tab-count { opacity: .75; font-weight: 400; margin-inline-start: 4px; }
+
+.rf-panel { display: none; }
+.rf-panel[data-active="true"] { display: block; }
+
+/* overview cards */
+.rf-sprint-card { cursor: pointer; }
+.rf-sprint-card:hover { border-color: var(--rf-accent); }
+.rf-sprint-card h3 { margin-bottom: 4px; }
+.rf-sprint-card .rf-progressbar { margin-top: var(--rf-space-3); }
+
+/* sprint view */
+.rf-sprint-head { margin-bottom: var(--rf-space-6); }
+.rf-sprint-head .rf-progressbar { max-width: 360px; margin-top: var(--rf-space-2); }
+
+/* story card */
+.rf-story { border: 1px solid var(--rf-border); border-radius: var(--rf-radius-lg); background: var(--rf-surface); margin-bottom: var(--rf-space-4); overflow: hidden; }
+.rf-story-head { display: flex; align-items: center; gap: var(--rf-space-3); padding: var(--rf-space-4); cursor: pointer; flex-wrap: wrap; }
+.rf-story-id { font-family: var(--rf-font-mono); font-size: .8rem; color: var(--rf-text-muted); }
+.rf-story-title { font-weight: 600; flex: 1; min-width: 200px; }
+.rf-story-progress { width: 90px; }
+.rf-story-progress .rf-progressbar { height: 6px; }
+.rf-story-progress span.pct { font-size: .72rem; color: var(--rf-text-muted); }
+.rf-story-caret { transition: transform var(--rf-dur-fast) var(--rf-ease); color: var(--rf-text-muted); }
+.rf-story[data-open="true"] .rf-story-caret { transform: rotate(90deg); }
+.rf-story-body { display: none; padding: 0 var(--rf-space-4) var(--rf-space-4); border-top: 1px solid var(--rf-border); }
+.rf-story[data-open="true"] .rf-story-body { display: block; padding-top: var(--rf-space-4); }
+.rf-story-body h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: var(--rf-text-muted); margin: var(--rf-space-4) 0 var(--rf-space-2); }
+.rf-story-body h4:first-child { margin-top: 0; }
+.rf-ac-list { margin: 0; padding-inline-start: var(--rf-space-6); display: flex; flex-direction: column; gap: 4px; }
+.rf-depends { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.rf-badge--priority-P0 { background: color-mix(in srgb, var(--rf-danger) 22%, transparent); color: var(--rf-danger); }
+.rf-badge--priority-P1 { background: color-mix(in srgb, var(--rf-highlight-500) 22%, transparent); color: var(--rf-highlight-400); }
+.rf-badge--priority-P2 { background: var(--rf-surface-2); color: var(--rf-text-muted); }
+.rf-badge--done { background: color-mix(in srgb, var(--rf-success) 22%, transparent); color: var(--rf-success); }
+
+/* task checklist */
+.rf-task-row { display: flex; align-items: flex-start; gap: var(--rf-space-3); padding: var(--rf-space-2) 0; border-bottom: 1px dashed var(--rf-border); }
+.rf-task-row:last-child { border-bottom: none; }
+.rf-task-row input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--rf-accent-500); flex-shrink: 0; }
+.rf-task-row label { flex: 1; cursor: pointer; }
+.rf-task-row.done label { color: var(--rf-text-muted); text-decoration: line-through; }
+.rf-task-meta { font-size: .75rem; color: var(--rf-text-muted); font-family: var(--rf-font-mono); white-space: nowrap; }
+
+/* backlog table */
+.rf-backlog-filters { display: flex; gap: var(--rf-space-3); flex-wrap: wrap; margin-bottom: var(--rf-space-4); align-items: center; }
+.rf-backlog-filters input, .rf-backlog-filters select { padding: var(--rf-space-2) var(--rf-space-3); border-radius: var(--rf-radius-md); border: 1px solid var(--rf-border); background: var(--rf-bg); color: var(--rf-text); font: inherit; }
+.rf-backlog-table-wrap { overflow-x: auto; border: 1px solid var(--rf-border); border-radius: var(--rf-radius-lg); }
+.rf-backlog-table-wrap table { min-width: 900px; }
+.rf-status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-inline-end: 6px; background: var(--rf-text-muted); }
+.rf-status-dot.done { background: var(--rf-success); }
+.rf-status-dot.partial { background: var(--rf-highlight-500); }
+
+@media (max-width: 640px) {
+  .rf-story-title { min-width: 100%; order: -1; }
+}

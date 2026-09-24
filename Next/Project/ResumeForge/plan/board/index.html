@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ResumeForge — Delivery Plan Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../UIUX/assets/tokens.css" />
+  <link rel="stylesheet" href="assets/board.css" />
+</head>
+<body>
+  <header class="rf-app-header">
+    <div class="rf-app-header-row">
+      <span class="rf-app-title">ResumeForge — Delivery Plan Tracker</span>
+      <div class="rf-app-actions">
+        <button class="rf-btn" data-theme-toggle aria-label="Toggle theme">◐ Theme</button>
+        <button class="rf-btn" id="reset-progress">Reset progress</button>
+      </div>
+    </div>
+    <div class="rf-progress-summary" id="overall-stats"></div>
+  </header>
+
+  <main class="rf-container">
+    <nav class="rf-tabs" id="rf-tabs" aria-label="Plan sections"></nav>
+    <div id="rf-panels"></div>
+  </main>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/board.js"></script>
+</body>
+</html>

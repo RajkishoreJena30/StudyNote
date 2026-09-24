@@ -27,6 +27,7 @@ For any tech stack you give it, FrontendForge generates a full documentation set
 | 11 | Coding standards | `11-Coding-Standards.md` |
 | 12 | Starter template steps | `12-Starter-Template.md` |
 | 13 | AI features (streaming events, generative UI) | `13-AI-Features.md` |
+| 14 | Cost-optimized production deployment guide | `14-Production-Deployment.md` |
 | — | Master index of the generated project | `00-INDEX.md` |
 
 > **Rule 16 honored:** AI features (e.g., streaming events / SSE) are baked into every generated plan.
@@ -40,7 +41,7 @@ For any tech stack you give it, FrontendForge generates a full documentation set
 AI/FrontendForge/
 ├── README.md                     ← you are here
 ├── MANIFEST.md                   ← index of every component + pipeline map
-├── Agents/                       ← 1 orchestrator + 10 specialist agents
+├── Agents/                       ← 1 orchestrator + 11 specialist agents
 ├── Skills/                       ← reusable domain knowledge packs
 ├── Commands/                     ← slash-command prompts to run each phase
 ├── Rules/                        ← coding standards + output structure (instructions)
@@ -63,7 +64,7 @@ AI/FrontendForge/
 2. The orchestrator asks you **2 questions only**:
    - Which **architecture** do you want? (it proposes options)
    - Which **frameworks/tools should it NOT use**?
-3. It then runs the full pipeline (research → tech → architecture → spec → UI/UX → sprints → security → testing → performance → i18n → standards → starter → AI features) and writes all Markdown deliverables.
+3. It then runs the full pipeline (research → tech → architecture → spec → UI/UX → sprints → security → testing → performance → i18n → standards → starter → AI features → production deployment) and writes all Markdown deliverables.
 
 Full details: [Docs/ACTIVATION-GUIDE.md](Docs/ACTIVATION-GUIDE.md).
 
@@ -71,7 +72,7 @@ Full details: [Docs/ACTIVATION-GUIDE.md](Docs/ACTIVATION-GUIDE.md).
 
 | Location | Contains | Role |
 |----------|----------|------|
-| `.github/prompts/forge-*.prompt.md` | 11 thin pointer prompts | Make `/forge-*` slash commands discoverable |
+| `.github/prompts/forge-*.prompt.md` | 12 thin pointer prompts | Make `/forge-*` slash commands discoverable |
 | `.github/agents/frontendforge.agent.md` | 1 orchestrator pointer | Makes the agent selectable in the picker |
 | `AI/FrontendForge/**` | agents, skills, rules, hooks, scripts, docs | **Canonical source — edit here** |
 
@@ -103,7 +104,8 @@ flowchart TD
     A7 --> A8[08 Testing Strategist]
     A8 --> A9[09 Performance & i18n Engineer]
     A9 --> A10[10 Starter Template Generator]
-    A10 --> Out[(Generated Markdown deliverables)]
+    A10 --> A11[11 Deployment & Cost Architect]
+    A11 --> Out[(Generated Markdown deliverables)]
 ```
 
 ---

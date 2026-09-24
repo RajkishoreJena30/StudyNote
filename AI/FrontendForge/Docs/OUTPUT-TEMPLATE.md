@@ -61,7 +61,8 @@
 | `11-Coding-Standards.md` | TS/lint/naming/commit conventions, PR checklist |
 | `12-Starter-Template.md` | a single cross-platform Node.js scaffold script (see `Skills/starter-template-scaffolding/SKILL.md`) covering scaffold→deps→config→structure→tests→CI→verify, actually run end-to-end (install/build/test/typecheck/lint green) before the doc is finalized |
 | `13-AI-Features.md` | SSE contract, client streaming code, guardrails, sequence diagram |
-| `00-INDEX.md` | links to all 13 + coverage summary + how to proceed |
+| `14-Production-Deployment.md` | target architecture diagram + hosting comparison w/ cost-optimized recommendation + independent per-remote CI/CD + MF caching/versioning/rollback rules + secrets/BFF + security table + observability + cost estimate range + scaling-path diagram |
+| `00-INDEX.md` | links to all 14 + coverage summary + how to proceed |
 
 ---
 
@@ -74,7 +75,7 @@
 
 ## Deliverables
 1. [Project Research](01-Project-Research.md)
-... (all 13) ...
+... (all 14) ...
 
 ## Coverage summary
 - Test target: ≥ 90% (unit + E2E)
@@ -82,8 +83,10 @@
 - i18n: <locales>
 - Security: <auth model>
 - AI: streaming (<transport>)
+- Deployment: <hosting stack> (est. <cost range>/mo)
 
 ## How to proceed
 1. Build the starter → `12-Starter-Template.md`.
 2. Execute sprints → `06-Delivery-Plan.md`.
+3. Deploy to production → `14-Production-Deployment.md`.
 ```

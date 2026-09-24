@@ -1,5 +1,5 @@
 ---
-description: 'FrontendForge Orchestrator — turns a single tech-stack input into a full production-grade frontend project plan by asking only about architecture, then running the 10-phase pipeline and writing all Markdown deliverables.'
+description: 'FrontendForge Orchestrator — turns a single tech-stack input into a full production-grade frontend project plan by asking only about architecture, then running the 11-phase pipeline and writing all Markdown deliverables.'
 tools: ['codebase', 'search', 'editFiles', 'fetch', 'runCommands']
 ---
 
@@ -55,12 +55,13 @@ These specialist `.agent.md` files are **personas the model adopts**, not a runt
 | 8 | `08-testing-strategist` | `08-Testing-Strategy.md` |
 | 9 | `09-performance-i18n-engineer` | `09-Performance.md`, `10-Internationalization.md` |
 | 10 | `10-starter-template-generator` | `11-Coding-Standards.md`, `12-Starter-Template.md`, `13-AI-Features.md` |
+| 11 | `11-deployment-architect` | `14-Production-Deployment.md` |
 
 ## Quality gates (from `Hooks/hooks.md`)
 
 - After each phase, verify the deliverable exists, is non-empty, and follows `Docs/OUTPUT-TEMPLATE.md`.
-- Cross-check consistency: the tech stack chosen in Phase 2 must be referenced consistently in Phases 3–10.
-- Run `Scripts/validate-plan.ps1` at the end to confirm all 14 deliverables are present.
+- Cross-check consistency: the tech stack chosen in Phase 2 must be referenced consistently in Phases 3–11.
+- Run `Scripts/validate-plan.ps1` at the end to confirm all 15 deliverables are present.
 
 ## Final chat message (keep short)
 

@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Validates that all 14 FrontendForge deliverables exist and are non-empty, and reports coverage of key required topics.
+  Validates that all 15 FrontendForge deliverables exist and are non-empty, and reports coverage of key required topics.
 
 .PARAMETER PlanDir
   Path to the project's plan folder (contains the deliverable Markdown files).
@@ -20,7 +20,8 @@ $required = @(
     "00-INDEX.md", "01-Project-Research.md", "02-Tech-Stack.md", "03-Architecture.md",
     "04-Product-Spec.md", "05-UIUX-Design.md", "06-Delivery-Plan.md", "07-Security-Auth.md",
     "08-Testing-Strategy.md", "09-Performance.md", "10-Internationalization.md",
-    "11-Coding-Standards.md", "12-Starter-Template.md", "13-AI-Features.md"
+    "11-Coding-Standards.md", "12-Starter-Template.md", "13-AI-Features.md",
+    "14-Production-Deployment.md"
 )
 
 # topic -> file it should appear in, and a regex proving it is covered
@@ -29,7 +30,8 @@ $topicChecks = @(
     @{ Topic = "Core Web Vitals"; File = "09-Performance.md"; Pattern = "LCP|INP|CLS" },
     @{ Topic = "i18n";            File = "10-Internationalization.md"; Pattern = "i18n|locale|Intl" },
     @{ Topic = "Auth";            File = "07-Security-Auth.md"; Pattern = "OAuth|OIDC|auth" },
-    @{ Topic = "AI streaming";    File = "13-AI-Features.md"; Pattern = "SSE|stream|EventSource|ReadableStream" }
+    @{ Topic = "AI streaming";    File = "13-AI-Features.md"; Pattern = "SSE|stream|EventSource|ReadableStream" },
+    @{ Topic = "Deployment cost"; File = "14-Production-Deployment.md"; Pattern = "(?i)cost|\$\d|/mo\b" }
 )
 
 $missing = @()

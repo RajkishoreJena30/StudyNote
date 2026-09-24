@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Scaffolds the FrontendForge output folder: 14 empty deliverable files under plan/, and a UIUX/ folder skeleton for the Phase 5b static reference site.
+  Scaffolds the FrontendForge output folder: 15 empty deliverable files under plan/, and a UIUX/ folder skeleton for the Phase 5b static reference site.
 
 .PARAMETER ProjectName
   The project name (used as the output subfolder).
@@ -41,7 +41,8 @@ $deliverables = @(
     "10-Internationalization.md",
     "11-Coding-Standards.md",
     "12-Starter-Template.md",
-    "13-AI-Features.md"
+    "13-AI-Features.md",
+    "14-Production-Deployment.md"
 )
 
 foreach ($file in $deliverables) {

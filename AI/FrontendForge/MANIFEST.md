@@ -20,6 +20,7 @@
 | `08-testing-strategist.agent.md` | Unit + integration + E2E, 90%+ coverage plan. | testing-strategy | `08-Testing-Strategy.md` |
 | `09-performance-i18n-engineer.agent.md` | Core Web Vitals budget + multi-language plan. | web-performance-i18n | `09-Performance.md`, `10-Internationalization.md` |
 | `10-starter-template-generator.agent.md` | Step-by-step starter template (verified by actually running it) + AI streaming feature. | ai-streaming-features, starter-template-scaffolding | `11-Coding-Standards.md`, `12-Starter-Template.md`, `13-AI-Features.md` |
+| `11-deployment-architect.agent.md` | Cost-optimized production deployment guide: hosting, independent per-remote CI/CD, MF caching/rollback, secrets/BFF, security, observability, cost estimate. | deployment-cost-optimization | `14-Production-Deployment.md` |
 
 ---
 
@@ -37,6 +38,7 @@
 | `web-performance-i18n/SKILL.md` | Core Web Vitals, CRP, critical CSS, HTTP caching, content negotiation, windowing, code splitting, and i18n/l10n patterns. |
 | `ai-streaming-features/SKILL.md` | SSE/WebSocket streaming, generative UI, **MCP UI**, token streaming UX, guardrails. |
 | `starter-template-scaffolding/SKILL.md` | Cross-platform Node.js scaffold-script pattern, complete Module Federation config checklist, entry-point convention, Turborepo v2 config, and the mandatory verify-by-actually-running loop. |
+| `deployment-cost-optimization/SKILL.md` | Static-first/serverless-first hosting decisions, MF production caching/versioning/rollback rules, secrets/BFF placement, cost-estimation methodology, scaling path gated on evidence. |
 
 ---
 
@@ -56,6 +58,7 @@
 | `/forge-testing` | Phase 8 only — testing strategy. |
 | `/forge-perf-i18n` | Phase 9 only — performance + i18n. |
 | `/forge-starter` | Phase 10 only — starter template + AI features. |
+| `/forge-deploy` | Phase 11 only — cost-optimized production deployment guide. |
 
 ---
 
@@ -81,7 +84,7 @@
 | Script | Purpose |
 |--------|---------|
 | `scaffold-output.ps1` | Creates the output folder + empty deliverable files for a new project run. |
-| `validate-plan.ps1` | Verifies all 14 deliverables exist and are non-empty; reports coverage gaps. |
+| `validate-plan.ps1` | Verifies all 15 deliverables exist and are non-empty; reports coverage gaps. |
 
 ---
 
@@ -112,4 +115,5 @@ flowchart LR
     Sec --> Starter
     Test --> Starter
     Perf --> Starter
+    Starter --> Deploy[11 Deployment + Cost]
 ```

@@ -1,6 +1,6 @@
 # FrontendForge — Pipeline
 
-> The 11-phase pipeline: inputs, the agent + skill used, the deliverable produced, and the gate that must pass before moving on.
+> The 12-phase pipeline: inputs, the agent + skill used, the deliverable produced, and the gate that must pass before moving on.
 
 ---
 
@@ -20,6 +20,7 @@
 | 8 | Testing | `08-testing-strategist` | testing-strategy | 4,6 | `08-Testing-Strategy.md` | ≥90% threshold config |
 | 9 | Perf + i18n | `09-performance-i18n-engineer` | web-performance-i18n | 3,5 | `09-Performance.md`, `10-Internationalization.md` | CWV budget + locale plan |
 | 10 | Starter + AI | `10-starter-template-generator` | ai-streaming-features, starter-template-scaffolding | all | `11-Coding-Standards.md`, `12-Starter-Template.md`, `13-AI-Features.md` | scaffold script actually run (install/build/test/typecheck/lint green) + working steps + SSE diagram |
+| 11 | Deployment + Cost | `11-deployment-architect` | deployment-cost-optimization | 3,7,9,10(starter) | `14-Production-Deployment.md` | target-architecture diagram + hosting comparison w/ recommendation + independent per-remote CI/CD + cost estimate range + scaling-path diagram |
 
 ---
 
@@ -45,7 +46,10 @@ flowchart TD
     P7 --> P10
     P8 --> P10
     P9 --> P10
-    P10 --> IDX[00-INDEX.md]
+    P10 --> P11[11 Deployment + Cost]
+    P7 --> P11
+    P9 --> P11
+    P11 --> IDX[00-INDEX.md]
 ```
 
 ---
@@ -53,7 +57,7 @@ flowchart TD
 ## Gate enforcement
 Each phase is wrapped by the hooks in [../Hooks/hooks.md](../Hooks/hooks.md):
 `pre-phase/load-context` → phase writes doc → `post-phase/validate-doc`.
-After Phase 10: `post-run/consistency-check` → `post-run/validate-plan`.
+After Phase 11: `post-run/consistency-check` → `post-run/validate-plan`.
 
 ## Requirement traceability
 
@@ -76,3 +80,4 @@ After Phase 10: `post-run/consistency-check` → `post-run/validate-plan`.
 | 14. Plan properly | Whole pipeline |
 | 15. No default Next.js | Tech-stack constraint |
 | 16. AI streaming events | Phase 10 |
+| 17. Cost-optimized production deployment | Phase 11 |

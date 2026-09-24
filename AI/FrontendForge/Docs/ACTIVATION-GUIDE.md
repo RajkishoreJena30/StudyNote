@@ -27,7 +27,7 @@ Other valid examples:
 2. **Exclusions** — name any frameworks/tools to avoid.
 
 ## Step 3 — Let it run
-The orchestrator scaffolds the output folder and runs 10 phases (see [PIPELINE.md](PIPELINE.md)), writing 14 Markdown deliverables. Chat stays quiet — one progress line per phase.
+The orchestrator scaffolds the output folder and runs 11 phases (see [PIPELINE.md](PIPELINE.md)), writing 15 Markdown deliverables. Chat stays quiet — one progress line per phase.
 
 ## Step 4 — Review the output
 Open the generated `00-INDEX.md` under `Next/Project/<ProjectName>/plan/` and read in order:
@@ -45,9 +45,10 @@ Open the generated `00-INDEX.md` under `Next/Project/<ProjectName>/plan/` and re
 11. `11-Coding-Standards.md` — conventions.
 12. `12-Starter-Template.md` — build a working template.
 13. `13-AI-Features.md` — streaming events.
+14. `14-Production-Deployment.md` — cost-optimized production deployment.
 
 ## Step 5 — Build the starter
-Follow `12-Starter-Template.md` step by step to get a running project, then execute `06-Delivery-Plan.md` sprint by sprint.
+Follow `12-Starter-Template.md` step by step to get a running project, then execute `06-Delivery-Plan.md` sprint by sprint, then deploy per `14-Production-Deployment.md`.
 
 ---
 

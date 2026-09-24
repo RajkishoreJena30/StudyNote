@@ -17,6 +17,7 @@
 11. [Coding Standards](11-Coding-Standards.md)
 12. [Starter Template](12-Starter-Template.md)
 13. [AI Features (streaming)](13-AI-Features.md)
+14. [Production Deployment (cost-optimized)](14-Production-Deployment.md)
 
 ## Coverage summary
 - **Architecture:** Module Federation (Rspack) — shell host + 4 independently deployable remotes + BFF.

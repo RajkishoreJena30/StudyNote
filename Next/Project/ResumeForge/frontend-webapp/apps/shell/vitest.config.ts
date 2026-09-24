@@ -9,6 +9,7 @@ export default defineConfig({
       // it at a local stub instead — a plain vi.mock is too late here because
       // Vite's import-analysis plugin fails before vi.mock can intercept it.
       'editor/EditorApp': path.resolve(process.cwd(), 'test/mocks/EditorAppStub.tsx'),
+      'templates/TemplatesApp': path.resolve(process.cwd(), 'test/mocks/TemplatesAppStub.tsx'),
     },
   },
   test: {

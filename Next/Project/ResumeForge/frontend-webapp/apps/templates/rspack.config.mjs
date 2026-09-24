@@ -2,9 +2,7 @@ import path from 'node:path';
 import { rspack } from '@rspack/core';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 
-// Plain .mjs (not .ts): with "type": "module" in package.json, Node's own ESM
-// loader tries to import the config file directly and errors on ".ts" before
-// Rspack's TS loader ever gets a chance. Plain JS avoids that entirely.
+// Plain .mjs for the same reason as the shell's config — see that file's comment.
 const isProd = process.env.NODE_ENV === 'production';
 
 export default {
@@ -13,7 +11,7 @@ export default {
   mode: isProd ? 'production' : 'development',
   devtool: isProd ? false : 'cheap-module-source-map',
   output: {
-    uniqueName: 'shell',
+    uniqueName: 'templates',
     publicPath: 'auto',
     path: path.resolve(process.cwd(), 'dist'),
   },
@@ -38,24 +36,19 @@ export default {
     ],
   },
   devServer: {
-    port: 3000,
-    historyApiFallback: true,
+    port: 3002,
+    // Required so the shell (port 3000) can fetch remoteEntry.js cross-origin in dev.
     headers: { 'Access-Control-Allow-Origin': '*' },
   },
   plugins: [
     new rspack.HtmlRspackPlugin({ template: './public/index.html' }),
     new ModuleFederationPlugin({
-      name: 'shell',
-      remotes: {
-        // Points at the editor remote's dev server; swap for a CDN URL per env in production.
-        editor: process.env.EDITOR_REMOTE_URL ?? 'editor@http://localhost:3001/remoteEntry.js',
-        // Points at the templates remote's dev server; swap for a CDN URL per env in production.
-        templates: process.env.TEMPLATES_REMOTE_URL ?? 'templates@http://localhost:3002/remoteEntry.js',
-      },
+      name: 'templates',
+      filename: 'remoteEntry.js',
+      exposes: { './TemplatesApp': './src/TemplatesApp.tsx' },
       shared: {
         react: { singleton: true, requiredVersion: false },
         'react-dom': { singleton: true, requiredVersion: false },
-        'react-router': { singleton: true, requiredVersion: false },
         zustand: { singleton: true, requiredVersion: false },
       },
     }),

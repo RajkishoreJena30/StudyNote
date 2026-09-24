@@ -116,17 +116,23 @@ Each Pages project auto-builds and deploys independently on push (or via the CI 
 
 ## 6. CI/CD Pipeline (Independent Per-Remote Deploys)
 
-Extend the CI matrix from [12-Starter-Template.md](12-Starter-Template.md) with a deploy job **per app**, gated on its own tests passing — this is what makes deploys independent, not just the runtime architecture:
+Use **one workflow file per remote**, each with its own `paths:` trigger filter — this is what actually makes deploys independent, and it's simpler and more reliable than trying to do path-based conditionals inside a single combined workflow (see the pitfall note below).
+
+> **Where this file must live:** `.github/workflows/*.yml` at the **repository root**. If `frontend-webapp/` is a subfolder of a larger repo (as in this workspace), either give it its own repository, or add `working-directory: Next/Project/ResumeForge/frontend-webapp` to every `run` step and adjust the `directory:`/path values below to match.
+>
+> **One-time setup before this runs:** create the Cloudflare Pages projects (`resumeforge-shell`, `resumeforge-editor`) first (§5.1), and add repo secrets `CF_API_TOKEN` + `CF_ACCOUNT_ID` under Settings → Secrets and variables → Actions.
 
 ```yaml
-# .github/workflows/deploy.yml
-name: deploy
+# .github/workflows/deploy-shell.yml
+name: deploy-shell
 on:
   push:
     branches: [main]
+    paths:
+      - 'apps/shell/**'
+      - 'packages/**'
 jobs:
-  deploy-shell:
-    if: contains(github.event.head_commit.modified, 'apps/shell/') || contains(github.event.head_commit.modified, 'packages/')
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -141,8 +147,19 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           projectName: resumeforge-shell
           directory: apps/shell/dist
-  deploy-editor:
-    if: contains(github.event.head_commit.modified, 'apps/editor/') || contains(github.event.head_commit.modified, 'packages/')
+```
+
+```yaml
+# .github/workflows/deploy-editor.yml
+name: deploy-editor
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/editor/**'
+      - 'packages/**'
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -158,6 +175,8 @@ jobs:
           projectName: resumeforge-editor
           directory: apps/editor/dist
 ```
+
+**Why not one file with `if:` conditions per job?** GitHub Actions' `push` event only exposes `github.event.head_commit.modified` (an array of *exact* changed file paths from the last commit of the push). A common mistake — used in an earlier draft of this doc — is `if: contains(github.event.head_commit.modified, 'apps/shell/')`; `contains()` on an array checks for an **exact element match**, not a path-prefix/substring match, so that condition is effectively always false and the job would rarely if ever run. It also silently misses earlier commits in a multi-commit push. Per-workflow `on.push.paths:` filters (used above) are evaluated natively by GitHub against the *whole* push's changed files and don't have this problem. If you later want everything in a single workflow file (e.g. to add a shared "notify" job after both deploys), use the community [`dorny/paths-filter`](https://github.com/dorny/paths-filter) action to compute per-job `changed` outputs instead of hand-rolling the `contains()` check.
 
 - Each job only runs (and deploys) when files relevant to it changed — a PDF-export fix in `editor` ships without touching `shell` at all.
 - Pull requests get automatic preview URLs from Cloudflare Pages, so reviewers can click through changes before merge — no extra cost.

@@ -1,4 +1,7 @@
 import { useResumeStore } from './model/resumeStore';
+// Imported here (not bootstrap.tsx) so the CSS ships with the federated module the shell actually loads.
+import '@resumeforge/ui/tokens.css';
+import '@resumeforge/ui/tailwind.css';
 
 // This is the ONLY file exposed via Module Federation (see exposes.
 // './EditorApp' in rspack.config.mjs). index.ts/bootstrap.tsx above are for
@@ -21,8 +24,9 @@ export default function EditorApp() {
         onChange={(e) => updateSummary(e.target.value)}
       />
       <p data-testid="live-preview">
-        <strong>Live preview:</strong> {summary || 'Start typing your summary…'}
+        <strong>Live preview Of Input-Field Hello User :</strong> {summary || 'Start typing your summary…'}
       </p>
+      <p className="rf-muted bg-red-100 p-2 rounded-md border-2 border-red-200">Note: Changes are reflected in real-time above.</p>
     </section>
   );
 }

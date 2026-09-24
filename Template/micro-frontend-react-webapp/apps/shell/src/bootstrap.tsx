@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import '@resumeforge/ui/tokens.css';
+import '@resumeforge/ui/tailwind.css';
 
 const container = document.getElementById('root');
 if (!container) {

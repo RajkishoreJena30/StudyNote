@@ -31,7 +31,8 @@ export default {
         },
         type: 'javascript/auto',
       },
-      { test: /\.css$/, type: 'css' },
+      // postcss-loader runs Tailwind before Rspack's native CSS handling picks it up.
+      { test: /\.css$/, type: 'css', use: ['postcss-loader'] },
     ],
   },
   devServer: {

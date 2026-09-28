@@ -79,6 +79,15 @@ body {
 .rf-nav a {
   color: var(--rf-text);
 }
+.rf-nav-actions {
+  display: flex;
+  gap: var(--rf-space-2);
+  align-items: center;
+  margin-inline-start: auto;
+}
+.rf-nav-actions a.rf-btn {
+  text-decoration: none;
+}
 .rf-card {
   background: var(--rf-surface);
   border: 1px solid var(--rf-border);

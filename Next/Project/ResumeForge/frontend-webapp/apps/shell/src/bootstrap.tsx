@@ -2,6 +2,10 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import '@resumeforge/ui/tokens.css';
 import '@resumeforge/ui/tailwind.css';
+import { applyTheme, getStoredTheme } from './lib/theme';
+
+// Before first render so the saved theme doesn't flash dark first.
+applyTheme(getStoredTheme());
 
 const container = document.getElementById('root');
 if (!container) {

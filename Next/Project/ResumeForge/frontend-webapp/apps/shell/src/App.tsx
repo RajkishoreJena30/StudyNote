@@ -2,6 +2,8 @@ import React, { Suspense } from 'react';
 import type { ReactNode } from 'react';
 import { createBrowserRouter, RouterProvider, Link, Outlet } from 'react-router';
 import Home from './page/home';
+import Login from './page/login';
+import { ThemeToggle } from './components/ThemeToggle';
 const EditorApp = React.lazy(() => import('editor/EditorApp'));
 const TemplatesApp = React.lazy(() => import('templates/TemplatesApp'));
 
@@ -15,6 +17,12 @@ function Layout() {
           <Link to="/editor/demo">Editor</Link>
           <Link to="/templates">Templates</Link>
         </nav>
+        <div className="rf-nav-actions">
+          <ThemeToggle />
+          <Link className="rf-btn rf-btn--primary" to="/login">
+            Log in
+          </Link>
+        </div>
       </header>
       <main style={{ padding: 24 }}>
         <Outlet />
@@ -76,6 +84,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: 'login', element: <Login /> },
       {
         path: 'editor/:id',
         element: (

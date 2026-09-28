@@ -11,21 +11,25 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@resumeforge/contracts": "workspace:*",
+    "@resumeforge/ui": "workspace:*",
+    "@tanstack/react-query": "^5",
+    "@tanstack/react-virtual": "^3",
+    "i18next": "^24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "zustand": "^5.0.0",
-    "@resumeforge/ui": "workspace:*",
-    "@resumeforge/contracts": "workspace:*"
+    "react-i18next": "^15",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
-    "@rspack/core": "^1.0.14",
-    "@rspack/cli": "^1.0.14",
     "@module-federation/enhanced": "^0.8.4",
+    "@rspack/cli": "^1.0.14",
+    "@rspack/core": "^1.0.14",
+    "@testing-library/react": "^16.0.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "jsdom": "^25.0.1",
     "typescript": "^5.6.3",
-    "vitest": "^2.1.2",
-    "@testing-library/react": "^16.0.1",
-    "jsdom": "^25.0.1"
+    "vitest": "^2.1.2"
   }
 }

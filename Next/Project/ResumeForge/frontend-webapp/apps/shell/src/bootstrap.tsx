@@ -3,6 +3,9 @@ import { App } from './App';
 import '@resumeforge/ui/tokens.css';
 import '@resumeforge/ui/tailwind.css';
 import { applyTheme, getStoredTheme } from './lib/theme';
+import { initMonitoring } from './lib/monitoring';
+
+initMonitoring();
 
 // Before first render so the saved theme doesn't flash dark first.
 applyTheme(getStoredTheme());

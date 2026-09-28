@@ -1,0 +1,8 @@
+{
+  "nav": {
+    "home": "Home",
+    "editor": "Editor",
+    "templates": "Templates",
+    "login": "Log in"
+  }
+}

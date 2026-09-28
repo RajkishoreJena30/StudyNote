@@ -44,6 +44,10 @@ export default {
   },
   plugins: [
     new rspack.HtmlRspackPlugin({ template: './public/index.html' }),
+    new rspack.DefinePlugin({
+      __SENTRY_DSN__: JSON.stringify(process.env.SENTRY_DSN ?? ''),
+      __APP_ENV__: JSON.stringify(isProd ? 'production' : 'development'),
+    }),
     new ModuleFederationPlugin({
       name: 'shell',
       remotes: {
@@ -51,12 +55,16 @@ export default {
         editor: process.env.EDITOR_REMOTE_URL ?? 'editor@http://localhost:3001/remoteEntry.js',
         // Points at the templates remote's dev server; swap for a CDN URL per env in production.
         templates: process.env.TEMPLATES_REMOTE_URL ?? 'templates@http://localhost:3002/remoteEntry.js',
+        auth: process.env.AUTH_REMOTE_URL ?? 'auth@http://localhost:3003/remoteEntry.js',
       },
       shared: {
         react: { singleton: true, requiredVersion: false },
         'react-dom': { singleton: true, requiredVersion: false },
         'react-router': { singleton: true, requiredVersion: false },
         zustand: { singleton: true, requiredVersion: false },
+        '@tanstack/react-query': { singleton: true, requiredVersion: false },
+        i18next: { singleton: true, requiredVersion: false },
+        'react-i18next': { singleton: true, requiredVersion: false },
       },
     }),
   ],

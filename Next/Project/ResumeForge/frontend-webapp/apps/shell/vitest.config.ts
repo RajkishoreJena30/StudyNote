@@ -10,11 +10,14 @@ export default defineConfig({
       // Vite's import-analysis plugin fails before vi.mock can intercept it.
       'editor/EditorApp': path.resolve(process.cwd(), 'test/mocks/EditorAppStub.tsx'),
       'templates/TemplatesApp': path.resolve(process.cwd(), 'test/mocks/TemplatesAppStub.tsx'),
+      'auth/AuthApp': path.resolve(process.cwd(), 'test/mocks/AuthAppStub.tsx'),
     },
   },
   test: {
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./test/setup.ts'],
+    // Node's ESM loader can't resolve react-i18next's html-parse-stringify import; let Vite transform it.
+    server: { deps: { inline: ['react-i18next'] } },
   },
 });

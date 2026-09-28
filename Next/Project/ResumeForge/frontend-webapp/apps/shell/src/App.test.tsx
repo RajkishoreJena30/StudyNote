@@ -5,6 +5,6 @@ import { App } from './App';
 describe('App', () => {
   it('renders the home route', () => {
     render(<App />);
-    expect(screen.getByText(/Welcome to ResumeForge/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/past the ATS/i);
   });
 });

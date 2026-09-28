@@ -11,7 +11,7 @@ export default {
   mode: isProd ? 'production' : 'development',
   devtool: isProd ? false : 'cheap-module-source-map',
   output: {
-    uniqueName: 'editor',
+    uniqueName: 'auth',
     publicPath: 'auto',
     path: path.resolve(process.cwd(), 'dist'),
   },
@@ -36,16 +36,16 @@ export default {
     ],
   },
   devServer: {
-    port: 3001,
+    port: 3003,
     // Required so the shell (port 3000) can fetch remoteEntry.js cross-origin in dev.
     headers: { 'Access-Control-Allow-Origin': '*' },
   },
   plugins: [
     new rspack.HtmlRspackPlugin({ template: './public/index.html' }),
     new ModuleFederationPlugin({
-      name: 'editor',
+      name: 'auth',
       filename: 'remoteEntry.js',
-      exposes: { './EditorApp': './src/EditorApp.tsx' },
+      exposes: { './AuthApp': './src/AuthApp.tsx' },
       shared: {
         react: { singleton: true, requiredVersion: false },
         'react-dom': { singleton: true, requiredVersion: false },

@@ -1,8 +1,7 @@
 import React, { Suspense } from 'react';
 import type { ReactNode } from 'react';
 import { createBrowserRouter, RouterProvider, Link, Outlet } from 'react-router';
-import { Button } from '@resumeforge/ui';
-
+import Home from './page/home';
 const EditorApp = React.lazy(() => import('editor/EditorApp'));
 const TemplatesApp = React.lazy(() => import('templates/TemplatesApp'));
 
@@ -10,7 +9,7 @@ function Layout() {
   return (
     <div>
       <header className="rf-header">
-        <strong>ResumeForge</strong>
+        <span className="rf-brand">Resumex</span>
         <nav className="rf-nav">
           <Link to="/">Home</Link>
           <Link to="/editor/demo">Editor</Link>
@@ -20,18 +19,6 @@ function Layout() {
       <main style={{ padding: 24 }}>
         <Outlet />
       </main>
-    </div>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h1>Welcome to ResumeForge</h1>
-      <p>Open the Editor to load the federated remote running on port 3001.</p>
-      <Button onClick={() => alert('Shared @resumeforge/ui Button works!')}>
-        Try the shared Button
-      </Button>
     </div>
   );
 }
@@ -58,7 +45,9 @@ class RemoteErrorBoundary extends React.Component<BoundaryProps, BoundaryState> 
   }
   render() {
     if (this.state.hasError) {
-      return <p>Could not load the editor remote. Make sure it is running on http://localhost:3001.</p>;
+      return (
+        <p>Could not load the editor remote. Make sure it is running on http://localhost:3001.</p>
+      );
     }
     return this.props.children;
   }
@@ -71,7 +60,11 @@ class TemplatesRemoteErrorBoundary extends React.Component<BoundaryProps, Bounda
   }
   render() {
     if (this.state.hasError) {
-      return <p>Could not load the templates remote. Make sure it is running on http://localhost:3002.</p>;
+      return (
+        <p>
+          Could not load the templates remote. Make sure it is running on http://localhost:3002.
+        </p>
+      );
     }
     return this.props.children;
   }
